@@ -1,0 +1,248 @@
+﻿<UserControl 
+    x:Class="Lucky.Views.Ucs.MinerProfileOption"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+	mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Thickness x:Key="RowThickness">0 3</Thickness>
+            <Style TargetType="CheckBox">
+                <Setter Property="MinWidth" Value="10" />
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    
+    <ScrollViewer 
+		VerticalScrollBarVisibility="Auto" 
+		PreviewMouseDown="ScrollViewer_PreviewMouseDown">
+        
+        <StackPanel Margin="6 10 10 10">
+
+            <WrapPanel Margin="{StaticResource RowThickness}" VerticalAlignment="Center" Visibility="{x:Static app:AppStatic.IsMinerTweakVisible}">
+                <CheckBox
+                        VerticalAlignment="Center"
+						Padding="0"
+						FocusVisualStyle="{x:Null}"
+						IsChecked="{Binding IsAutoBoot}">
+                    <TextBlock>开机启动</TextBlock>
+                </CheckBox>
+            </WrapPanel>
+
+            <WrapPanel Margin="{StaticResource RowThickness}" VerticalAlignment="Center" Visibility="{x:Static app:AppStatic.IsMinerTweakVisible}">
+                <CheckBox
+					Padding="0"
+					FocusVisualStyle="{x:Null}"
+					VerticalContentAlignment="Center"
+					IsChecked="{Binding IsAutoStart}">
+                    <TextBlock VerticalAlignment="Center">自动挖矿，延迟</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding AutoStartDelaySeconds}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">秒</TextBlock>
+            </WrapPanel>
+
+            <WrapPanel Margin="{StaticResource RowThickness}">
+                <CheckBox
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsAutoRestartKernel}">
+                    <TextBlock VerticalAlignment="Center">如果内核进程意外消失，尝试重启内核</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding AutoRestartKernelTimes}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">次</TextBlock>
+            </WrapPanel>
+                
+            <WrapPanel Margin="{StaticResource RowThickness}">
+                <CheckBox MinWidth="10"
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsNoShareRestartComputer}">
+                        <TextBlock VerticalAlignment="Center">如果</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding NoShareRestartComputerMinutes}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">分钟无份额重启电脑</TextBlock>
+            </WrapPanel>
+                
+            <WrapPanel Margin="0 3" Visibility="Collapsed">
+                <CheckBox
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsNetUnavailableStopMine}">
+                    <TextBlock VerticalAlignment="Center">挖矿中断网</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding NetUnavailableStopMineMinutes}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">分钟后自动停止挖矿</TextBlock>
+            </WrapPanel>
+                
+            <WrapPanel Margin="{StaticResource RowThickness}" Visibility="Collapsed">
+                <CheckBox
+						VerticalContentAlignment="Center"
+                        IsEnabled="{Binding IsNetUnavailableStopMine}"
+						IsChecked="{Binding IsNetAvailableStartMine}">
+                    <TextBlock VerticalAlignment="Center">因断网停止挖矿后，网络恢复</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding NetAvailableStartMineSeconds}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">秒钟后自动开始挖矿</TextBlock>
+            </WrapPanel>
+            <WrapPanel Margin="{StaticResource RowThickness}">
+                <CheckBox
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsPeriodicRestartKernel}">
+                        <TextBlock VerticalAlignment="Center">每运行</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding PeriodicRestartKernelHours}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+
+                <TextBlock VerticalAlignment="Center">小时</TextBlock>
+                <ui:NumberBox
+                            Value="{Binding PeriodicRestartKernelMinutes,ValidatesOnExceptions=True}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">分钟重启内核</TextBlock>
+            </WrapPanel>
+                
+            <WrapPanel Margin="{StaticResource RowThickness}">
+                <CheckBox
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsPeriodicRestartComputer}">
+                        <TextBlock VerticalAlignment="Center">每运行</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding PeriodicRestartComputerHours}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">小时</TextBlock>
+                <ui:NumberBox
+                            Value="{Binding PeriodicRestartComputerMinutes,ValidatesOnExceptions=True}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">分钟重启电脑</TextBlock>
+            </WrapPanel>
+            <WrapPanel Margin="{StaticResource RowThickness}">
+                <CheckBox
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsAutoStopByCpu}">
+                        <TextBlock VerticalAlignment="Center">CPU 温度持续</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding CpuGETemperatureSeconds}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">秒不低于</TextBlock>
+                <ui:NumberBox
+                            Value="{Binding CpuStopTemperature,ValidatesOnExceptions=True}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">℃ 停止挖矿</TextBlock>
+            </WrapPanel>
+            <WrapPanel Margin="{StaticResource RowThickness}">
+                <CheckBox
+                        IsEnabled="{Binding IsAutoStopByCpu}"
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsAutoStartByCpu}">
+                    <TextBlock VerticalAlignment="Center">CPU 温度持续</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding CpuLETemperatureSeconds}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">秒不高于</TextBlock>
+                <ui:NumberBox
+                            Value="{Binding CpuStartTemperature,ValidatesOnExceptions=True}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">℃ 开始挖矿</TextBlock>
+            </WrapPanel>
+            <WrapPanel Margin="{StaticResource RowThickness}">
+                <CheckBox
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsRaiseHighCpuEvent}">
+                    <TextBlock VerticalAlignment="Center">CPU 使用率持续</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                    Value="{Binding HighCpuSeconds}"
+                    SpinButtonPlacementMode="Compact"
+                    SmallChange="1"
+                    LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">秒达到</TextBlock>
+                <ui:NumberBox
+                    Value="{Binding HighCpuBaseline,ValidatesOnExceptions=True}"
+                    SpinButtonPlacementMode="Compact"
+                    SmallChange="1"
+                    LargeChange="10" />
+                            
+                <TextBlock VerticalAlignment="Center">% 产生告警消息</TextBlock>
+            </WrapPanel>
+            <WrapPanel Margin="{StaticResource RowThickness}">
+                <CheckBox
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsAutoStopByGpu}">
+                        <TextBlock VerticalAlignment="Center">GPU 温度持续</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding GpuGETemperatureSeconds}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">秒不低于</TextBlock>
+                <ui:NumberBox
+                            Value="{Binding GpuStopTemperature,ValidatesOnExceptions=True}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">℃ 停止挖矿</TextBlock>
+            </WrapPanel>
+            <WrapPanel Margin="{StaticResource RowThickness}">
+                <CheckBox
+                        IsEnabled="{Binding IsAutoStopByGpu}"
+						VerticalContentAlignment="Center"
+						IsChecked="{Binding IsAutoStartByGpu}">
+                        <TextBlock VerticalAlignment="Center">GPU 温度持续</TextBlock>
+                </CheckBox>
+                <ui:NumberBox
+                            Value="{Binding GpuLETemperatureSeconds}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">秒不高于</TextBlock>
+                <ui:NumberBox
+                            Value="{Binding GpuStartTemperature,ValidatesOnExceptions=True}"
+                            SpinButtonPlacementMode="Compact"
+                            SmallChange="1"
+                            LargeChange="10" />
+                <TextBlock VerticalAlignment="Center">℃ 开始挖矿</TextBlock>
+            </WrapPanel>
+                
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

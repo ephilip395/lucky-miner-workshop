@@ -1,0 +1,99 @@
+﻿<UserControl 
+    x:Class="Lucky.Views.Ucs.StateBar"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	xmlns:local="clr-namespace:Lucky.Views.Ucs"
+	xmlns:vm="clr-namespace:Lucky.Vms;assembly=AppModels"
+	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
+	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
+	d:DataContext="{d:DesignData Source=../Design/StateBarViewModel.xaml}"
+	mc:Ignorable="d" d:DesignWidth="1200">
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<Style x:Key="Lbl" TargetType="TextBlock">
+				<Setter Property="Foreground" Value="{StaticResource LableColor}"></Setter>
+				<Setter Property="TextAlignment" Value="Right"></Setter>
+			</Style>
+		</ResourceDictionary>
+	</UserControl.Resources>
+    <Border Padding="4 0 4 0">
+        <StackPanel>
+            <Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"></ColumnDefinition>
+					<ColumnDefinition Width="auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <WrapPanel Grid.Column="0" Margin="0 0 70 0">
+                    <controls:KbButton 
+						Background="Transparent"
+						Margin="4 0 0 0"
+						ToolTip="{x:Static app:AppStatic.WindowsEditionToolTip}"
+                        Cursor="Hand"
+                        Command="{x:Static app:AppStatic.WindowsProperty}"
+                        Foreground="{x:Static app:AppStatic.WindowsEditionColor}"
+                        Content="{x:Static app:AppStatic.WindowsEdition}"
+						CornerRadius="2">
+                    </controls:KbButton>
+                    <TextBlock Text=" / " Foreground="{StaticResource LableColor}"></TextBlock>
+                    <controls:KbButton 
+						x:Name="BtnShowVirtualMemory"
+						Command="{x:Static app:AppStatic.ShowVirtualMemory}"
+						Content="{x:Static app:AppStatic.TotalVirtualMemoryGbText}" 
+						Background="Transparent" 
+						Cursor="Hand"
+						Foreground="{StaticResource LableColor}"></controls:KbButton>
+                    <TextBlock Text=" / " Foreground="{StaticResource LableColor}"></TextBlock>
+                    <TextBlock 
+                        Text="{x:Static app:AppStatic.DriverVersion}" 
+                        ToolTip="{x:Static app:AppStatic.DriverVersionToolTip}" 
+                        Foreground="{x:Static app:AppStatic.DriverVersionColor}"></TextBlock>
+                    <TextBlock 
+                        Text=" / " 
+                        Foreground="{StaticResource LableColor}"></TextBlock>
+                    <TextBlock 
+                        Text="{x:Static app:AppStatic.GpuSetInfo}" 
+                        MaxWidth="260" 
+                        ToolTip="{x:Static app:AppStatic.GpuSetInfo}" 
+                        Foreground="{StaticResource LableColor}"></TextBlock>
+                </WrapPanel>
+                <controls:KbButton 
+                    Grid.Column="1"
+                    ToolTip="检查更新"
+					Cursor="Hand"
+					Background="Transparent" 
+                    Click="BtnCheckUpdate_Click"
+					Command="{x:Static app:AppStatic.ShowOnlineUpdate}">
+                    <WrapPanel>
+                        <Path 
+                            x:Name="UpdateIcon"
+							Width="14"
+							Height="13"
+							Data="{StaticResource Icon_Update}"
+							Fill="{Binding CheckUpdateForeground}"
+							Stretch="Fill" />
+                        <Path 
+                            x:Name="LoadingIcon"
+                            Visibility="Collapsed"
+							Width="14"
+							Height="14"
+							Data="{StaticResource Icon_Loading}"
+							Fill="{StaticResource BtnBackground}"
+							Stretch="Fill">
+                            <Path.RenderTransform>
+                                <RotateTransform Angle="0" CenterX="7" CenterY="7"></RotateTransform>
+                            </Path.RenderTransform>
+                        </Path>
+                        <TextBlock
+						    Margin="2 0 0 0"
+                            Foreground="{StaticResource LableColor}"
+						    VerticalAlignment="Center"
+						    Text="{x:Static app:AppStatic.VersionFullName}" />
+                    </WrapPanel>
+                </controls:KbButton>
+            </Grid>
+		</StackPanel>
+	</Border>
+</UserControl>

@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C7108D8F-EB73-4AE3-916F-BE817EDE37AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Lucky</RootNamespace>
+    <AssemblyName>LuckyRpcClient</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>false</Deterministic>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\Impl\ReadOnlyLuckyFileSet.cs" />
+    <Compile Include="Core\IReadOnlyLuckyFileSet.cs" />
+    <Compile Include="Rpc\IBinaryRequestJsonResponseRpcHelper.cs" />
+    <Compile Include="Rpc\IHttpRpcHelper.cs" />
+    <Compile Include="Rpc\IJsonRequestBinaryResponseRpcHelper.cs" />
+    <Compile Include="Rpc\IJsonRpcHelper.cs" />
+    <Compile Include="Rpc\IJsonRpcHelper.partials.cs" />
+    <Compile Include="Rpc\Impl\BinaryRequestJsonResponseRpcHelper.cs" />
+    <Compile Include="Rpc\Impl\JsonRequestBinaryResponseRpcHelper.cs" />
+    <Compile Include="Rpc\Impl\HttpRpcHelper.cs" />
+    <Compile Include="Messages.cs" />
+    <Compile Include="MinerMonitorServiceType.cs" />
+    <Compile Include="RpcRoot.cs" />
+    <Compile Include="RpcRoot.partials.cs" />
+    <Compile Include="RpcUser.cs" />
+    <Compile Include="Rpc\Impl\JsonRpcHelper.cs" />
+    <Compile Include="Services\ClientServices.cs" />
+    <Compile Include="Services\Official\AdminService.cs" />
+    <Compile Include="Services\Official\AppSettingService.cs" />
+    <Compile Include="Services\Client\MinerMonitorService.cs" />
+    <Compile Include="Services\Client\LuckyClientService.cs" />
+    <Compile Include="Services\Client\LuckyDaemonService.cs" />
+    <Compile Include="Core\Impl\KernelOutputKeywordSet.cs" />
+    <Compile Include="Services\Official\BinaryRequestJsonResponseRpcHelperExtensions.cs" />
+    <Compile Include="Services\Official\CalcConfigBinaryService.cs" />
+    <Compile Include="Services\Official\FileUrlService.cs" />
+    <Compile Include="Services\Official\JsonRequestBinaryResponseRpcHelperExtensions.cs" />
+    <Compile Include="Services\Official\JsonRpcHelperExtensions.cs" />
+    <Compile Include="Services\Official\LuckyFileService.cs" />
+    <Compile Include="Services\Official\LuckyWalletService.cs" />
+    <Compile Include="Services\OfficialServices.cs" />
+    <Compile Include="Services\Official\OverClockDataService.cs" />
+    <Compile Include="Services\Official\CalcConfigService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Official\KernelOutputKeywordService.cs" />
+    <Compile Include="Services\Official\ServerMessageBinaryService.cs" />
+    <Compile Include="Services\Official\UserAppSettingService.cs" />
+    <Compile Include="Services\Official\UserService.cs" />
+    <Compile Include="Services\Official\WsServerNodeService.cs" />
+    <Compile Include="Services\Official\ClientDataService.cs" />
+    <Compile Include="Services\Official\UserMinerGroupService.cs" />
+    <Compile Include="Services\Official\UserMineWorkService.cs" />
+    <Compile Include="Core\Impl\ServerMessageSet.cs" />
+    <Compile Include="Services\OSSService.cs" />
+    <Compile Include="Services\OSS\AliyunOSSService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucky.Controllers\Lucky.Controllers.csproj">
+      <Project>{5911457a-357a-412d-a20c-e77c1a56b4f6}</Project>
+      <Name>Lucky.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyDataSchemas\LuckyDataSchemas.csproj">
+      <Project>{defc7387-f9fa-4651-a281-6612efb7fbb6}</Project>
+      <Name>LuckyDataSchemas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyHub\LuckyHub.csproj">
+      <Project>{e17f278a-e393-403e-9d37-e371036d7a02}</Project>
+      <Name>LuckyHub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyLib\LuckyLib.csproj">
+      <Project>{5d0f2719-83fd-40fc-8f65-85ebb891bc13}</Project>
+      <Name>LuckyLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyLogging\LuckyLogging.csproj">
+      <Project>{f5091b28-5bb6-4446-9b97-02b37125e340}</Project>
+      <Name>LuckyLogging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyRpc\LuckyRpc.csproj">
+      <Project>{4579c4f3-ea8c-4bb6-be3b-eab9c502fa93}</Project>
+      <Name>LuckyRpc</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Services\Official\ServerMessageService.cs" />
+    <None Include="app.config" />
+    <Compile Include="Rpc\Impl\JsonRpcHelper.partials.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="LiteDB">
+      <Version>5.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Net.Http">
+      <Version>2.2.29</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

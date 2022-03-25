@@ -1,0 +1,98 @@
+﻿<UserControl 
+    x:Class="Lucky.Views.Ucs.GroupMonitorOption"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
+	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
+	mc:Ignorable="d" d:DesignHeight="200" d:DesignWidth="600">
+    
+    <StackPanel Margin="6 10 10 10">
+        <GroupBox x:Name="OuterUserGroup">
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <WrapPanel Grid.Row="0" Grid.Column="1">
+                    <CheckBox IsChecked="{Binding IsOuterUserEnabled}" Content="连接外网群控"/>
+                    <WrapPanel Margin="4 0 0 0" VerticalAlignment="Center" ToolTip="{Binding WsStateText}">
+                        <Path 
+								Height="14"
+								Width="14"
+                                Visibility="{Binding IsWsOnline,Converter={StaticResource BoolToVisibilityConverter}}"
+								Data="{StaticResource Icon_Online}"
+								Fill="{Binding IsWsOnline,Converter={StaticResource BoolToBrushConverter}}"
+								Stretch="Fill" />
+                        <Path 
+								Height="14"
+								Width="14"
+                                Visibility="{Binding IsWsOnline,Converter={StaticResource BoolToVisibilityInvertConverter}}"
+								Data="{StaticResource Icon_Offline}"
+								Fill="{Binding IsWsOnline,Converter={StaticResource BoolToBrushConverter}}"
+								Stretch="Fill" />
+                        <TextBlock 
+                                Margin="2 0 0 0" 
+                                MouseUp="TbWsDaemonStateDescription_MouseUp"
+                                Foreground="{Binding IsWsOnline,Converter={StaticResource BoolToBrushConverter}}" 
+                                Text="{Binding WsDescription}">
+                        </TextBlock>
+                    </WrapPanel>
+                    
+                </WrapPanel>
+                <StackPanel 
+                    Grid.Row="0" Grid.Column="1"
+                    Margin="0 2 8 0"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal"
+                    Visibility="{Binding WsNextTrySecondsDelayVisible}">
+                    <WrapPanel Visibility="{Binding IsConnecting,Converter={StaticResource BoolToVisibilityInvertConverter}}" VerticalAlignment="Center" ToolTip="每重试失败1次重试间隔加时10秒直到重试成功或手动刷新时重置回10秒">
+                        <TextBlock Text="{Binding WsLastTryOnText}"></TextBlock>
+                        <TextBlock>，</TextBlock>
+                        <TextBlock Text="{Binding WsNextTrySecondsDelayText}"></TextBlock>
+                        <TextBlock>重试</TextBlock>
+                    </WrapPanel>
+                    <Button
+                    Margin="2 0 0 0"
+                    Padding="2"
+                    VerticalAlignment="Center"
+                    BorderThickness="1"
+					Command="{Binding WsRetry}">
+                        <WrapPanel>
+                            <Border Width="16" Height="16">
+                                <Path Width="12" Height="12"
+								Data="{StaticResource Icon_Refresh}"
+								Fill="{StaticResource BtnBackground}"
+								Stretch="Fill">
+                                    <Path.LayoutTransform>
+                                        <RotateTransform Angle="{Binding WsRetryIconAngle}"/>
+                                    </Path.LayoutTransform>
+                                </Path>
+                            </Border>
+                            <TextBlock Padding="0 0 2 0" Text="{Binding WsRetryText}"></TextBlock>
+                        </WrapPanel>
+                    </Button>
+                </StackPanel>
+                <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource LblTbBase}" Margin="8">登录名</TextBlock>
+                <TextBox Grid.Row="1" Grid.Column="1"
+                            x:Name="TbOuterUserId"
+                            Width="180" 
+                            Height="26" 
+                            Text="{Binding OuterUserId}"></TextBox>
+                <Button Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0 8"
+							Command="{x:Static app:AppStatic.ShowSignUpPage}"
+							Content="注册">
+                </Button>
+            </Grid>
+        </GroupBox>
+        
+
+    </StackPanel>
+</UserControl>

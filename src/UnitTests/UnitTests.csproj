@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4A3C8C8B-6642-405F-B349-57E23903F15B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lucky</RootNamespace>
+    <AssemblyName>UnitTests</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">15.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <ReferencePath>$(ProgramFiles)\Common Files\microsoft shared\VSTT\$(VisualStudioVersion)\UITestExtensionPackages</ReferencePath>
+    <IsCodedUITest>False</IsCodedUITest>
+    <TestProjectType>UnitTest</TestProjectType>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenHardwareMonitorLib">
+      <HintPath>..\ThirdPartyDlls\OpenHardwareMonitorLib.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="Qiniu, Version=7.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdPartyDlls\Qiniu.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppTypeTests.cs" />
+    <Compile Include="Base64StringTests.cs" />
+    <Compile Include="BinarySerializerTests.cs" />
+    <Compile Include="BoxTests.cs" />
+    <Compile Include="ConvertTests.cs" />
+    <Compile Include="CpuTests.cs" />
+    <Compile Include="DataSchema\DataSchemaTests.cs" />
+    <Compile Include="DataSchema\DataSchemaLogger.cs" />
+    <Compile Include="DependencyObjectTests.cs" />
+    <Compile Include="DotNet45Tests.cs" />
+    <Compile Include="EncodingTests.cs" />
+    <Compile Include="EnumTests.cs" />
+    <Compile Include="EnvironmentTests.cs" />
+    <Compile Include="FuncTests.cs" />
+    <Compile Include="GpuNameTests.cs" />
+    <Compile Include="GuidTests.cs" />
+    <Compile Include="GZipUtilTests.cs" />
+    <Compile Include="IoTests.cs" />
+    <Compile Include="LiteDBTests.cs" />
+    <Compile Include="NameValueCollectionTests.cs" />
+    <Compile Include="LuckyDataSchemasTests.cs" />
+    <Compile Include="NTStopwatchTests.cs" />
+    <Compile Include="OSSTests.cs" />
+    <Compile Include="PathPriorityTests.cs" />
+    <Compile Include="PerformanceCounterTests.cs" />
+    <Compile Include="PInvokeTests.cs" />
+    <Compile Include="RamTests.cs" />
+    <Compile Include="CryptographyTests.cs" />
+    <Compile Include="RandomTests.cs" />
+    <Compile Include="ReflectionTests.cs" />
+    <Compile Include="RoleTests.cs" />
+    <Compile Include="SecureStringTests.cs" />
+    <Compile Include="ShardingHasherTests.cs" />
+    <Compile Include="SpeedTests.cs" />
+    <Compile Include="StackTraceTests.cs" />
+    <Compile Include="StopwatchTests.cs" />
+    <Compile Include="StreamTests.cs" />
+    <Compile Include="TestUtil.cs" />
+    <Compile Include="UnitTest1.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="IPTests.cs" />
+    <Compile Include="MarshalTests.cs" />
+    <Compile Include="RegexTests.cs" />
+    <Compile Include="TimingTests.cs" />
+    <Compile Include="RemoteDesktopTests.cs" />
+    <Compile Include="LocalMessageTests.cs" />
+    <Compile Include="NetTests.cs" />
+    <Compile Include="JsonSerializerTests.cs" />
+    <Compile Include="HttpClientTests.cs" />
+    <Compile Include="DictionaryTests.cs" />
+    <Compile Include="ResourceDictionaryTests.cs" />
+    <Compile Include="RedisTests.cs" />
+    <Compile Include="PartialTests.cs" />
+    <Compile Include="F2poolTests.cs" />
+    <Compile Include="UriTests.cs" />
+    <Compile Include="VersionTests.cs" />
+    <Compile Include="WebSocketTests.cs" />
+    <Compile Include="WMITests.cs" />
+    <Compile Include="WsMessageTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="DataSchema\GpuProfilesJsonDb.schema" />
+    <None Include="DataSchema\LocalJsonDb.schema" />
+    <None Include="DataSchema\ServerJsonDb.schema" />
+    <None Include="data\clientDatas.json" />
+    <None Include="data\speedData.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AppModels\AppModels.csproj">
+      <Project>{3426f677-5026-4bb1-a0b2-dd5d9bd70d07}</Project>
+      <Name>AppModels</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MinerTweak\MinerTweak.csproj">
+      <Project>{128b59a2-fa1a-479c-9136-7eb866b96fb4}</Project>
+      <Name>MinerTweak</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MinerMonitor\MinerMonitor.csproj">
+      <Project>{6ed1f43a-b43f-4be4-80dd-49297cf3dc4f}</Project>
+      <Name>MinerMonitor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Lucky.Controllers\Lucky.Controllers.csproj">
+      <Project>{5911457a-357a-412d-a20c-e77c1a56b4f6}</Project>
+      <Name>Lucky.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyClient\LuckyClient.csproj">
+      <Project>{85d052ab-44b8-46f3-9d7b-f624c24fd8ba}</Project>
+      <Name>LuckyClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyDataSchemas\LuckyDataSchemas.csproj">
+      <Project>{defc7387-f9fa-4651-a281-6612efb7fbb6}</Project>
+      <Name>LuckyDataSchemas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyGpus\LuckyGpus.csproj">
+      <Project>{035c9774-01fc-4df2-8225-769542a9fd5e}</Project>
+      <Name>LuckyGpus</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyHub\LuckyHub.csproj">
+      <Project>{e17f278a-e393-403e-9d37-e371036d7a02}</Project>
+      <Name>LuckyHub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyLib\LuckyLib.csproj">
+      <Project>{5d0f2719-83fd-40fc-8f65-85ebb891bc13}</Project>
+      <Name>LuckyLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyLogging\LuckyLogging.csproj">
+      <Project>{f5091b28-5bb6-4446-9b97-02b37125e340}</Project>
+      <Name>LuckyLogging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyRpcClient\LuckyRpcClient.csproj">
+      <Project>{c7108d8f-eb73-4ae3-916f-be817ede37af}</Project>
+      <Name>LuckyRpcClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyWpf\LuckyWpf.csproj">
+      <Project>{dd8e010e-d5e9-47cf-9cb4-8dc6e13d483d}</Project>
+      <Name>LuckyWpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\websocket-sharp\websocket-sharp.csproj">
+      <Project>{b357bac7-529e-4d81-a0d2-71041b19c8de}</Project>
+      <Name>websocket-sharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Aliyun.OSS.SDK">
+      <Version>2.13.0</Version>
+    </PackageReference>
+    <PackageReference Include="LiteDB">
+      <Version>5.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client">
+      <Version>5.2.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Net.Http">
+      <Version>2.2.29</Version>
+    </PackageReference>
+    <PackageReference Include="MSTest.TestAdapter">
+      <Version>2.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="MSTest.TestFramework">
+      <Version>2.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="StackExchange.Redis">
+      <Version>1.2.6</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

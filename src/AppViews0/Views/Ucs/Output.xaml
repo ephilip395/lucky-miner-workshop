@@ -1,0 +1,43 @@
+﻿<UserControl x:Class="Lucky.Views.Ucs.Output"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:local="clr-namespace:Lucky.Views.Ucs"
+             xmlns:views="clr-namespace:Lucky.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="ColorTextListViewTemplate">
+            <TextBlock 
+                    Text="{Binding Text}" 
+                    TextWrapping="WrapWithOverflow" 
+                    Foreground="{Binding Color, Converter={StaticResource ConsoleColorToControllColorConverter}}" 
+                    HorizontalAlignment="Stretch"
+                
+                />
+        </DataTemplate>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <views:AutoScrollingListView 
+            Background="Black"           
+            ItemTemplate="{StaticResource ColorTextListViewTemplate}"
+                    SelectionMode="Single"
+                    ItemsSource="{Binding OutputContent}"
+                    VirtualizingPanel.VirtualizationMode="Recycling" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </views:AutoScrollingListView>
+
+    </Grid>
+</UserControl>

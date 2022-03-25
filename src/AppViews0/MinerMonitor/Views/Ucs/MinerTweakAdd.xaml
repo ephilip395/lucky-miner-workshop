@@ -1,0 +1,88 @@
+﻿<Window 
+    x:Class="Lucky.MinerMonitor.Views.Ucs.MinerTweakAdd"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
+	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
+	ResizeMode="NoResize"
+	SizeToContent="Height"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d" 
+    Width="300" 
+    MinHeight="120"
+    Title="添加矿机"
+    d:DataContext="{d:DesignData Source=../Design/MinerTweakAddViewModel.xaml}">
+
+    <Window.Resources>
+        <Style x:Key="label" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="{DynamicResource ResourceKey=SystemControlBackgroundBaseMediumHighBrush}" />
+            <Setter Property="Padding" Value="4" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+       
+        
+        <StackPanel Grid.Row="0" Margin="16">
+            <WrapPanel Margin="0 10 0 2">
+                <TextBlock Style="{StaticResource label}">IP</TextBlock>
+                <TextBox Width="200" Text="{Binding LeftIp, ValidatesOnExceptions=True}">
+                </TextBox>
+            </WrapPanel>
+            <WrapPanel Margin="0 2">
+                <TextBlock Style="{StaticResource label}"></TextBlock>
+                <CheckBox IsChecked="{Binding IsIpRange}" FocusVisualStyle="{x:Null}">至</CheckBox>
+            </WrapPanel>
+            <StackPanel Margin="0 2" Visibility="{Binding IsIpRange,Converter={StaticResource BoolToVisibilityConverter}}">
+                <WrapPanel>
+                    <TextBlock Style="{StaticResource label}">IP</TextBlock>
+                    <TextBox Width="200" Text="{Binding RightIp, ValidatesOnExceptions=True}">
+                    </TextBox>
+                </WrapPanel>
+            </StackPanel>
+        </StackPanel>
+        <Button
+			Grid.Row="1"
+			IsDefault="True"
+			Command="{Binding Save}" 
+			HorizontalAlignment="Center"
+			Padding="15 2"
+			Margin="0 0 0 10">
+            <TextBlock
+				Padding="4"
+				VerticalAlignment="Center"
+				Text="添加" />
+        </Button>
+        <controls:KbButton
+			Grid.Row="2"
+			IsDefault="True"
+            ToolTip="用矿机雷达发现矿机"
+			Command="{x:Static app:AppStatic.OpenMinerFinder}" 
+			HorizontalAlignment="Right"
+			Margin="0 0 4 10"
+			Background="White"
+			CornerRadius="2">
+            <WrapPanel>
+                <Path
+					Width="16"
+					Height="16"
+					Data="{StaticResource Icon_MinerFinder}"
+					Fill="Green"
+					Stretch="Fill" />
+                <TextBlock
+					Padding="2 4"
+					VerticalAlignment="Center"
+					Text="矿机雷达" />
+            </WrapPanel>
+        </controls:KbButton>
+    </Grid>
+</Window>

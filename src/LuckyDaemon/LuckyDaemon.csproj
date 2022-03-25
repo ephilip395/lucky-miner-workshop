@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4B8A3AEC-4021-480A-8C5F-DCA17E6867B0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Lucky</RootNamespace>
+    <AssemblyName>LuckyDaemon</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>false</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\MinerTweak\Daemon\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\MinerTweak\Daemon\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <StartupObject>Lucky.VirtualRoot</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>logo.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.NetFwTypeLib">
+      <HintPath>..\ThirdPartyDlls\Interop.NetFwTypeLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Web" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\AppModels\RemoteDesktop\Firewall.cs">
+      <Link>RemoteDesktop\Firewall.cs</Link>
+    </Compile>
+    <Compile Include="..\MinerTweakSelfHost\HttpServer.cs">
+      <Link>HttpServer.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyClient\Windows\Power.cs">
+      <Link>Windows\Power.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyClient\Windows\WMI.cs">
+      <Link>Windows\WMI.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\cryptography\BigInteger.cs">
+      <Link>Cryptography\BigInteger.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\cryptography\RSAKey.cs">
+      <Link>Cryptography\RSAKey.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\Cryptography\RSAUtil.cs">
+      <Link>Cryptography\RSAUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\DataExtensions.cs">
+      <Link>DataExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\GZipUtil.cs">
+      <Link>GZipUtil.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\LuckyRegistry.cs">
+      <Link>LuckyRegistry.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\LuckyRegistry.partials.cs">
+      <Link>LuckyRegistry.partials.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\Serialization\BinarySerializer.cs">
+      <Link>Serialization\BinarySerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\Serialization\IBinarySerializer.cs">
+      <Link>Serialization\IBinarySerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\Serialization\IJsonSerializer.cs">
+      <Link>Serialization\IJsonSerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\Serialization\NTJsonSerializer.cs">
+      <Link>Serialization\NTJsonSerializer.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\TempPath.cs">
+      <Link>TempPath.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\VirtualRoot.partials.Common.cs">
+      <Link>VirtualRoot.partials.Common.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\VirtualRoot.partials.DriveSet.cs">
+      <Link>VirtualRoot.partials.DriveSet.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\VirtualRoot.partials.Hub.cs">
+      <Link>VirtualRoot.partials.Hub.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\VirtualRoot.partials.LocalIpSet.cs">
+      <Link>VirtualRoot.partials.LocalIpSet.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\VirtualRoot.partials.LocalMessage.cs">
+      <Link>VirtualRoot.partials.LocalMessage.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\Windows\Cmd.cs">
+      <Link>Windows\Cmd.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\Windows\ConsoleHandler.cs">
+      <Link>Windows\ConsoleHandler.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\Windows\TaskKill.cs">
+      <Link>Windows\TaskKill.cs</Link>
+    </Compile>
+    <Compile Include="..\LuckyLib\Windows\WinRegistry.cs">
+      <Link>Windows\WinRegistry.cs</Link>
+    </Compile>
+    <Compile Include="Core\IDaemonOperation.cs" />
+    <Compile Include="Core\IOperationResultSet.cs" />
+    <Compile Include="Core\Impl\OperationResultSet.cs" />
+    <Compile Include="MinerProfileUtil.cs" />
+    <Compile Include="Ws\AbstractWsClient.cs" />
+    <Compile Include="Ws\DaemonWsClient.cs" />
+    <Compile Include="Core\Impl\DaemonOperation.cs" />
+    <Compile Include="LuckyDaemonController.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SpecialPath.cs" />
+    <Compile Include="VirtualRoot.cs" />
+    <Compile Include="Ws\DaemonWsMessageFromWsServerHandler.cs" />
+    <Compile Include="Core\Impl\ResponseBaseExtensions.cs" />
+    <Compile Include="Ws\WebSocketStateExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="FodyWeavers.xsd">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lucky.Controllers\Lucky.Controllers.csproj">
+      <Project>{5911457a-357a-412d-a20c-e77c1a56b4f6}</Project>
+      <Name>Lucky.Controllers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyDataSchemas\LuckyDataSchemas.csproj">
+      <Project>{defc7387-f9fa-4651-a281-6612efb7fbb6}</Project>
+      <Name>LuckyDataSchemas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyHub\LuckyHub.csproj">
+      <Project>{e17f278a-e393-403e-9d37-e371036d7a02}</Project>
+      <Name>LuckyHub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyLogging\LuckyLogging.csproj">
+      <Project>{f5091b28-5bb6-4446-9b97-02b37125e340}</Project>
+      <Name>LuckyLogging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyRpcClient\LuckyRpcClient.csproj">
+      <Project>{c7108d8f-eb73-4ae3-916f-be817ede37af}</Project>
+      <Name>LuckyRpcClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\websocket-sharp\websocket-sharp.csproj">
+      <Project>{b357bac7-529e-4d81-a0d2-71041b19c8de}</Project>
+      <Name>websocket-sharp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="logo.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Aliyun.OSS.SDK">
+      <Version>2.13.0</Version>
+    </PackageReference>
+    <PackageReference Include="Costura.Fody">
+      <Version>5.7.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Fody">
+      <Version>6.6.0</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="LiteDB">
+      <Version>5.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="log4net">
+      <Version>2.0.14</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNet.WebApi.SelfHost">
+      <Version>5.2.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Bcl.Build">
+      <Version>1.0.21</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Net.Http">
+      <Version>2.2.29</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>$(TargetName) --sha1</PostBuildEvent>
+  </PropertyGroup>
+</Project>

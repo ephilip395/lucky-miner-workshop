@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5D0F2719-83FD-40FC-8F65-85EBB891BC13}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Lucky</RootNamespace>
+    <AssemblyName>LuckyLib</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>false</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Management" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSetting\LocalAppSettingSet.cs" />
+    <Compile Include="AppSetting\IAppSettingSet.cs" />
+    <Compile Include="ClientAppType.cs" />
+    <Compile Include="ClientDataComparer.cs" />
+    <Compile Include="Collection\AsyncObservableCollection.cs" />
+    <Compile Include="Cryptography\AESUtil.cs" />
+    <Compile Include="Cryptography\BigInteger.cs" />
+    <Compile Include="Cryptography\QuickUtil.cs" />
+    <Compile Include="Cryptography\RSAKey.cs" />
+    <Compile Include="CosturaUtil.cs" />
+    <Compile Include="GZipUtil.cs" />
+    <Compile Include="HomePath.cs" />
+    <Compile Include="IdGenerator\DefaultIdGenerator.cs" />
+    <Compile Include="IdGenerator\IIdGenerator.cs" />
+    <Compile Include="Net\ConnectionMethod.cs" />
+    <Compile Include="Net\Hosts.cs" />
+    <Compile Include="LuckyHttpException.cs" />
+    <Compile Include="LuckyRegistry.partials.cs" />
+    <Compile Include="Net\IpUtil.cs" />
+    <Compile Include="Repositories\JsonReadOnlyRepository.cs" />
+    <Compile Include="Cryptography\RSAUtil.cs" />
+    <Compile Include="Serialization\BinarySerializer.cs" />
+    <Compile Include="Serialization\IBinarySerializer.cs" />
+    <Compile Include="StopwatchExtensions.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="LuckyRegistry.cs" />
+    <Compile Include="Repositories\IJsonReadOnlyRepository.cs" />
+    <Compile Include="LuckyException.cs" />
+    <Compile Include="Messages.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\LiteDbReadWriteRepository.cs" />
+    <Compile Include="Repositories\HierarchicalRepository.cs" />
+    <Compile Include="Repositories\DuplicateIdException.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Serialization\IJsonSerializer.cs" />
+    <Compile Include="Serialization\NTJsonSerializer.cs" />
+    <Compile Include="TaskEx.cs" />
+    <Compile Include="TempPath.cs" />
+    <Compile Include="User\LoginedUserExtensions.cs" />
+    <Compile Include="User\UserId.cs" />
+    <Compile Include="User\UserIdType.cs" />
+    <Compile Include="VirtualRoot.cs" />
+    <Compile Include="ValidationException.cs" />
+    <Compile Include="VirtualRoot.partials.Common.cs" />
+    <Compile Include="VirtualRoot.partials.DriveSet.cs" />
+    <Compile Include="VirtualRoot.partials.Hub.cs" />
+    <Compile Include="VirtualRoot.partials.LocalIpSet.cs" />
+    <Compile Include="VirtualRoot.partials.LocalMessage.cs" />
+    <Compile Include="Windows\ConsoleHandler.cs" />
+    <Compile Include="Windows\Cpu.cs" />
+    <Compile Include="Windows\NativeMethods.cs" />
+    <Compile Include="Windows\OS.cs" />
+    <Compile Include="Windows\Ram.cs" />
+    <Compile Include="Windows\WinRegistry.cs" />
+    <Compile Include="Windows\Role.cs" />
+    <Compile Include="Windows\Cmd.cs" />
+    <Compile Include="Windows\TaskKill.cs" />
+    <Compile Include="DataExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LuckyDataSchemas\LuckyDataSchemas.csproj">
+      <Project>{defc7387-f9fa-4651-a281-6612efb7fbb6}</Project>
+      <Name>LuckyDataSchemas</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyHub\LuckyHub.csproj">
+      <Project>{e17f278a-e393-403e-9d37-e371036d7a02}</Project>
+      <Name>LuckyHub</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LuckyLogging\LuckyLogging.csproj">
+      <Project>{f5091b28-5bb6-4446-9b97-02b37125e340}</Project>
+      <Name>LuckyLogging</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Aliyun.OSS.SDK">
+      <Version>2.13.0</Version>
+    </PackageReference>
+    <PackageReference Include="LiteDB">
+      <Version>5.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="Lucky.Views.Ucs.ConnectionMethodOption"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+             xmlns:local="clr-namespace:Lucky.Views.Ucs"
+             xmlns:wpf="clr-namespace:Lucky;assembly=LuckyWpf"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="Border">
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlTransientBorderBrush}" />
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Padding" Value="8"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Margin="8">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel>
+
+            <ui:RadioButtons
+                x:Name="ConnectionMethod"
+                SelectedIndex="{Binding SelectedConnectionMethodIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                MaxColumns="3"
+                Header="选择连接方式">
+                <RadioButton Content="直连"  />
+                <RadioButton Content="内置代理" />
+                <RadioButton Content="自定义代理" />
+            </ui:RadioButtons>
+            <TextBlock
+                x:Name="Control1Output"
+                Foreground="{DynamicResource SystemControlHighlightAccentBrush}"
+                Text="提示：内置代理仅用于学习研究，不保证一直能用。生产环境请使用自定义代理。"
+                VerticalAlignment="Center"
+                Margin="8,0" />
+            
+        </WrapPanel>
+
+        <TextBlock Grid.Row="1" Text="自定义代理设置" Padding="0 8" />
+
+        <Border Grid.Row="2">
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <WrapPanel Grid.Row="0" >
+                    <ComboBox
+                            x:Name="ProxyProtocol"
+                            ui:ControlHelper.Header="代理协议"
+                            SelectedIndex="0"
+                            Width="120">
+                        <sys:String>SOCKS5</sys:String>
+                    </ComboBox>
+                    <TextBox
+                        Text="{Binding ProxyServerAddress, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                        Margin="10 0 0 0"
+                        Width="180"
+                        ToolTip="可以是域名地址或者IP"
+                        ui:ControlHelper.Header="代理服务器"
+                        ui:ControlHelper.PlaceholderText="127.0.0.1"
+                        />
+                    <TextBox
+                        Text="{Binding ProxyServerPort, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                        Margin="10 0 0 0"
+                        Width="60"
+                        ui:ControlHelper.Header="代理端口"
+                        ui:ControlHelper.PlaceholderText="1080" />
+                    <TextBox
+                        Text="{Binding ProxyUsername, Mode=TwoWay, UpdateSourceTrigger=LostFocus}"
+                        ToolTip="如果代理服务不需要认证，可以不填。"
+                        Margin="10 0 0 0"
+                        Width="160"
+                        ui:ControlHelper.PlaceholderText="非必填"
+                        ui:ControlHelper.Header="用户名" />
+                    <PasswordBox wpf:PasswordHelper.Attach="True"
+                        Margin="10 0 0 0"
+                        ui:ControlHelper.Header="密码"
+                        wpf:PasswordHelper.Password="{Binding Text, ElementName=PasswordText, Mode=TwoWay, UpdateSourceTrigger=LostFocus}" 
+                        Width="160"/>
+                    <TextBox
+                        x:Name="PasswordText"
+                        Text="{Binding ProxyPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Margin="10 0 0 0"
+                        Visibility="Hidden"
+                        Width="0" />
+                </WrapPanel>
+            </Grid>
+        </Border>
+
+
+    </Grid>
+</UserControl>

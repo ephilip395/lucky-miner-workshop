@@ -1,0 +1,71 @@
+﻿<UserControl 
+    x:Class="Lucky.MinerMonitor.Views.Ucs.MinerTweaksPagging"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	xmlns:uc="clr-namespace:Lucky.Views.Ucs"
+	xmlns:local="clr-namespace:Lucky.Views.Ucs"
+	xmlns:vm="clr-namespace:Lucky.MinerMonitor.Vms;assembly=AppModels"
+	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
+    d:DataContext="{d:DesignData Source=../Design/MinerTweaksWindowViewModel.xaml}"
+	mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource LblTbBase}">
+            <Setter Property="Padding" Value="4" />
+        </Style>
+    </UserControl.Resources>
+    <Grid Margin="4">
+        <WrapPanel HorizontalAlignment="Right">
+            <Button Margin="4 0 0 0" Command="{Binding PageFirst}" IsEnabled="{Binding IsPageUpEnabled}">首页</Button>
+            <Button
+				Width="26" Margin="4 0 0 0"
+				Command="{Binding PageUp}" 
+				IsEnabled="{Binding IsPageUpEnabled}" 
+				Content="&lt;"
+				ToolTip="上一页">
+            </Button>
+            <Button
+				Width="26" Margin="4 0 0 0"
+				Command="{Binding PageDown}" 
+				IsEnabled="{Binding IsPageDownEnabled}" 
+				Content="&gt;"
+				ToolTip="下一页">
+            </Button>
+            <Button Command="{Binding PageLast}" IsEnabled="{Binding IsPageDownEnabled}" Margin="4 0 0 0">尾页</Button>
+            <ui:AppBarButton Icon="Refresh" Command="{Binding PageRefresh}" LabelPosition="Collapsed" />
+            <TextBlock>转到第</TextBlock>
+            <TextBox VerticalContentAlignment="Center" Padding="4 0" Text="{Binding PageIndex}" KeyUp="TextBoxPageIndex_KeyUp"></TextBox>
+            <TextBlock>/</TextBlock>
+            <TextBlock Text="{Binding PageCount}"></TextBlock>
+            <TextBlock>页，每页</TextBlock>
+            <ComboBox ItemsSource="{Binding PageSizeItems}" SelectedItem="{Binding PageSize}"/>
+
+            <TextBlock>条，共</TextBlock>
+            <TextBlock Text="{Binding Total}"></TextBlock>
+            <TextBlock>条</TextBlock>
+
+            <TextBlock>冻结前</TextBlock>
+            <ComboBox ItemsSource="{Binding FrozenColumns}" SelectedItem="{Binding FrozenColumnCount}"/>
+            <TextBlock>列</TextBlock>
+            
+            <ui:AppBarButton 
+                x:Name="ButtonColumnsShow"
+                LabelPosition="Collapsed"
+                Icon="CalendarDay" 
+                Label="{Binding ColumnsShow.ColumnsShowName}" 
+                IsEnabled="{Binding ElementName=PopupColumnsShow,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
+                Click="KbButtonColumnsShow_Clicked"/>
+            <Popup 
+                x:Name="PopupColumnsShow" 
+                Placement="Bottom" 
+                PlacementTarget="{Binding ElementName=ButtonColumnsShow}" 
+                PopupAnimation="Slide"
+                StaysOpen="False">
+            </Popup>
+        </WrapPanel>
+    </Grid>
+</UserControl>

@@ -1,0 +1,69 @@
+﻿<UserControl 
+    x:Class="Lucky.MinerMonitor.Views.Ucs.MinerGroupSelect"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:ui="http://schemas.modernwpf.com/2019"
+
+	mc:Ignorable="d" 
+	d:DesignHeight="300"
+    d:DesignWidth="310"
+    d:DataContext="{d:DesignData Source=../Design/MinerGroupSelectViewModel.xaml}">
+    <Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"></RowDefinition>
+			<RowDefinition Height="*" MinHeight="26"></RowDefinition>
+		</Grid.RowDefinitions>
+        <WrapPanel Grid.Row="0" Margin="0 0 20 0">
+            <Button
+                Style="{DynamicResource AccentButtonStyle}"
+                Click="HideView"
+				Command="{Binding MinerGroupVms.Add}">
+                <Button.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <ui:FontIcon Glyph="&#xE710;" />
+                        <TextBlock Margin="4 0 0 0" Text="新建分组" />
+                    </StackPanel>
+                </Button.Content>
+            </Button>
+            <TextBlock Padding="4 0" VerticalAlignment="Center" Text="{Binding Description}"></TextBlock>
+        </WrapPanel>
+        <ListBox 
+            Grid.Row="1"
+			ItemsSource="{Binding MinerGroupVms.MinerGroupItems}"
+			SelectedItem="{Binding SelectedResult}"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+			ScrollViewer.VerticalScrollBarVisibility="Auto"
+            SelectionChanged="Lb_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <WrapPanel>
+                        <TextBlock Width="220" VerticalAlignment="Center" Text="{Binding Name}" ToolTip="{Binding Description}"></TextBlock>
+                        <Button 
+                            Margin="4 0 0 0"
+                            Command="{Binding Edit}"
+                            Click="HideView"
+                            Visibility="{Binding IsPleaseSelect,Converter={StaticResource BoolToHiddenInvertConverter}}">
+                            <ui:FontIcon Glyph="&#xE70F;" />
+                        </Button>
+                        <Button 
+                            Margin="4 0 0 0"
+                            Click="HideView"
+                            Visibility="{Binding IsPleaseSelect,Converter={StaticResource BoolToHiddenInvertConverter}}"
+                            Command="{Binding Remove}">
+                            <ui:FontIcon Glyph="&#xE74D;" />
+                        </Button>
+                    </WrapPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <TextBlock 
+            Grid.Row="1" 
+            Margin="0 30 0 0"
+            Visibility="{Binding MinerGroupVms.MinerGroupItems, Converter={StaticResource NoRecordVisibilityConverter}}" 
+            Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}" 
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center">没有记录</TextBlock>
+	</Grid>
+</UserControl>
