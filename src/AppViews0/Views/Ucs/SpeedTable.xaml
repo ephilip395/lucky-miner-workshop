@@ -4,15 +4,10 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-	xmlns:sys="clr-namespace:System;assembly=mscorlib"
-	xmlns:uc="clr-namespace:Lucky.Views.Ucs"
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
-	xmlns:local="clr-namespace:Lucky.Views.Ucs"
 	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
-	xmlns:vm="clr-namespace:Lucky.Vms;assembly=AppModels"
 	mc:Ignorable="d" 
     x:Name="Uc"
-	Background="White"
 	d:DesignHeight="450" d:DesignWidth="1200"
     d:DataContext="{d:DesignData Source=../Design/SpeedTableViewModel.xaml}">
     
