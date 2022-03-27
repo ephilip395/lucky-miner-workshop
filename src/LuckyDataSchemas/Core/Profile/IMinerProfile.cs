@@ -79,6 +79,8 @@ namespace Lucky.Core.Profile {
 
         bool IsUseProxy { get; }
 
+        bool IsAdvParamsVisual { get; }
+
         int ConnectionMethod { get; }
         string ProxyServerAddress { get; }
         int ProxyServerPort { get; }

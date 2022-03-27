@@ -131,6 +131,7 @@ namespace Lucky.Report {
                 HighCpuSeconds = workProfile.HighCpuSeconds,
                 IsOuterUserEnabled = workProfile.IsOuterUserEnabled,
                 ReportOuterUserId = LuckyRegistry.GetOuterUserId(),
+                IsAdvParamsVisual = workProfile.IsAdvParamsVisual,
                 IsUseProxy = workProfile.IsUseProxy,
                 ConnectionMethod = workProfile.ConnectionMethod,
                 ProxyServerAddress = workProfile.ProxyServerAddress,

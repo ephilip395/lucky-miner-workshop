@@ -470,7 +470,19 @@ namespace Lucky.Vms
             }
         }
 
-        public bool IsUseProxyEnable { get; set; }
+        public bool IsAdvParamsVisual
+        {
+            get => LuckyContext.Instance.MinerProfile.IsAdvParamsVisual;
+            set
+            {
+                if (LuckyContext.Instance.MinerProfile.IsAdvParamsVisual != value)
+                {
+                    LuckyContext.Instance.MinerProfile.SetMinerProfileProperty(nameof(IsAdvParamsVisual), value);
+                    OnPropertyChanged(nameof(IsAdvParamsVisual));
+                }
+            }
+        }
+
 
         public bool IsUseProxy
         {

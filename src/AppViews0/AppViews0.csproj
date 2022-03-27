@@ -165,11 +165,17 @@
     <Compile Include="Views\Presents\ColorPresetResources.cs" />
     <Compile Include="Views\Presents\PresentManager.cs" />
     <Compile Include="Views\Presents\ShapePresetResources.cs" />
+    <Compile Include="Views\Ucs\DeveloperTools.xaml.cs">
+      <DependentUpon>DeveloperTools.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Ucs\GroupMonitorOption.xaml.cs">
       <DependentUpon>GroupMonitorOption.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Ucs\Help.xaml.cs">
       <DependentUpon>Help.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Ucs\MainMenu.xaml.cs">
+      <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Ucs\MinerProfileIndex2.xaml.cs">
       <DependentUpon>MinerProfileIndex2.xaml</DependentUpon>
@@ -836,11 +842,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Ucs\DeveloperTools.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Ucs\GroupMonitorOption.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Ucs\Help.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Ucs\MainMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

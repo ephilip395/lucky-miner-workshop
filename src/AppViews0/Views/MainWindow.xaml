@@ -23,11 +23,12 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="*" />
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
-            
-            <Border Grid.Row="0"
+
+            <Border Grid.Row="1"
                     Padding="16 16 16 32"
                     BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
                     BorderThickness="0"
@@ -42,7 +43,7 @@
                 </Grid>
             </Border>
 
-            <TabControl x:Name="MainTabControl" Grid.Row="1" TabStripPlacement="Bottom">
+            <TabControl Grid.Row="2" x:Name="MainTabControl" TabStripPlacement="Bottom">
                 
                 <TabItem x:Name="TabItemSpeedTable">
                     <TabItem.Header>
@@ -98,13 +99,19 @@
                     BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
                     Background="{DynamicResource SystemControlBackgroundAltHighBrush}"></Border>
                 </TabItem>
+                <TabItem x:Name="TabItemDeveloperTools">
+                    <TabItem.Header>
+                        <TextBlock Text="开发者工具" Padding="2 0"></TextBlock>
+                    </TabItem.Header>
+                    <Border x:Name="DeveloperToolsContainer"
+                    BorderThickness="1"
+                    BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
+                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"></Border>
+                </TabItem>
             </TabControl>
 
             <!--下状态栏-->
-            <uc:StateBar 
-                x:Name="StateBar"
-			    Grid.Row="2"
-			    Padding="0 0 0 2"/>
+            <uc:StateBar Grid.Row="3" x:Name="StateBar" Padding="0 0 0 2"/>
 
 
         </Grid>

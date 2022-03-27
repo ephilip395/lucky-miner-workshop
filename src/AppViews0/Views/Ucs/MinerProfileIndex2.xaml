@@ -259,10 +259,11 @@
             </Border>
         </StackPanel>
 
+        <WrapPanel Visibility="{Binding MinerProfile.IsAdvParamsVisual, Converter={StaticResource BoolToVisibilityConverter}}">
 
-        <StackPanel VerticalAlignment="Center">
-            <TextBlock Text="高级参数" Style="{StaticResource label}" />
-            <TextBox 
+            <StackPanel VerticalAlignment="Center">
+                <TextBlock Text="高级参数" Style="{StaticResource label}" />
+                <TextBox 
 				Width="283"
                 Height="30"
 				VerticalContentAlignment="Center"
@@ -271,47 +272,48 @@
 				IsReadOnly="{Binding MinerProfile.IsMining}"
 				VerticalScrollBarVisibility="Auto"
 				Text="{Binding MinerProfile.CoinVm.CoinKernel.CoinKernelProfile.CustomArgs, Mode=TwoWay}">
-            </TextBox>
-        </StackPanel>
+                </TextBox>
+            </StackPanel>
 
-        <ItemsControl
+            <ItemsControl
             Visibility="{Binding MinerProfile.CoinVm.CoinKernel.GpuInputSegmentVms,Converter={StaticResource NoRecordInvertVisibilityConverter}}"
 			ItemsSource="{Binding MinerProfile.CoinVm.CoinKernel.GpuInputSegmentVms}"
 			VerticalAlignment="Bottom"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <CheckBox 
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox 
                         VerticalAlignment="Bottom"
                         Margin="0 0 4 0" 
                         IsChecked="{Binding IsChecked}" 
                         FocusVisualStyle="{x:Null}" 
                         Content="{Binding Name}" 
                         ToolTip="{Binding Description}"></CheckBox>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-                
-        </ItemsControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
 
-        <StackPanel Visibility="{Binding MinerProfile.CoinVm.CoinKernel.Kernel.KernelInputVm.IsSupportDevicesArg, Converter={StaticResource BoolToVisibilityConverter}}">
-            <TextBlock Style="{StaticResource label}" ToolTip="全不选等于全选" Text="显卡" />
-            <ItemsControl
+            </ItemsControl>
+
+            <StackPanel Visibility="{Binding MinerProfile.CoinVm.CoinKernel.Kernel.KernelInputVm.IsSupportDevicesArg, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock Style="{StaticResource label}" ToolTip="全不选等于全选" Text="显卡" />
+                <ItemsControl
 				Grid.Column="1"
 				ItemsSource="{Binding GpuVms}"
 				ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox 
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <CheckBox 
                             Margin="0 0 4 0" 
                             IsChecked="{Binding IsDeviceArgInclude}" 
                             FocusVisualStyle="{x:Null}" 
 				            VerticalAlignment="Bottom"
                             Content="{Binding SharpIndexText}"></CheckBox>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </WrapPanel>
 
     </WrapPanel>
 </UserControl>

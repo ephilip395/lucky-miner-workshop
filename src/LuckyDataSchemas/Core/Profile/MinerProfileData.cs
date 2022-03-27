@@ -107,6 +107,7 @@ namespace Lucky.Core.Profile
             HighCpuSeconds = 10;
             IsOuterUserEnabled = false;
             OuterUserId = string.Empty;
+            IsAdvParamsVisual = false;
             IsUseProxy = false;
             ConnectionMethod = 1;
             ProxyServerAddress = "127.0.0.1";
@@ -241,6 +242,9 @@ namespace Lucky.Core.Profile
 
         [WorkIgnore]
         public bool IsUseProxy { get; set; }
+
+        [WorkIgnore]
+        public bool IsAdvParamsVisual { get; set; }
 
         [WorkIgnore]
         public int ConnectionMethod { get; set; }

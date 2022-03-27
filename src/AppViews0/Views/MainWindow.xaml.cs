@@ -110,6 +110,13 @@ namespace Lucky.Views
                         OutputContainer.Child = new Output();
                     }
                 }
+                else if(selectedItem == TabItemDeveloperTools)
+                {
+                    if(DeveloperToolsContainer.Child == null)
+                    {
+                        DeveloperToolsContainer.Child = new DeveloperTools();
+                    }
+                }
                 #endregion
             };
 

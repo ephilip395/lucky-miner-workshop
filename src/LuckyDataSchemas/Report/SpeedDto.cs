@@ -168,6 +168,7 @@ namespace Lucky.Report {
 
         public GpuSpeedData[] GpuTable { get; set; }
 
+        public bool IsAdvParamsVisual { get; set; }
         public bool IsUseProxy { get; set; }
         public int ConnectionMethod { get; set; }
         public string ProxyServerAddress { get; set; }

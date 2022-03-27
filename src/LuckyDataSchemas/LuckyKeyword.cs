@@ -133,6 +133,7 @@ namespace Lucky
         public const string DivertProxyNuVersionRegistryKey = "DivertProxyNuVersion";
         public const string IsOuterUserEnabledRegistryKey = "IsOuterUserEnabled";
         public const string OuterUserIdRegistryKey = "OuterUserId";
+        public const string IsAdvParamsVisualRegistryKey = "IsAdvParamsVisual";
         public const string IsUseProxyRegistryKey = "IsUseProxy";
         public const string ConnectionMethodRegistryKey = "ConnectionMethod";
         public const string ProxyServerAddressRegistryKey = "ProxyServerAddress";

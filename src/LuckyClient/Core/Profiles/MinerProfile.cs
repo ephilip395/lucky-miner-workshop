@@ -72,6 +72,7 @@ namespace Lucky.Core.Profiles
                         SetIsOuterUserEnabled(_data.IsOuterUserEnabled);
                         SetOuterUserId(_data.OuterUserId);
                     }
+                    SetIsAdvParamsVisual(_data.IsAdvParamsVisual);
                     SetIsUserProxy(_data.IsUseProxy);
                     SetConnectionMethod(_data.ConnectionMethod);
                     SetProxyServerAddress(_data.ProxyServerAddress);
@@ -827,6 +828,16 @@ namespace Lucky.Core.Profiles
             }
         }
 
+        public bool IsAdvParamsVisual
+        {
+            get => _data.IsAdvParamsVisual;
+            private set
+            {
+                _data.IsAdvParamsVisual = value;
+                SetIsAdvParamsVisual(value);
+            }
+        }
+
         public bool IsUseProxy
         {
             get => _data.IsUseProxy;
@@ -927,6 +938,14 @@ namespace Lucky.Core.Profiles
             Windows.WinRegistry.SetValue(Registry.Users, LuckyRegistry.LuckyRegistrySubKey, LuckyKeyword.OuterUserIdRegistryKey, outerUserId);
         }
 
+        private static void SetIsAdvParamsVisual(bool isAdvParamsVisual)
+        {
+            if (!ClientAppType.IsMinerTweak)
+            {
+                return;
+            }
+            Windows.WinRegistry.SetValue(Registry.Users, LuckyRegistry.LuckyRegistrySubKey, LuckyKeyword.IsAdvParamsVisualRegistryKey, isAdvParamsVisual.ToString());
+        }
         private static void SetIsUserProxy(bool isUseProxy)
         {
             if (!ClientAppType.IsMinerTweak)

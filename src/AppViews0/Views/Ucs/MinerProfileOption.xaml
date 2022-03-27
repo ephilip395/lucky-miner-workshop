@@ -242,7 +242,12 @@
                             LargeChange="10" />
                 <TextBlock VerticalAlignment="Center">℃ 开始挖矿</TextBlock>
             </WrapPanel>
-                
+
+            <CheckBox VerticalContentAlignment="Center"
+			    IsChecked="{Binding IsAdvParamsVisual}">
+                <TextBlock VerticalAlignment="Center">高级参数可见</TextBlock>
+            </CheckBox>
+
         </StackPanel>
     </ScrollViewer>
 </UserControl>
