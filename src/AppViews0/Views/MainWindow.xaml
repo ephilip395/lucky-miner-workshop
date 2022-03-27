@@ -99,7 +99,7 @@
                     BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
                     Background="{DynamicResource SystemControlBackgroundAltHighBrush}"></Border>
                 </TabItem>
-                <TabItem x:Name="TabItemDeveloperTools">
+                <TabItem x:Name="TabItemDeveloperTools" Visibility="{x:Static app:AppStatic.IsDevModeVisible }">
                     <TabItem.Header>
                         <TextBlock Text="开发者工具" Padding="2 0"></TextBlock>
                     </TabItem.Header>
