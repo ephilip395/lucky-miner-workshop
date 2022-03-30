@@ -9,7 +9,7 @@ namespace Lucky.MinerMonitor {
         public class MinerTweakMessagesViewModel : ViewModelBase {
             private readonly ObservableCollection<LocalMessageDtoViewModel> _vms = new ObservableCollection<LocalMessageDtoViewModel>();
             private readonly object _locker = new object();
-            private MinerTweakViewModel _minerClientVm;
+            private MinerViewModel _minerClientVm;
 
             private static bool _called = false;
 
@@ -70,7 +70,7 @@ namespace Lucky.MinerMonitor {
             }
 
             private DateTime _preSendMqMessageOn = DateTime.MinValue;
-            private MinerTweakViewModel _preMinerTweakVm;
+            private MinerViewModel _preMinerTweakVm;
             public void SendGetLocalMessagesMqMessage(bool isFast) {
                 if (this._minerClientVm == null || !IsMinerTweakMessagesVisible) {
                     return;

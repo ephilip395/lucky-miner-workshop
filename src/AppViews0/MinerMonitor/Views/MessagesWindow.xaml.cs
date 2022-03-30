@@ -10,7 +10,7 @@ namespace Lucky.MinerMonitor.Views
     /// </summary>
     public partial class MessagesWindow : Window
     {
-        public MinerTweaksWindowViewModel Vm
+        public MinersWindowViewModel Vm
         {
             get
             {

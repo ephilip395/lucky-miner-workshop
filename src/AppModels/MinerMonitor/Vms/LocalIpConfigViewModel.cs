@@ -15,7 +15,7 @@ namespace Lucky.MinerMonitor.Vms
 
         public ICommand Save { get; private set; }
 
-        public LocalIpConfigViewModel(MinerTweakViewModel minerClientVm)
+        public LocalIpConfigViewModel(MinerViewModel minerClientVm)
         {
             this.MinerTweakVm = minerClientVm;
             this.Save = new DelegateCommandTpl<LocalIpViewModel>((vm) =>
@@ -55,7 +55,7 @@ namespace Lucky.MinerMonitor.Vms
             }
         }
 
-        public MinerTweakViewModel MinerTweakVm
+        public MinerViewModel MinerTweakVm
         {
             get; private set;
         }

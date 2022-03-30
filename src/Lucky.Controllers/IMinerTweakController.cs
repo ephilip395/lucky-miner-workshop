@@ -25,5 +25,6 @@ namespace Lucky.Controllers
         void ReportWsDaemonState(WsClientState state);
         void OverClock();
         void RunAction(DataRequest<MinerTweakActionType> request);
+        void RefreshConnParams();
     }
 }

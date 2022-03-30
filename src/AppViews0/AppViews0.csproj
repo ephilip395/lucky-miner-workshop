@@ -98,14 +98,14 @@
     <Compile Include="MinerMonitor\Views\OutputWindow.xaml.cs">
       <DependentUpon>OutputWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweaksAppBar.xaml.cs">
-      <DependentUpon>MinerTweaksAppBar.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinersAppBar.xaml.cs">
+      <DependentUpon>MinersAppBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweaksCommandBar.xaml.cs">
-      <DependentUpon>MinerTweaksCommandBar.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinersCommandBar.xaml.cs">
+      <DependentUpon>MinersCommandBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweaksFilterBar.xaml.cs">
-      <DependentUpon>MinerTweaksFilterBar.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinersFilterBar.xaml.cs">
+      <DependentUpon>MinersFilterBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="MinerMonitor\Views\Ucs\MqCountsPage.xaml.cs">
       <DependentUpon>MqCountsPage.xaml</DependentUpon>
@@ -138,14 +138,14 @@
     <Compile Include="Views\PackagesWindow.xaml.cs">
       <DependentUpon>PackagesWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweakOperationResults.xaml.cs">
-      <DependentUpon>MinerTweakOperationResults.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinerOperationResultsView.xaml.cs">
+      <DependentUpon>MinerOperationResultsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweakMessages.xaml.cs">
-      <DependentUpon>MinerTweakMessages.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinerMessagesView.xaml.cs">
+      <DependentUpon>MinerMessagesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweaksPagging.xaml.cs">
-      <DependentUpon>MinerTweaksPagging.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinersPagging.xaml.cs">
+      <DependentUpon>MinersPagging.xaml</DependentUpon>
     </Compile>
     <Compile Include="MinerMonitor\Views\Ucs\ColumnsShowSelect.xaml.cs">
       <DependentUpon>ColumnsShowSelect.xaml</DependentUpon>
@@ -156,8 +156,8 @@
     <Compile Include="MinerMonitor\Views\Ucs\MineWorkSelect.xaml.cs">
       <DependentUpon>MineWorkSelect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweaksSearchBar.xaml.cs">
-      <DependentUpon>MinerTweaksSearchBar.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinersSearchBar.xaml.cs">
+      <DependentUpon>MinersSearchBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="MinerMonitor\Views\Ucs\WsServerNodePage.xaml.cs">
       <DependentUpon>WsServerNodePage.xaml</DependentUpon>
@@ -195,8 +195,8 @@
     <Compile Include="Views\Ucs\WindowsAutoLogon.xaml.cs">
       <DependentUpon>WindowsAutoLogon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweaks.xaml.cs">
-      <DependentUpon>MinerTweaks.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinersView.xaml.cs">
+      <DependentUpon>MinersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Ucs\ResizeCursor.xaml.cs">
       <DependentUpon>ResizeCursor.xaml</DependentUpon>
@@ -243,8 +243,8 @@
     <Compile Include="Views\Ucs\KernelInputSelect.xaml.cs">
       <DependentUpon>KernelInputSelect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweaksToolBar.xaml.cs">
-      <DependentUpon>MinerTweaksToolBar.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinersToolBar.xaml.cs">
+      <DependentUpon>MinersToolBar.xaml</DependentUpon>
     </Compile>
     <Compile Include="MinerMonitor\Views\Ucs\LuckyWalletEdit.xaml.cs">
       <DependentUpon>LuckyWalletEdit.xaml</DependentUpon>
@@ -303,14 +303,14 @@
     <Compile Include="Views\Ucs\CoinKernelSelect.xaml.cs">
       <DependentUpon>CoinKernelSelect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweakSetting.xaml.cs">
-      <DependentUpon>MinerTweakSetting.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinerSettingView.xaml.cs">
+      <DependentUpon>MinerSettingView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MinerMonitor\Views\Ucs\MinerNamesSeter.xaml.cs">
       <DependentUpon>MinerNamesSeter.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweak.xaml.cs">
-      <DependentUpon>MinerTweak.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinerView.xaml.cs">
+      <DependentUpon>MinerView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Ucs\Calc.xaml.cs">
       <DependentUpon>Calc.xaml</DependentUpon>
@@ -333,8 +333,8 @@
     <Compile Include="MinerMonitor\Views\Ucs\OverClockDataEdit.xaml.cs">
       <DependentUpon>OverClockDataEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerTweakAdd.xaml.cs">
-      <DependentUpon>MinerTweakAdd.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\Ucs\MinerAddView.xaml.cs">
+      <DependentUpon>MinerAddView.xaml</DependentUpon>
     </Compile>
     <Compile Include="MinerMonitor\Views\Ucs\LuckyUpdaterConfig.xaml.cs">
       <DependentUpon>LuckyUpdaterConfig.xaml</DependentUpon>
@@ -354,8 +354,8 @@
     <Compile Include="Views\Ucs\KernelOutputEdit.xaml.cs">
       <DependentUpon>KernelOutputEdit.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\MinerTweaksWindow.xaml.cs">
-      <DependentUpon>MinerTweaksWindow.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\MinersWindow.xaml.cs">
+      <DependentUpon>MinersWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MinerMonitor\Views\Ucs\CalcConfig.xaml.cs">
       <DependentUpon>CalcConfig.xaml</DependentUpon>
@@ -490,15 +490,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweaksAppBar.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinersAppBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweaksCommandBar.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinersCommandBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweaksFilterBar.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinersFilterBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -766,15 +766,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweakOperationResults.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinerOperationResultsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweakMessages.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinerMessagesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweaksPagging.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinersPagging.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -790,7 +790,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweaksSearchBar.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinersSearchBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -882,7 +882,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweaks.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinersView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -946,7 +946,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweaksToolBar.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinersToolBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1038,7 +1038,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweakSetting.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinerSettingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1046,7 +1046,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweak.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinerView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1090,7 +1090,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerTweakAdd.xaml">
+    <Page Include="MinerMonitor\Views\Ucs\MinerAddView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1138,7 +1138,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\MinerTweaksWindow.xaml">
+    <Page Include="MinerMonitor\Views\MinersWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

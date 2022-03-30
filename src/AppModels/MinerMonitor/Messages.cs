@@ -68,11 +68,11 @@ namespace Lucky.MinerMonitor {
 
     [MessageType(description: "打开挖矿端远程设置界面")]
     public class ShowMinerTweakSettingCommand : Cmd {
-        public ShowMinerTweakSettingCommand(MinerTweakSettingViewModel vm) {
+        public ShowMinerTweakSettingCommand(MinerSettingViewModel vm) {
             this.Vm = vm;
         }
 
-        public MinerTweakSettingViewModel Vm { get; private set; }
+        public MinerSettingViewModel Vm { get; private set; }
     }
 
     [MessageType(description: "打开群控矿机列表页")]
@@ -95,11 +95,11 @@ namespace Lucky.MinerMonitor {
 
     [MessageType(description: "打开群控超频界面")]
     public class ShowGpuProfilesPageCommand : Cmd {
-        public ShowGpuProfilesPageCommand(MinerTweaksWindowViewModel minerClientsWindowVm) {
+        public ShowGpuProfilesPageCommand(MinersWindowViewModel minerClientsWindowVm) {
             this.MinerTweaksWindowVm = minerClientsWindowVm;
         }
 
-        public MinerTweaksWindowViewModel MinerTweaksWindowVm { get; private set; }
+        public MinersWindowViewModel MinerTweaksWindowVm { get; private set; }
     }
 
     [MessageType(description: "打开群控矿机的虚拟内存界面")]
@@ -231,11 +231,11 @@ namespace Lucky.MinerMonitor {
 
     [MessageType(description: "矿机列表页选中了和上次选中的不同的矿机时")]
     public class MinerTweakSelectionChangedEvent : EventBase {
-        public MinerTweakSelectionChangedEvent(MinerTweakViewModel minerClientVm) {
+        public MinerTweakSelectionChangedEvent(MinerViewModel minerClientVm) {
             this.MinerTweakVm = minerClientVm;
         }
 
-        public MinerTweakViewModel MinerTweakVm { get; private set; }
+        public MinerViewModel MinerTweakVm { get; private set; }
     }
 
     [MessageType(description: "收到了GetDrives的响应")]

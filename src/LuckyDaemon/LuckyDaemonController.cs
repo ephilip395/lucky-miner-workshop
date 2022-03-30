@@ -186,5 +186,11 @@ namespace Lucky
             }
             return VirtualRoot.DaemonOperation.SetLocalIps(request.Data);
         }
+
+        [HttpPost]
+        public ResponseBase UpdateConnParams([FromBody] ConnParams connParams)
+        {
+            return VirtualRoot.DaemonOperation.UpdateConnParams(connParams);
+        }
     }
 }

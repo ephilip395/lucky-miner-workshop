@@ -198,10 +198,10 @@
     <Compile Include="Vms\KernelViewModel.cs" />
     <Compile Include="Vms\MainWindowViewModel.cs" />
     <Compile Include="Vms\MeasureModel.cs" />
-    <Compile Include="MinerMonitor\Vms\MinerTweakAddViewModel.cs" />
-    <Compile Include="MinerMonitor\Vms\MinerTweakSettingViewModel.cs" />
-    <Compile Include="MinerMonitor\Vms\MinerTweaksWindowViewModel.cs" />
-    <Compile Include="MinerMonitor\Vms\MinerTweakViewModel.cs" />
+    <Compile Include="MinerMonitor\Vms\MinerAddViewModel.cs" />
+    <Compile Include="MinerMonitor\Vms\MinerSettingViewModel.cs" />
+    <Compile Include="MinerMonitor\Vms\MinersWindowViewModel.cs" />
+    <Compile Include="MinerMonitor\Vms\MinerViewModel.cs" />
     <Compile Include="MinerMonitor\Vms\MinerGroupViewModel.cs" />
     <Compile Include="MinerMonitor\Vms\MinerNamesSeterViewModel.cs" />
     <Compile Include="Vms\MinerProfileIndexViewModel.cs" />

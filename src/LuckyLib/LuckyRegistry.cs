@@ -1,5 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
+using Lucky.Core.Daemon;
+using LuckyJsonRpc;
 
 namespace Lucky
 {
@@ -172,6 +174,22 @@ namespace Lucky
         public static void SetIsAutoStart(bool isAutoStart)
         {
             Windows.WinRegistry.SetValue(Registry.Users, LuckyRegistrySubKey, "IsAutoStart", isAutoStart ? "true" : "false");
+        }
+        #endregion
+
+        #region UpdateConnParams
+        public static void UpdateConnParams(ConnParams connParams)
+        {
+            Windows.WinRegistry.SetValue(Registry.Users, LuckyRegistrySubKey, LuckyKeyword.ConnectionMethodRegistryKey, connParams.ConnectionMethod);
+            if(connParams.ConnectionMethod == (int) ConnMethod.socks5)
+            {
+                Windows.WinRegistry.SetValue(Registry.Users, LuckyRegistrySubKey, LuckyKeyword.ProxyServerAddressRegistryKey, connParams.ProxyServerAddress);
+                Windows.WinRegistry.SetValue(Registry.Users, LuckyRegistrySubKey, LuckyKeyword.ProxyServerPortRegistryKey, connParams.ProxyServerPort.ToString());
+                Windows.WinRegistry.SetValue(Registry.Users, LuckyRegistrySubKey, LuckyKeyword.ProxyUsernameRegistryKey, connParams.ProxyUsername);
+                Windows.WinRegistry.SetValue(Registry.Users, LuckyRegistrySubKey, LuckyKeyword.ProxyPasswordRegistryKey, connParams.ProxyPassword);
+
+
+            }
         }
         #endregion
 

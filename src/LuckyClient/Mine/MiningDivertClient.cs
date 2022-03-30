@@ -30,16 +30,16 @@ namespace Lucky.Mine
         }
 
 
-        public static void SwitchProxy(ProxyType proxyType)
+        public static void SwitchConnMethod(ConnMethod connMethod)
         {
 
             IMiningDivert divert = GetDivert();
-            divert.SwitchProxy(proxyType);
+            divert.SwitchConnMethod(connMethod);
             ((IDisposable)divert).Dispose();
 
         }
 
-        public static void UpdateUpstream(ProxyType proxyType, string endpoint, string username="", string password="")
+        public static void UpdateUpstream(ConnMethod proxyType, string endpoint, string username="", string password="")
         {
 
             IMiningDivert divert = GetDivert();

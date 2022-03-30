@@ -47,11 +47,11 @@ namespace Lucky.MinerMonitor
             }, serverHost, btnCloseClick);
         }
 
-        public static MinerTweaksWindowViewModel MinerTweaksWindowVm
+        public static MinersWindowViewModel MinerTweaksWindowVm
         {
             get
             {
-                return MinerTweaksWindowViewModel.Instance;
+                return MinersWindowViewModel.Instance;
             }
         }
 

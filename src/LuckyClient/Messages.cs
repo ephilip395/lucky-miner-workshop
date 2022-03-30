@@ -149,9 +149,23 @@ namespace Lucky {
         public RefreshAutoBootStartCommand() { }
     }
 
+
+    [MessageType(description: "刷新网络连接参数")]
+    public class RefreshConnParamsCommand : Cmd
+    {
+        public RefreshConnParamsCommand() { }
+    }
+
+
     [MessageType(description: "开机启动和自动挖矿刷新后")]
     public class AutoBootStartRefreshedEvent : EventBase {
         public AutoBootStartRefreshedEvent() { }
+    }
+
+    [MessageType(description: "网络连接参数刷新后")]
+    public class ConnParamsRefreshedEvent : EventBase
+    {
+        public ConnParamsRefreshedEvent() { }
     }
 
     [MessageType(description: "刷新主界面状态栏的windows远程桌面图标颜色")]

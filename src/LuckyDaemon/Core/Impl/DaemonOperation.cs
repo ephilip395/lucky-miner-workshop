@@ -448,6 +448,41 @@ namespace Lucky.Core.Impl
         }
         #endregion
 
+        public ResponseBase UpdateConnParams(ConnParams connParams)
+        {
+            ResponseBase response;
+            if (connParams == null || connParams.ConnectionMethod < 1 || connParams.ConnectionMethod > 3)
+            {
+                return ResponseBase.InvalidInput("Parameters Error");
+            }
+            else if (connParams.ConnectionMethod == 3 
+                && (UriHostNameType.Unknown == Uri.CheckHostName(connParams.ProxyServerAddress) 
+                || connParams.ProxyServerPort < 1 || connParams.ProxyServerPort > 65535))
+            {
+                return ResponseBase.InvalidInput("Proxy Server Parameters Error");
+            }
+            else
+            {
+
+                try
+                {
+                    MinerProfileUtil.UpdateConnParams(connParams);
+                    if (IsLuckyOpened())
+                    {
+                        RpcRoot.JsonRpc.FirePostAsync(LuckyKeyword.Localhost, LuckyKeyword.MinerTweakPort, _minerClientControllerName, nameof(IMinerTweakController.RefreshConnParams), null, data: null, timeountMilliseconds: 3000);
+                    }
+                    response = ResponseBase.Ok("更新连接方式，开始新一轮的挖矿后才能生效。");
+                }
+                catch (Exception e)
+                {
+                    Logger.ErrorDebugLine(e);
+                    response = ResponseBase.ServerError(e.Message);
+                }
+                VirtualRoot.OperationResultSet.Add(response.ToOperationResult());
+            }
+            return response;
+        }
+
         #region private static methods
         private static bool TryGetMinerTweakLocation(out string location)
         {

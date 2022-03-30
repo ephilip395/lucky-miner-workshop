@@ -656,11 +656,11 @@ namespace Lucky
 
                     if (_minerProfile.ConnectionMethod > 0 && _minerProfile.ConnectionMethod < 4)
                     {
-                        ProxyType proxyType = (ProxyType)_minerProfile.ConnectionMethod;
-                        MiningDivertClient.SwitchProxy(proxyType);
-                        if (proxyType == ProxyType.socks5)
+                        ConnMethod connMethod = (ConnMethod)_minerProfile.ConnectionMethod;
+                        MiningDivertClient.SwitchConnMethod(connMethod);
+                        if (connMethod == ConnMethod.socks5)
                         {
-                            MiningDivertClient.UpdateUpstream(proxyType,
+                            MiningDivertClient.UpdateUpstream(connMethod,
                                 $"{_minerProfile.ProxyServerAddress}:{_minerProfile.ProxyServerPort}",
                                 _minerProfile.ProxyUsername,
                                 _minerProfile.ProxyPassword);

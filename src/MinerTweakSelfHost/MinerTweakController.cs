@@ -153,6 +153,13 @@ namespace Lucky
             VirtualRoot.Execute(new RefreshAutoBootStartCommand());
         }
 
+
+        [HttpPost]
+        public void RefreshConnParams()
+        {
+            VirtualRoot.Execute(new RefreshConnParamsCommand());
+        }
+
         [HttpPost]
         public void RefreshIsRemoteDesktopEnabled()
         {

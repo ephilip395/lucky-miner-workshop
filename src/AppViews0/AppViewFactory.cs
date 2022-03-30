@@ -391,7 +391,7 @@ namespace Lucky
             {
                 UIThread.Execute(() =>
                 {
-                    MinerMonitorViews.MinerTweaksWindow.ShowWindow(message.IsToggle);
+                    MinerMonitorViews.MinersWindow.ShowWindow(message.IsToggle);
                 });
             });
 
@@ -518,7 +518,7 @@ namespace Lucky
             {
                 UIThread.Execute(() =>
                 {
-                    MinerMonitorUcs.MinerTweakSetting.ShowWindow(message.Vm);
+                    MinerMonitorUcs.MinerSettingView.ShowWindow(message.Vm);
                 });
             });
 
@@ -545,7 +545,7 @@ namespace Lucky
             {
                 UIThread.Execute(() =>
                 {
-                    MinerMonitorUcs.MinerTweakAdd.ShowWindow();
+                    MinerMonitorUcs.MinerAddView.ShowWindow();
                 });
             });
 

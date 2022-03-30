@@ -188,6 +188,15 @@ namespace Lucky.Vms
                     this.OnPropertyChanged(nameof(IsAutoBoot));
                     this.OnPropertyChanged(nameof(IsAutoStart));
                 });
+            AppRoot.BuildEventPath<ConnParamsRefreshedEvent>("刷新网络连接参数的展示", LogEnum.DevConsole, location: this.GetType(), PathPriority.Normal,
+                path: message =>
+                {
+                    this.OnPropertyChanged(nameof(ConnectionMethod));
+                    this.OnPropertyChanged(nameof(ProxyServerAddress));
+                    this.OnPropertyChanged(nameof(ProxyServerPort));
+                    this.OnPropertyChanged(nameof(ProxyUsername));
+                    this.OnPropertyChanged(nameof(ProxyPassword));
+                });
             AppRoot.BuildEventPath<MinerProfilePropertyChangedEvent>("MinerProfile设置变更后刷新VM内存", LogEnum.DevConsole, location: this.GetType(), PathPriority.Normal,
                 path: message =>
                 {
@@ -511,7 +520,7 @@ namespace Lucky.Vms
             get => LuckyContext.Instance.MinerProfile.ConnectionMethod;
             set
             {
-                if(LuckyContext.Instance.MinerProfile.ConnectionMethod != value)
+                if (LuckyContext.Instance.MinerProfile.ConnectionMethod != value)
                 {
                     LuckyContext.Instance.MinerProfile.SetMinerProfileProperty(nameof(ConnectionMethod), value);
                     OnPropertyChanged(nameof(ConnectionMethod));

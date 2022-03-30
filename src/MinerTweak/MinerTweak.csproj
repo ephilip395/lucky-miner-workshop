@@ -103,7 +103,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs" />
-    <Compile Include="NoDevFeeUtil.cs" />
     <Compile Include="DivertProxyNuUtil.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="SplashWindow.xaml.cs">

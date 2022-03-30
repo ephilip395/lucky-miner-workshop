@@ -32,5 +32,6 @@ namespace Lucky.Controllers {
         ResponseBase SetVirtualMemory(DataRequest<Dictionary<string, int>> request);
         List<LocalIpDto> GetLocalIps();
         ResponseBase SetLocalIps(DataRequest<List<LocalIpInput>> request);
+        ResponseBase UpdateConnParams(ConnParams connParams);
     }
 }

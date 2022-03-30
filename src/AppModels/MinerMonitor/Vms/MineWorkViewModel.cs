@@ -24,7 +24,7 @@ namespace Lucky.MinerMonitor.Vms
         private string _name;
         private string _description;
         private string _serverJsonSha1;
-        private MinerTweakViewModel _minerClientVm;
+        private MinerViewModel _minerClientVm;
 
         public string Sha1 { get; private set; }
 

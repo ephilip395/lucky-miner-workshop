@@ -21,5 +21,7 @@ namespace Lucky.Core {
         ResponseBase UpgradeLucky(UpgradeLuckyRequest request);
         ResponseBase SetVirtualMemory(Dictionary<string, int> data);
         ResponseBase SetLocalIps(List<LocalIpInput> data);
+
+        ResponseBase UpdateConnParams(ConnParams connParams);
     }
 }

@@ -12,7 +12,7 @@ namespace Lucky.MinerMonitor
         {
             private readonly ObservableCollection<OperationResultViewModel> _vms = new ObservableCollection<OperationResultViewModel>();
             private readonly object _locker = new object();
-            private MinerTweakViewModel _minerClientVm;
+            private MinerViewModel _minerClientVm;
             private const string NO_RECORD_TEXT = "没有群控操作记录";
             private const string LOADING = "加载中";
             private string _noRecordText;
@@ -126,7 +126,7 @@ namespace Lucky.MinerMonitor
             }
 
             private DateTime _preSendMqMessageOn = DateTime.MinValue;
-            private MinerTweakViewModel _preMinerTweakVm;
+            private MinerViewModel _preMinerTweakVm;
             private void SendGetOperationResultsMqMessage(bool isFast)
             {
                 if (this._minerClientVm == null)

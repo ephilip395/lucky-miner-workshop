@@ -106,6 +106,10 @@
       <Project>{e17f278a-e393-403e-9d37-e371036d7a02}</Project>
       <Name>LuckyHub</Name>
     </ProjectReference>
+    <ProjectReference Include="..\LuckyJsonRpc\LuckyJsonRpc.csproj">
+      <Project>{30806e1b-057c-41ca-b5d0-778ab4628071}</Project>
+      <Name>LuckyJsonRpc</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LuckyLogging\LuckyLogging.csproj">
       <Project>{f5091b28-5bb6-4446-9b97-02b37125e340}</Project>
       <Name>LuckyLogging</Name>

@@ -40,7 +40,7 @@ namespace Lucky.MinerMonitor
                         }
                     }
                     OnPropertyChangeds();
-                    MinerTweaksWindowViewModel.Instance.RefreshMinerTweaksSelectedMineWork(MinerTweaksWindowViewModel.Instance.MinerTweaks.ToArray());
+                    MinersWindowViewModel.Instance.RefreshMinerTweaksSelectedMineWork(MinersWindowViewModel.Instance.MinerTweaks.ToArray());
                 });
                 this.Add = new DelegateCommand(() =>
                 {

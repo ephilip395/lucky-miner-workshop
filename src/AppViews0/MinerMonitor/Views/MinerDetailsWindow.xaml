@@ -70,7 +70,7 @@
 
         </Grid>
 
-        <uc:MinerTweak Grid.Row="1" DataContext="{Binding CurrentMinerTweak}" />
+        <uc:MinerView Grid.Row="1" DataContext="{Binding CurrentMinerTweak}" />
 
     </Grid>
 </Window>

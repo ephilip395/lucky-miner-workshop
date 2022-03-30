@@ -30,7 +30,7 @@ namespace Lucky.MinerMonitor {
                         }
                     }
                     this.OnPropertyChangeds();
-                    MinerTweaksWindowViewModel.Instance.RefreshMinerTweaksSelectedMinerGroup(MinerTweaksWindowViewModel.Instance.MinerTweaks.ToArray());
+                    MinersWindowViewModel.Instance.RefreshMinerTweaksSelectedMinerGroup(MinersWindowViewModel.Instance.MinerTweaks.ToArray());
                 });
                 this.Add = new DelegateCommand(() => {
                     new MinerGroupViewModel(Guid.NewGuid()).Edit.Execute(FormType.Add);
@@ -41,7 +41,7 @@ namespace Lucky.MinerMonitor {
                             vm = new MinerGroupViewModel(message.Source);
                             _dicById.Add(message.Source.GetId(), vm);
                             OnPropertyChangeds();
-                            MinerTweaksWindowVm.OnPropertyChanged(nameof(MinerTweaksWindowViewModel.SelectedMinerGroup));
+                            MinerTweaksWindowVm.OnPropertyChanged(nameof(MinersWindowViewModel.SelectedMinerGroup));
                         }
                     });
                 AppRoot.BuildEventPath<MinerGroupUpdatedEvent>("添加矿机分组后刷新VM内存", LogEnum.DevConsole, location: this.GetType(), PathPriority.Normal,
@@ -54,7 +54,7 @@ namespace Lucky.MinerMonitor {
                     if (_dicById.TryGetValue(message.Source.Id, out MinerGroupViewModel vm)) {
                         _dicById.Remove(vm.Id);
                         OnPropertyChangeds();
-                        MinerTweaksWindowVm.OnPropertyChanged(nameof(MinerTweaksWindowViewModel.SelectedMinerGroup));
+                        MinerTweaksWindowVm.OnPropertyChanged(nameof(MinersWindowViewModel.SelectedMinerGroup));
                     }
                 });
             }

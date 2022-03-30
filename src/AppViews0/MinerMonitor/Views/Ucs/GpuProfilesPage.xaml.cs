@@ -12,7 +12,7 @@ namespace Lucky.MinerMonitor.Views.Ucs
 {
     public partial class GpuProfilesPage : UserControl
     {
-        public static void ShowWindow(MinerTweaksWindowViewModel minerClientsWindowVm)
+        public static void ShowWindow(MinersWindowViewModel minerClientsWindowVm)
         {
             if (minerClientsWindowVm.SelectedMinerTweaks == null && minerClientsWindowVm.SelectedMinerTweaks.Length != 1)
             {
@@ -39,7 +39,7 @@ namespace Lucky.MinerMonitor.Views.Ucs
                 {
                     if (e.PropertyName == nameof(minerClientsWindowVm.SelectedMinerTweaks))
                     {
-                        List<MinerTweakViewModel> toRemoves = new List<MinerTweakViewModel>();
+                        List<MinerViewModel> toRemoves = new List<MinerViewModel>();
                         foreach (var item in vm.MinerTweakVms)
                         {
                             if (item != minerClientVm)
@@ -55,7 +55,7 @@ namespace Lucky.MinerMonitor.Views.Ucs
                         {
                             vm.MinerTweakVms.Remove(item);
                         }
-                        List<MinerTweakViewModel> toAdds = new List<MinerTweakViewModel>();
+                        List<MinerViewModel> toAdds = new List<MinerViewModel>();
                         foreach (var item in minerClientsWindowVm.SelectedMinerTweaks)
                         {
                             var exist = vm.MinerTweakVms.FirstOrDefault(a => a == item);

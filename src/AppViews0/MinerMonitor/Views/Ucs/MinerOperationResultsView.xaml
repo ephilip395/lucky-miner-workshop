@@ -1,0 +1,64 @@
+﻿<UserControl 
+    x:Class="Lucky.MinerMonitor.Views.Ucs.MinerOperationResultsView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	xmlns:uc="clr-namespace:Lucky.Views.Ucs"
+	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
+	xmlns:local="clr-namespace:Lucky.Views.Ucs"
+	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
+	xmlns:vm="clr-namespace:Lucky.MinerMonitor.Vms;assembly=AppModels"
+	mc:Ignorable="d" 
+    x:Name="Uc"
+	d:DesignHeight="450" d:DesignWidth="1200">
+    <Grid>
+        <DataGrid 
+            IsReadOnly="True"
+			ItemsSource="{Binding ClientOperationResults}" 
+            EnableRowVirtualization="True"
+            AutoGenerateColumns="False"
+            HeadersVisibility="Column"
+            GridLinesVisibility="None"
+			HorizontalScrollBarVisibility="Auto">
+            <DataGrid.Resources>
+                <controls:BindingProxy x:Key="proxy" Data="{Binding}" />
+                <Style TargetType="DataGridCell">
+                    <Setter Property="Foreground" Value="{Binding IconFill}" />
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+
+                <DataGridTemplateColumn MinWidth="20" Width="20" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Path
+						        Width="14"
+						        Height="14"
+						        Data="{Binding StateCodeIcon}"
+						        Fill="{Binding IconFill}"
+						        Stretch="Fill" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Header="时间" Binding="{Binding TimestampText}"/>
+
+                <DataGridTextColumn Header="短语" Binding="{Binding ReasonPhrase}"/>
+
+                <DataGridTextColumn Header="说明" Binding="{Binding Description}"/>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock 
+            Margin="0 30 0 0"
+            Visibility="{Binding IsNoRecord, Converter={StaticResource BoolToVisibilityConverter}}" 
+            Foreground="Red" 
+            Text="{Binding NoRecordText}"
+            VerticalAlignment="Center" 
+            HorizontalAlignment="Center"></TextBlock>
+    </Grid>
+</UserControl>

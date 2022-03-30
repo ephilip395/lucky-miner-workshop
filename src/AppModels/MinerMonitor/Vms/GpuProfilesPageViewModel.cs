@@ -20,8 +20,8 @@ namespace Lucky.MinerMonitor.Vms
         private CoinViewModel _coinVm;
         private GpuProfilesJsonDb _data;
         private bool _isEnabled = false;
-        private readonly MinerTweakViewModel _minerClientVm;
-        private readonly ObservableCollection<MinerTweakViewModel> _minerClientVms;
+        private readonly MinerViewModel _minerClientVm;
+        private readonly ObservableCollection<MinerViewModel> _minerClientVms;
 
         public ICommand Save { get; private set; }
 
@@ -34,14 +34,14 @@ namespace Lucky.MinerMonitor.Vms
             }
         }
 
-        public GpuProfilesPageViewModel(MinerTweaksWindowViewModel minerClientsWindowVm)
+        public GpuProfilesPageViewModel(MinersWindowViewModel minerClientsWindowVm)
         {
             if (minerClientsWindowVm.SelectedMinerTweaks == null || minerClientsWindowVm.SelectedMinerTweaks.Length == 0)
             {
                 throw new InvalidProgramException();
             }
             _minerClientVm = minerClientsWindowVm.SelectedMinerTweaks[0];
-            _minerClientVms = new ObservableCollection<MinerTweakViewModel>(minerClientsWindowVm.SelectedMinerTweaks);
+            _minerClientVms = new ObservableCollection<MinerViewModel>(minerClientsWindowVm.SelectedMinerTweaks);
             if (AppRoot.CoinVms.TryGetCoinVm(_minerClientVm.MainCoinCode, out CoinViewModel outCoinVm))
             {
                 this._coinVm = outCoinVm;
@@ -168,7 +168,7 @@ namespace Lucky.MinerMonitor.Vms
             }
         }
 
-        public MinerTweakViewModel MinerTweakVm
+        public MinerViewModel MinerTweakVm
         {
             get
             {
@@ -176,7 +176,7 @@ namespace Lucky.MinerMonitor.Vms
             }
         }
 
-        public ObservableCollection<MinerTweakViewModel> MinerTweakVms
+        public ObservableCollection<MinerViewModel> MinerTweakVms
         {
             get
             {

@@ -72,12 +72,12 @@
 
         </Grid>
 
-        <uc:MinerTweakOperationResults Grid.Row="1" />
+        <uc:MinerOperationResultsView Grid.Row="1" />
 
         <TextBlock Grid.Row="2" Padding="6 4" HorizontalAlignment="Right" VerticalAlignment="Bottom"
                    Text="{Binding MinerTweakConsoleVm.LatestTimeSpanText}" />
 
-        <uc:MinerTweakMessages Grid.Row="3" />
+        <uc:MinerMessagesView Grid.Row="3" />
 
     </Grid>
 </Window>

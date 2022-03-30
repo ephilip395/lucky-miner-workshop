@@ -18,7 +18,7 @@ namespace Lucky.MinerMonitor.Vms {
             }
         }
 
-        public VirtualMemoryViewModel(MinerTweakViewModel minerClientVm) {
+        public VirtualMemoryViewModel(MinerViewModel minerClientVm) {
             this.MinerTweakVm = minerClientVm;
             this.Apply = new DelegateCommand(() => {
                 MinerMonitorRoot.MinerMonitorService.SetVirtualMemoryAsync(minerClientVm, _drives.ToDictionary(a => a.Name, a => a.VirtualMemoryMaxSizeMb));
@@ -37,7 +37,7 @@ namespace Lucky.MinerMonitor.Vms {
             }
         }
 
-        public MinerTweakViewModel MinerTweakVm { get; set; }
+        public MinerViewModel MinerTweakVm { get; set; }
 
         public List<DriveViewModel> Drives {
             get {

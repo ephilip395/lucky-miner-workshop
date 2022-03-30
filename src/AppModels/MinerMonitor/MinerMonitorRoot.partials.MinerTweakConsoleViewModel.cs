@@ -13,7 +13,7 @@ namespace Lucky.MinerMonitor
         {
             private readonly List<ConsoleOutLine> _outLines = new List<ConsoleOutLine>();
             private readonly object _locker = new object();
-            private MinerTweakViewModel _minerClientVm;
+            private MinerViewModel _minerClientVm;
             private DateTime _latestTimestamp = Timestamp.UnixBaseTime;
 
             public DateTime LatestTimestamp

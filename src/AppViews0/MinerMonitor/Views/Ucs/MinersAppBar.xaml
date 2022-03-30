@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Lucky.MinerMonitor.Views.Ucs.MinersAppBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:ui="http://schemas.modernwpf.com/2019"
+
+             xmlns:local="clr-namespace:Lucky.MinerMonitor.Views.Ucs"
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="800">
+    <Grid>
+        <WrapPanel Orientation="Horizontal">
+
+            <ui:AppBarButton Icon="Play" Label="开始挖矿" AllowDrop="True" />
+            <ui:AppBarButton Icon="Stop" Label="停止挖矿" />
+            <ui:AppBarButton Icon="DisconnectDrive" Label="单机作业" />
+            <ui:AppBarButton Icon="Document" Label="分配作业..." />
+            <ui:AppBarButton Icon="AllApps" Label="指定分组..." />
+            <ui:AppBarButton Icon="Up" Label="超频..." />
+
+            <ui:AppBarButton Icon="Setting" Label="矿机配置..." />
+            <ui:AppBarSeparator />
+            <ui:AppBarButton Icon="Add" Label="添加矿机" />
+            <ui:AppBarButton Icon="Delete" Label="删除矿机" />
+            <ui:AppBarButton Icon="CalendarDay" Label="我的视图" />
+            <ui:AppBarSeparator />
+            <ui:AppBarButton Icon="Refresh" Label="重启电脑" />
+            <ui:AppBarButton Icon="Clear" Label="关闭电脑" />
+            <ui:AppBarButton Icon="Remote" Label="远程桌面" />
+            <ui:AppBarButton Icon="DisableUpdates" Label="禁用更新" />
+            <ui:AppBarButton Icon="ReportHacked" Label="禁用休眠" />
+            <ui:AppBarButton Icon="SwitchApps" Label="虚拟内存..." />
+            <ui:AppBarButton Icon="Mappin" Label="IP设置..." />
+            <ui:AppBarButton Icon="Upload" Label="软件升级..." />
+            <ui:AppBarButton Icon="Shuffle" Label="计算模式" />
+            
+        </WrapPanel>
+    </Grid>
+</UserControl>

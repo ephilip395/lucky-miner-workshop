@@ -1,7 +1,9 @@
 ﻿using System;
 
-namespace Lucky.Core.Daemon {
-    public class WorkRequest : IRequest {
+namespace Lucky.Core.Daemon
+{
+    public class WorkRequest : IRequest
+    {
         public WorkRequest() { }
 
         public Guid WorkId { get; set; }

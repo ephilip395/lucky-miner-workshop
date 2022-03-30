@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using LuckyJsonRpc;
 
 namespace Lucky.Core.Profiles
 {
@@ -31,6 +32,23 @@ namespace Lucky.Core.Profiles
                     _data.IsAutoBoot = data.IsAutoBoot;
                     _data.IsAutoStart = data.IsAutoStart;
                     VirtualRoot.RaiseEvent(new AutoBootStartRefreshedEvent());
+                }
+            });
+            VirtualRoot.BuildCmdPath<RefreshConnParamsCommand>(location: this.GetType(), LogEnum.DevConsole, path: message =>
+            {
+                var minerProfileRepository = luckyContext.ServerContext.CreateLocalRepository<MinerProfileData>();
+                var data = minerProfileRepository.GetAll().FirstOrDefault();
+                if (data != null && _data != null)
+                {
+                    _data.ConnectionMethod = data.ConnectionMethod;
+                    if (_data.ConnectionMethod == (int)ConnMethod.socks5)
+                    {
+                        _data.ProxyServerAddress = data.ProxyServerAddress;
+                        _data.ProxyServerPort = data.ProxyServerPort;
+                        _data.ProxyUsername = data.ProxyUsername;
+                        _data.ProxyPassword = data.ProxyPassword;
+                    }
+                    VirtualRoot.RaiseEvent(new ConnParamsRefreshedEvent());
                 }
             });
             Init(luckyContext);

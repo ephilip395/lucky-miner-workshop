@@ -10,9 +10,9 @@ namespace LuckyJsonRpc
     {
         void StartOne(MiningParams mps);
 
-        void SwitchProxy(ProxyType proxyType);
+        void SwitchConnMethod(ConnMethod proxyType);
 
-        void UpdateUpstream(ProxyType proxyType, string endpoint, string username = "", string password = "");
+        void UpdateUpstream(ConnMethod proxyType, string endpoint, string username = "", string password = "");
        
     }
 }

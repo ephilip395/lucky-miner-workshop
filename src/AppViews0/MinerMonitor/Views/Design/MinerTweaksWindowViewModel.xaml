@@ -1,2 +1,2 @@
-﻿<vm:MinerTweaksWindowViewModel xmlns:vm="clr-namespace:Lucky.MinerMonitor.Vms;assembly=AppModels">
-</vm:MinerTweaksWindowViewModel>
+﻿<vm:MinersWindowViewModel xmlns:vm="clr-namespace:Lucky.MinerMonitor.Vms;assembly=AppModels">
+</vm:MinersWindowViewModel>
