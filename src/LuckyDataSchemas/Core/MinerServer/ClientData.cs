@@ -7,15 +7,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Lucky.Core.MinerServer {
-    public class ClientData : SpeedDto, IClientData {
+namespace Lucky.Core.MinerServer
+{
+    public class ClientData : SpeedDto, IClientData
+    {
         private static readonly Dictionary<string, PropertyInfo> _reflectionUpdateProperties = new Dictionary<string, PropertyInfo>();
 
-        public static bool TryGetReflectionUpdateProperty(string propertyName, out PropertyInfo propertyInfo) {
+        public static bool TryGetReflectionUpdateProperty(string propertyName, out PropertyInfo propertyInfo)
+        {
             return _reflectionUpdateProperties.TryGetValue(propertyName, out propertyInfo);
         }
 
-        static ClientData() {
+        static ClientData()
+        {
             Type type = typeof(ClientData);
             // 这算是一个安全措施，因为propertyName是来自客户端传入的，所以需要白名单。
             HashSet<string> propertyNames = new HashSet<string> {
@@ -25,29 +29,35 @@ namespace Lucky.Core.MinerServer {
                 nameof(WindowsLoginName),
                 nameof(WindowsPassword)
             };
-            foreach (var propertyName in propertyNames) {
+            foreach (var propertyName in propertyNames)
+            {
                 _reflectionUpdateProperties.Add(propertyName, type.GetProperty(propertyName));
             }
         }
 
-        public ClientData() : base() {
+        public ClientData() : base()
+        {
         }
 
         // 用户在内网群控端添加矿机时
-        public static ClientData Create(string minerIp, out MinerData minerData) {
+        public static ClientData Create(string minerIp, out MinerData minerData)
+        {
             minerData = MinerData.Create(minerIp);
             return Create(minerData);
         }
 
         // WebApiServer收到矿机签名变更事件但矿机不存在时
-        public static ClientData Create(IMinerSign minerSign) {
+        public static ClientData Create(IMinerSign minerSign)
+        {
             var minerData = MinerData.Create(minerSign);
             return Create(minerData);
         }
 
         // 内网群控端从litedb和WebApiServer从redis加载数据时
-        public static ClientData Create(IMinerData data) {
-            return new ClientData() {
+        public static ClientData Create(IMinerData data)
+        {
+            return new ClientData()
+            {
                 #region
                 Id = data.Id,
                 ClientId = data.ClientId,
@@ -157,8 +167,10 @@ namespace Lucky.Core.MinerServer {
             };
         }
 
-        public static ClientData Clone(ClientData data) {
-            return new ClientData() {
+        public static ClientData Clone(ClientData data)
+        {
+            return new ClientData()
+            {
                 #region
                 Id = data.Id,
                 DiskSpaceMb = data.DiskSpaceMb,
@@ -268,8 +280,10 @@ namespace Lucky.Core.MinerServer {
             };
         }
 
-        public static ClientData Create(ReportState state, string minerIp) {
-            return new ClientData {
+        public static ClientData Create(ReportState state, string minerIp)
+        {
+            return new ClientData
+            {
                 Id = ObjectId.NewObjectId().ToString(),
                 ClientId = state.ClientId,
                 IsMining = state.IsMining,
@@ -288,69 +302,87 @@ namespace Lucky.Core.MinerServer {
             out int dualCoinPoolDelayNumber,
             out double mainCoinRejectPercent,
             out double dualCoinRejectPercent,
-            out int diskSpaceMb) {
+            out int diskSpaceMb)
+        {
             #region
             mainCoinPoolDelayNumber = 0;
             dualCoinPoolDelayNumber = 0;
             mainCoinRejectPercent = 0.0;
             dualCoinRejectPercent = 0.0;
-            if (!string.IsNullOrEmpty(speedDto.MainCoinPoolDelay)) {
+            if (!string.IsNullOrEmpty(speedDto.MainCoinPoolDelay))
+            {
                 string text = speedDto.MainCoinPoolDelay.Trim();
                 int count = 0;
-                for (int i = 0; i < text.Length; i++) {
-                    if (!char.IsNumber(text[i])) {
+                for (int i = 0; i < text.Length; i++)
+                {
+                    if (!char.IsNumber(text[i]))
+                    {
                         count = i;
                         break;
                     }
                 }
-                if (count != 0) {
+                if (count != 0)
+                {
                     mainCoinPoolDelayNumber = int.Parse(text.Substring(0, count));
                 }
             }
-            if (!string.IsNullOrEmpty(speedDto.DualCoinPoolDelay)) {
+            if (!string.IsNullOrEmpty(speedDto.DualCoinPoolDelay))
+            {
                 string text = speedDto.DualCoinPoolDelay.Trim();
                 int count = 0;
-                for (int i = 0; i < text.Length; i++) {
-                    if (!char.IsNumber(text[i])) {
+                for (int i = 0; i < text.Length; i++)
+                {
+                    if (!char.IsNumber(text[i]))
+                    {
                         count = i;
                         break;
                     }
                 }
-                if (count != 0) {
+                if (count != 0)
+                {
                     dualCoinPoolDelayNumber = int.Parse(text.Substring(0, count));
                 }
             }
-            if (speedDto.MainCoinTotalShare != 0) {
+            if (speedDto.MainCoinTotalShare != 0)
+            {
                 mainCoinRejectPercent = (speedDto.MainCoinRejectShare * 100.0) / speedDto.MainCoinTotalShare;
             }
-            if (speedDto.DualCoinTotalShare != 0) {
+            if (speedDto.DualCoinTotalShare != 0)
+            {
                 dualCoinRejectPercent = (speedDto.DualCoinRejectShare * 100.0) / speedDto.DualCoinTotalShare;
             }
             diskSpaceMb = GetMinDiskSpaceMb(speedDto.DiskSpace);
             #endregion
         }
 
-        private static int GetMinDiskSpaceMb(string diskSpace) {
+        private static int GetMinDiskSpaceMb(string diskSpace)
+        {
             // C:\21.4 Gb;D:\9.2 Gb;E:\27.1 Gb
-            if (string.IsNullOrEmpty(diskSpace)) {
+            if (string.IsNullOrEmpty(diskSpace))
+            {
                 return 0;
             }
             string[] parts = diskSpace.Split(new char[] { '\\' }, StringSplitOptions.RemoveEmptyEntries);
             List<int> list = new List<int>();
-            foreach (string part in parts) {
-                if (char.IsDigit(part[0])) {
-                    if (double.TryParse(part.Substring(0, part.IndexOf(' ')), out double value)) {
+            foreach (string part in parts)
+            {
+                if (char.IsDigit(part[0]))
+                {
+                    if (double.TryParse(part.Substring(0, part.IndexOf(' ')), out double value))
+                    {
                         list.Add((int)(value * LuckyKeyword.IntK));
                     }
                 }
             }
-            if (list.Count == 0) {
+            if (list.Count == 0)
+            {
                 return 0;
             }
             return list.Min();
         }
 
-        public static ClientData Create(ISpeedDto speedDto, string minerIp) {
+        public static ClientData Create(ISpeedDto speedDto, string minerIp)
+        {
             Extract(
                 speedDto,
                 out int mainCoinPoolDelayNumber,
@@ -358,7 +390,8 @@ namespace Lucky.Core.MinerServer {
                 out double mainCoinRejectPercent,
                 out double dualCoinRejectPercent,
                 out int diskSpaceMb);
-            return new ClientData() {
+            return new ClientData()
+            {
                 #region
                 Id = ObjectId.NewObjectId().ToString(),
                 MineContextId = speedDto.MineContextId,
@@ -468,7 +501,8 @@ namespace Lucky.Core.MinerServer {
             };
         }
 
-        public void Update(MinerSign minerSign) {
+        public void Update(MinerSign minerSign)
+        {
             #region
             this.LoginName = minerSign.LoginName;
             this.ClientId = minerSign.ClientId;
@@ -478,8 +512,10 @@ namespace Lucky.Core.MinerServer {
             #endregion
         }
 
-        public SpeedData ToSpeedData() {
-            return new SpeedData {
+        public SpeedData ToSpeedData()
+        {
+            return new SpeedData
+            {
                 #region
                 SpeedOn = this.MinerActiveOn,
                 AutoRestartKernelTimes = this.AutoRestartKernelTimes,
@@ -578,10 +614,12 @@ namespace Lucky.Core.MinerServer {
         /// <param name="speedDto"></param>
         /// <param name="minerIp"></param>
         /// <param name="isMinerDataChanged"></param>
-        public void Update(ISpeedDto speedDto, string minerIp, out bool isMinerDataChanged) {
+        public void Update(ISpeedDto speedDto, string minerIp, out bool isMinerDataChanged)
+        {
             Update(speedDto, out isMinerDataChanged);
             this.MinerActiveOn = DateTime.Now;
-            if (!isMinerDataChanged && minerIp != this.MinerIp) {
+            if (!isMinerDataChanged && minerIp != this.MinerIp)
+            {
                 isMinerDataChanged = true;
             }
             this.MinerIp = minerIp;
@@ -593,11 +631,13 @@ namespace Lucky.Core.MinerServer {
         /// <param name="state"></param>
         /// <param name="minerIp"></param>
         /// <param name="isMinerDataChanged"></param>
-        public void Update(ReportState state, string minerIp, out bool isMinerDataChanged) {
+        public void Update(ReportState state, string minerIp, out bool isMinerDataChanged)
+        {
             isMinerDataChanged = false;
             this.IsMining = state.IsMining;
             this.MinerActiveOn = DateTime.Now;
-            if (!isMinerDataChanged && minerIp != this.MinerIp) {
+            if (!isMinerDataChanged && minerIp != this.MinerIp)
+            {
                 isMinerDataChanged = true;
             }
             this.MinerIp = minerIp;
@@ -609,7 +649,8 @@ namespace Lucky.Core.MinerServer {
         /// </summary>
         /// <param name="speedDto"></param>
         /// <param name="isMinerDataChanged"></param>
-        public void Update(ISpeedData speedData, out bool isMinerDataChanged) {
+        public void Update(ISpeedData speedData, out bool isMinerDataChanged)
+        {
             this.Update((ISpeedDto)speedData, out isMinerDataChanged);
             this.MinerActiveOn = speedData.SpeedOn;
         }
@@ -619,35 +660,43 @@ namespace Lucky.Core.MinerServer {
         /// </summary>
         /// <param name="speedDto"></param>
         /// <param name="isMinerDataChanged"></param>
-        public void Update(ISpeedDto speedDto, out bool isMinerDataChanged) {
+        public void Update(ISpeedDto speedDto, out bool isMinerDataChanged)
+        {
             #region
             isMinerDataChanged = false;
-            if (speedDto == null) {
+            if (speedDto == null)
+            {
                 return;
             }
             #region MinerData
-            if (!isMinerDataChanged) {
+            if (!isMinerDataChanged)
+            {
                 isMinerDataChanged = this.ClientId != speedDto.ClientId;
             }
             this.ClientId = speedDto.ClientId;
-            if (!isMinerDataChanged) {
+            if (!isMinerDataChanged)
+            {
                 isMinerDataChanged = this.MACAddress != speedDto.MACAddress;
             }
             this.MACAddress = speedDto.MACAddress;
-            if (!isMinerDataChanged) {
+            if (!isMinerDataChanged)
+            {
                 isMinerDataChanged = this.LocalIp != speedDto.LocalIp;
             }
             this.LocalIp = speedDto.LocalIp;
-            if (!isMinerDataChanged) {
+            if (!isMinerDataChanged)
+            {
                 isMinerDataChanged = this.MinerName != speedDto.MinerName;
             }
             this.MinerName = speedDto.MinerName;
-            if (!isMinerDataChanged) {
+            if (!isMinerDataChanged)
+            {
                 isMinerDataChanged = this.IsOuterUserEnabled != speedDto.IsOuterUserEnabled;
             }
             this.IsOuterUserEnabled = speedDto.IsOuterUserEnabled;
             this.ReportOuterUserId = speedDto.ReportOuterUserId;
-            if (!isMinerDataChanged) {
+            if (!isMinerDataChanged)
+            {
                 isMinerDataChanged = this.OuterUserId != speedDto.ReportOuterUserId;
             }
             this.OuterUserId = speedDto.ReportOuterUserId;
@@ -757,12 +806,16 @@ namespace Lucky.Core.MinerServer {
         public string WindowsLoginName { get; set; }
 
         private string _windowsPassword;
-        public string WindowsPassword {
-            get {
+        public string WindowsPassword
+        {
+            get
+            {
                 return _windowsPassword;
             }
-            set {
-                if (!Base64Util.IsBase64OrEmpty(value)) {
+            set
+            {
+                if (!Base64Util.IsBase64OrEmpty(value))
+                {
                     value = string.Empty;
                 }
                 _windowsPassword = value;
@@ -777,9 +830,11 @@ namespace Lucky.Core.MinerServer {
 
         public DateTime NetActiveOn { get; set; }
 
-        public DateTime GetActiveOn() {
+        public DateTime GetActiveOn()
+        {
             DateTime activeOn = this.MinerActiveOn;
-            if (this.NetActiveOn > activeOn) {
+            if (this.NetActiveOn > activeOn)
+            {
                 activeOn = this.NetActiveOn;
             }
             return activeOn;
@@ -787,22 +842,29 @@ namespace Lucky.Core.MinerServer {
 
         public bool IsOnline { get; set; }
 
-        public bool GetIsOnline(bool isOuterNet) {
-            if (!IsOnline) {
+        public bool GetIsOnline(bool isOuterNet)
+        {
+            if (!IsOnline)
+            {
                 return false;
             }
-            if (isOuterNet) {
-                if (this.IsOuterUserEnabled) {
-                    if (NetActiveOn.AddSeconds(60) < DateTime.Now) {
+            if (isOuterNet)
+            {
+                if (this.IsOuterUserEnabled)
+                {
+                    if (NetActiveOn.AddSeconds(60) < DateTime.Now)
+                    {
                         return false;
                     }
                 }
-                else if (NetActiveOn.AddSeconds(180) < DateTime.Now) {
+                else if (NetActiveOn.AddSeconds(180) < DateTime.Now)
+                {
                     return false;
                 }
                 return true;
             }
-            if (NetActiveOn.AddSeconds(20) < DateTime.Now) {
+            if (NetActiveOn.AddSeconds(20) < DateTime.Now)
+            {
                 return false;
             }
             return true;

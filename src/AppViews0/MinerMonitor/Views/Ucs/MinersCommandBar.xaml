@@ -13,7 +13,7 @@
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
 
-        <ui:CommandBar DefaultLabelPosition="Bottom" HorizontalAlignment="Left" Background="{DynamicResource ResourceKey=SystemControlDisabledTransparentBrush}">
+        <ui:CommandBar DefaultLabelPosition="Bottom" Background="{DynamicResource ResourceKey=SystemControlDisabledTransparentBrush}">
             
             <ui:AppBarButton Icon="Play" Label="开始挖矿" Command="{Binding StartMine}" IsEnabled="{Binding IsSelectedAny}" />
             <ui:AppBarButton Icon="Stop" Label="停止挖矿" Command="{Binding StopMine}" IsEnabled="{Binding IsSelectedAny}" />
@@ -40,7 +40,12 @@
             <ui:AppBarSeparator />
             <ui:AppBarButton Icon="Add" Label="添加矿机" Command="{Binding AddMinerTweak}" IsEnabled="{Binding IsInnerNet}"/>
             <ui:AppBarButton Icon="Delete" Label="删除矿机" IsEnabled="{Binding IsSelectedAny}" Command="{Binding RemoveMinerTweaks}" />
-            
+
+            <ui:AppBarSeparator />
+            <ui:AppBarButton Icon="Mail" Label="消息" IsEnabled="{Binding IsSelectedOne}" Command="{Binding EmptyCommandForSelectdOne}" Click="OpenMessagesWindow"  />
+            <ui:AppBarButton Icon="Slideshow" Label="输出" IsEnabled="{Binding IsSelectedOne}" Command="{Binding EmptyCommandForSelectdOne}" Click="OpenOutputWindow"  />
+            <ui:AppBarButton Icon="ShowResults" Label="查看详情" IsEnabled="{Binding IsSelectedOne}" Command="{Binding EmptyCommandForSelectdOne}" Click="OpenMinerDetailsWindow"  />
+
             <ui:AppBarSeparator />
             <ui:AppBarButton Icon="Refresh" Label="重启电脑" IsEnabled="{Binding IsSelectedAny}" Command="{Binding RestartWindows}" />
             <ui:AppBarButton Icon="Clear" Label="关闭电脑" IsEnabled="{Binding IsSelectedAny}" Command="{Binding ShutdownWindows}" />
@@ -52,19 +57,14 @@
             <ui:AppBarButton Icon="Mappin" Label="IP设置" IsEnabled="{Binding IsSelectedAny}" Command="{Binding LocalIpConfig}" />
             <ui:AppBarButton Icon="Up" Label="超频" IsEnabled="{Binding IsSelectedAny}" Command="{Binding OneKeyOverClock}" />
             <ui:AppBarButton Icon="Setting" Label="矿机配置" IsEnabled="{Binding IsSelectedAny}" Command="{Binding OneKeySetting}" />
-            <ui:AppBarButton Icon="World" Label="联网方式" IsEnabled="{Binding IsSelectedAny}" Command="{Binding ConnectionMethodSetting}" />
+            <ui:AppBarButton Icon="World" Label="网络连接" IsEnabled="{Binding IsSelectedAny}" Command="{Binding ConnectionMethodSetting}" />
             <ui:AppBarButton Icon="Shuffle" Label="A卡计算模式" IsEnabled="{Binding IsSelectedAny}" Command="{Binding SwitchRadeonGpu}"  />
             <ui:AppBarButton Icon="Upload" Label="软件升级" Click="ItemUpgrade_Click" IsEnabled="{Binding IsSelectedAny}">
                 <ui:FlyoutService.Flyout>
                     <ui:Flyout x:Name="UpgradeFlyout" Placement="BottomEdgeAlignedLeft"/>
                 </ui:FlyoutService.Flyout>
             </ui:AppBarButton>
-
-            <ui:AppBarSeparator />
-            <ui:AppBarButton Icon="Mail" Label="消息" IsEnabled="{Binding IsSelectedOne}" Command="{Binding EmptyCommandForSelectdOne}" Click="OpenMessagesWindow"  />
-            <ui:AppBarButton Icon="Slideshow" Label="输出" IsEnabled="{Binding IsSelectedOne}" Command="{Binding EmptyCommandForSelectdOne}" Click="OpenOutputWindow"  />
-            <ui:AppBarButton Icon="ShowResults" Label="查看详情" IsEnabled="{Binding IsSelectedOne}" Command="{Binding EmptyCommandForSelectdOne}" Click="OpenMinerDetailsWindow"  />
-
+            
         </ui:CommandBar>
 
         <StackPanel Grid.Column="1" Orientation="Horizontal">

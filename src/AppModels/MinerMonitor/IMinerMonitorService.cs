@@ -1,5 +1,6 @@
 ﻿using Lucky.Core.MinerTweak;
 using Lucky.Core.MinerServer;
+using Lucky.Core.Daemon;
 using System;
 using System.Collections.Generic;
 
@@ -22,6 +23,7 @@ namespace Lucky.MinerMonitor {
         void RestartWindowsAsync(IMinerData client);
         void ShutdownWindowsAsync(IMinerData client);
         void SetAutoBootStartAsync(IMinerData client, SetAutoBootStartRequest request);
+        void UpdateConnParamsAsync(IMinerData client, ConnParams connParams);
         void StartMineAsync(IMinerData client, Guid workId);
         void StopMineAsync(IMinerData client);
         void UpgradeLuckyAsync(IMinerData client, string luckycmFileName);

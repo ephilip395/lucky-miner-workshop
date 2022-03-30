@@ -3,8 +3,10 @@ using Lucky.User;
 using System;
 using System.Collections.Generic;
 
-namespace Lucky.Core {
-    public interface IClientDataSetBase {
+namespace Lucky.Core
+{
+    public interface IClientDataSetBase
+    {
         /// <summary>
         /// 
         /// </summary>

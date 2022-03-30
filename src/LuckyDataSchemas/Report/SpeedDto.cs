@@ -1,15 +1,18 @@
 ﻿using Lucky.Gpus;
 using System;
 
-namespace Lucky.Report {
+namespace Lucky.Report
+{
     /// <summary>
     /// 向服务器上报算力时的算力类型
     /// </summary>
-    public class SpeedDto : ISpeedDto {
+    public class SpeedDto : ISpeedDto
+    {
         private string _dualCoinCode;
         private int _totalPhysicalMemoryMb;
 
-        public SpeedDto() {
+        public SpeedDto()
+        {
             GpuTable = new GpuSpeedData[0];
         }
 
@@ -43,15 +46,19 @@ namespace Lucky.Report {
         public string OSName { get; set; }
         // ReSharper disable once InconsistentNaming
         public int OSVirtualMemoryMb { get; set; }
-        public int TotalPhysicalMemoryMb {
-            get {
+        public int TotalPhysicalMemoryMb
+        {
+            get
+            {
                 // 因为有客户端版本的单位不正确传上来的是kb不是Mb所以如果值较大除以1024
-                if (_totalPhysicalMemoryMb >= 100 * LuckyKeyword.IntK) {
+                if (_totalPhysicalMemoryMb >= 100 * LuckyKeyword.IntK)
+                {
                     _totalPhysicalMemoryMb /= LuckyKeyword.IntK;
                 }
                 return _totalPhysicalMemoryMb;
             }
-            set {
+            set
+            {
                 _totalPhysicalMemoryMb = value;
             }
         }
@@ -81,7 +88,8 @@ namespace Lucky.Report {
         public string MinerName { get; set; }
 
         private string _mainCoinCode;
-        public string MainCoinCode {
+        public string MainCoinCode
+        {
             get => _mainCoinCode ?? string.Empty;
             set => _mainCoinCode = value;
         }
@@ -94,7 +102,8 @@ namespace Lucky.Report {
 
         public string Kernel { get; set; }
 
-        public string DualCoinCode {
+        public string DualCoinCode
+        {
             get => _dualCoinCode ?? string.Empty;
             set => _dualCoinCode = value;
         }

@@ -518,7 +518,16 @@ namespace Lucky
             {
                 UIThread.Execute(() =>
                 {
-                    MinerMonitorUcs.MinerSettingView.ShowWindow(message.Vm);
+                    MinerMonitorUcs.MinerSettingWindow.ShowWindow(message.Vm);
+                });
+            });
+
+            // 显示矿工客户端网络连接设置
+            VirtualRoot.BuildCmdPath<ShowMinerConnSettingCommand>(location: location, LogEnum.DevConsole, path: message =>
+            {
+                UIThread.Execute(() =>
+                {
+                    MinerMonitorViews.MinerConnSettingWindow.ShowWindow(message.Vm);
                 });
             });
 

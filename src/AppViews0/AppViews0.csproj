@@ -89,6 +89,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppViewFactory.cs" />
+    <Compile Include="MinerMonitor\Views\MinerConnSettingWindow.xaml.cs">
+      <DependentUpon>MinerConnSettingWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MinerMonitor\Views\MinerDetailsWindow.xaml.cs">
       <DependentUpon>MinerDetailsWindow.xaml</DependentUpon>
     </Compile>
@@ -303,8 +306,8 @@
     <Compile Include="Views\Ucs\CoinKernelSelect.xaml.cs">
       <DependentUpon>CoinKernelSelect.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MinerMonitor\Views\Ucs\MinerSettingView.xaml.cs">
-      <DependentUpon>MinerSettingView.xaml</DependentUpon>
+    <Compile Include="MinerMonitor\Views\MinerSettingWindow.xaml.cs">
+      <DependentUpon>MinerSettingWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MinerMonitor\Views\Ucs\MinerNamesSeter.xaml.cs">
       <DependentUpon>MinerNamesSeter.xaml</DependentUpon>
@@ -477,6 +480,10 @@
     <Page Include="MinerMonitor\Views\Design\ColumnsShowViewModel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MinerMonitor\Views\MinerConnSettingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="MinerMonitor\Views\MinerDetailsWindow.xaml">
       <SubType>Designer</SubType>
@@ -1038,7 +1045,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MinerMonitor\Views\Ucs\MinerSettingView.xaml">
+    <Page Include="MinerMonitor\Views\MinerSettingWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

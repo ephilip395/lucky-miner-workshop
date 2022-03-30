@@ -260,6 +260,24 @@ namespace Lucky.MinerMonitor.Impl
         }
         #endregion
 
+        #region UpdateConnParamsAsync
+        public void UpdateConnParamsAsync(IMinerData client, ConnParams connParams)
+        {
+            if (!MinerMonitorRoot.WsClient.IsOpen)
+            {
+                return;
+            }
+            MinerMonitorRoot.WsClient.SendAsync(new WsMessage(Guid.NewGuid(), WsMessage.UpdateConnParams)
+            {
+                Data = new WrapperClientIdData
+                {
+                    ClientId = client.ClientId,
+                    Data = connParams
+                }
+            });
+        }
+        #endregion
+
         #region StartMineAsync
         public void StartMineAsync(IMinerData client, Guid workId)
         {

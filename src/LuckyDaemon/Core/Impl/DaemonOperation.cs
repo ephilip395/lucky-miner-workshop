@@ -190,7 +190,14 @@ namespace Lucky.Core.Impl
                 MinerProfileUtil.SetAutoStart(autoBoot, autoStart);
                 if (IsLuckyOpened())
                 {
-                    RpcRoot.JsonRpc.FirePostAsync(LuckyKeyword.Localhost, LuckyKeyword.MinerTweakPort, _minerClientControllerName, nameof(IMinerTweakController.RefreshAutoBootStart), null, data: null, timeountMilliseconds: 3000);
+                    RpcRoot.JsonRpc.FirePostAsync(
+                        LuckyKeyword.Localhost, 
+                        LuckyKeyword.MinerTweakPort, 
+                        _minerClientControllerName, 
+                        nameof(IMinerTweakController.RefreshAutoBootStart), 
+                        null, 
+                        data: null,
+                        timeountMilliseconds: 3000);
                 }
                 isSuccess = true;
             }
@@ -448,6 +455,7 @@ namespace Lucky.Core.Impl
         }
         #endregion
 
+        #region UpdateConnParams
         public ResponseBase UpdateConnParams(ConnParams connParams)
         {
             ResponseBase response;
@@ -469,7 +477,14 @@ namespace Lucky.Core.Impl
                     MinerProfileUtil.UpdateConnParams(connParams);
                     if (IsLuckyOpened())
                     {
-                        RpcRoot.JsonRpc.FirePostAsync(LuckyKeyword.Localhost, LuckyKeyword.MinerTweakPort, _minerClientControllerName, nameof(IMinerTweakController.RefreshConnParams), null, data: null, timeountMilliseconds: 3000);
+                        RpcRoot.JsonRpc.FirePostAsync(
+                            LuckyKeyword.Localhost, 
+                            LuckyKeyword.MinerTweakPort, 
+                            _minerClientControllerName, 
+                            nameof(IMinerTweakController.RefreshConnParams), 
+                            null, 
+                            data: null, 
+                            timeountMilliseconds: 3000);
                     }
                     response = ResponseBase.Ok("更新连接方式，开始新一轮的挖矿后才能生效。");
                 }
@@ -482,6 +497,7 @@ namespace Lucky.Core.Impl
             }
             return response;
         }
+        #endregion
 
         #region private static methods
         private static bool TryGetMinerTweakLocation(out string location)

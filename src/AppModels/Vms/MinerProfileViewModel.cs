@@ -191,7 +191,7 @@ namespace Lucky.Vms
             AppRoot.BuildEventPath<ConnParamsRefreshedEvent>("刷新网络连接参数的展示", LogEnum.DevConsole, location: this.GetType(), PathPriority.Normal,
                 path: message =>
                 {
-                    this.OnPropertyChanged(nameof(ConnectionMethod));
+                    this.OnPropertyChanged(nameof(SelectedConnectionMethodIndex));
                     this.OnPropertyChanged(nameof(ProxyServerAddress));
                     this.OnPropertyChanged(nameof(ProxyServerPort));
                     this.OnPropertyChanged(nameof(ProxyUsername));

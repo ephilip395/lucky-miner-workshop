@@ -224,11 +224,29 @@ namespace Lucky.MinerMonitor.Impl
         #region SetAutoBootStartAsync
         public void SetAutoBootStartAsync(IMinerData client, SetAutoBootStartRequest request)
         {
-            RpcRoot.JsonRpc.FirePostAsync(client.GetLocalIp(), LuckyKeyword.LuckyDaemonPort, _daemonControllerName, nameof(ILuckyDaemonController.SetAutoBootStart), new Dictionary<string, string>
+            RpcRoot.JsonRpc.FirePostAsync(
+                client.GetLocalIp(), 
+                LuckyKeyword.LuckyDaemonPort, 
+                _daemonControllerName, 
+                nameof(ILuckyDaemonController.SetAutoBootStart), new Dictionary<string, string>
             {
                 ["autoBoot"] = request.AutoBoot.ToString(),
                 ["autoStart"] = request.AutoStart.ToString()
             }, data: null, callback: null, timeountMilliseconds: 3000);
+        }
+        #endregion
+
+        #region UpdateConnParamsAsync
+        public void UpdateConnParamsAsync(IMinerData client, ConnParams connParams)
+        {
+            RpcRoot.JsonRpc.PostAsync<ResponseBase>(
+                client.GetLocalIp(), 
+                LuckyKeyword.LuckyDaemonPort, 
+                _daemonControllerName, 
+                nameof(ILuckyDaemonController.UpdateConnParams), 
+                data: connParams, 
+                callback: null, 
+                timeountMilliseconds: 3000);
         }
         #endregion
 

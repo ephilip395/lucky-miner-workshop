@@ -269,6 +269,71 @@ namespace Lucky.MinerMonitor.Vms
             }
         }
 
+        public int ConnectionMethod
+        {
+            get { return _data.ConnectionMethod; }
+            set
+            {
+                if(_data.ConnectionMethod != value)
+                {
+                    _data.ConnectionMethod = value;
+                    OnPropertyChanged(nameof(ConnectionMethod));
+                }
+            }
+        }
+
+        public string ProxyServerAddress
+        {
+            get { return _data.ProxyServerAddress; }
+            set
+            {
+                if (_data.ProxyServerAddress != value)
+                {
+                    _data.ProxyServerAddress = value;
+                    OnPropertyChanged(nameof(ProxyServerAddress));
+                }
+            }
+        }
+
+        public int ProxyServerPort
+        {
+            get { return _data.ProxyServerPort; }
+            set
+            {
+                if (_data.ProxyServerPort != value)
+                {
+                    _data.ProxyServerPort = value;
+                    OnPropertyChanged(nameof(ProxyServerPort));
+                }
+            }
+        }
+
+        public string ProxyUsername
+        {
+            get { return _data.ProxyUsername; }
+            set
+            {
+                if (_data.ProxyUsername != value)
+                {
+                    _data.ProxyUsername = value;
+                    OnPropertyChanged(nameof(ProxyUsername));
+                }
+            }
+        }
+
+        public string ProxyPassword
+        {
+            get { return _data.ProxyPassword; }
+            set
+            {
+                if (_data.ProxyPassword != value)
+                {
+                    _data.ProxyPassword = value;
+                    OnPropertyChanged(nameof(ProxyPassword));
+                }
+            }
+        }
+
         public int AutoStartDelaySeconds
         {
             get { return _data.AutoStartDelaySeconds; }

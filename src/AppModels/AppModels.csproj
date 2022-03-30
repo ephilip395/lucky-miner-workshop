@@ -106,6 +106,7 @@
     <Compile Include="MinerMonitor\Impl\ServerMinerMonitorService.cs" />
     <Compile Include="MinerMonitor\IServerMinerMonitorService.cs" />
     <Compile Include="MinerMonitor\Vms\LocalIpConfigViewModel.cs" />
+    <Compile Include="MinerMonitor\Vms\MinerConnSettingViewModel.cs" />
     <Compile Include="MinerMonitor\Vms\MqCountsPageViewModel.cs" />
     <Compile Include="MinerMonitor\Vms\MqCountViewModel.cs" />
     <Compile Include="MinerMonitor\Vms\MqReceivedCountViewModel.cs" />

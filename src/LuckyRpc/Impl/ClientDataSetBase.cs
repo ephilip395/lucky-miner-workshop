@@ -8,42 +8,53 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-namespace Lucky.Core.Impl {
+namespace Lucky.Core.Impl
+{
     /// <summary>
     /// 该基类有两个子类，两个子类的不同主要是数据源的不同，外网群控子类的数据源是redis，
     /// 外网群控运行在服务端，内网群控子类的数据源是litedb，内网群控运行在用户的电脑上。
     /// </summary>
-    public abstract class ClientDataSetBase {
-        protected class ClientDatas {
+    public abstract class ClientDataSetBase
+    {
+        protected class ClientDatas
+        {
             private readonly string _loginName;
             private readonly List<ClientData> _datas;
             private DateTime _lastAccessOn;
-            public ClientDatas(string loginName, List<ClientData> datas) {
+            public ClientDatas(string loginName, List<ClientData> datas)
+            {
                 this._loginName = loginName;
                 this._datas = datas;
                 this._lastAccessOn = DateTime.Now;
             }
 
-            public string LoginName {
+            public string LoginName
+            {
                 get { return _loginName; }
             }
-            public DateTime LastAccessOn {
+            public DateTime LastAccessOn
+            {
                 get { return _lastAccessOn; }
             }
-            public ClientData[] Datas {
-                get {
+            public ClientData[] Datas
+            {
+                get
+                {
                     this._lastAccessOn = DateTime.Now;
                     return _datas.ToArray();
                 }
             }
 
-            public void Add(ClientData data) {
-                if (!this._datas.Contains(data)) {
+            public void Add(ClientData data)
+            {
+                if (!this._datas.Contains(data))
+                {
                     this._datas.Add(data);
                 }
             }
 
-            public void Remove(ClientData data) {
+            public void Remove(ClientData data)
+            {
                 this._datas.Remove(data);
             }
         }
@@ -53,13 +64,15 @@ namespace Lucky.Core.Impl {
         private readonly ConcurrentDictionary<string, ClientDatas> _clientDatasByLoginName = new ConcurrentDictionary<string, ClientDatas>();
         private readonly Queue<long> _queryClientsMilliseconds = new Queue<long>();
 
-        public long AverageQueryClientsMilliseconds {
+        public long AverageQueryClientsMilliseconds
+        {
             get
             {
-                if(_queryClientsMilliseconds.Count > 0)
+                if (_queryClientsMilliseconds.Count > 0)
                 {
                     return (long)_queryClientsMilliseconds.Average();
-                } else
+                }
+                else
                 {
                     return 0;
                 }
@@ -67,12 +80,14 @@ namespace Lucky.Core.Impl {
         }
 
         protected DateTime InitedOn = DateTime.MinValue;
-        public bool IsReadied {
+        public bool IsReadied
+        {
             get; private set;
         }
 
         // 因为两个子类的持久层一个是redis一个是litedb所以需要不同的持久化逻辑
-        protected void DoUpdateSave(MinerData minerData) {
+        protected void DoUpdateSave(MinerData minerData)
+        {
             DoUpdateSave(new MinerData[] { minerData });
         }
         protected abstract void DoUpdateSave(IEnumerable<MinerData> minerDatas);
@@ -87,12 +102,15 @@ namespace Lucky.Core.Impl {
         /// </summary>
         /// <param name="isPull">内网群控传true，外网群控传false</param>
         /// <param name="getDatas"></param>
-        public ClientDataSetBase(bool isPull, Action<Action<IEnumerable<ClientData>>> getDatas) {
+        public ClientDataSetBase(bool isPull, Action<Action<IEnumerable<ClientData>>> getDatas)
+        {
             _isPull = isPull;
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
-            getDatas(clientDatas => {
-                foreach (var clientData in clientDatas) {
+            getDatas(clientDatas =>
+            {
+                foreach (var clientData in clientDatas)
+                {
                     _dicByObjectId[clientData.Id] = clientData;
                     _dicByClientId[clientData.ClientId] = clientData;
                 }
@@ -102,18 +120,22 @@ namespace Lucky.Core.Impl {
                 LuckyConsole.UserLine($"矿机集就绪，耗时 {stopwatch.GetElapsedSeconds().ToString("f2")} 秒", isPull ? MessageType.Debug : MessageType.Ok);
                 VirtualRoot.RaiseEvent(new ClientSetInitedEvent());
             });
-            if (!isPull) {
-                VirtualRoot.BuildEventPath<Per1MinuteEvent>("周期清理不活跃的缓存数据", LogEnum.None, typeof(ClientDataSetBase), PathPriority.Normal, message => {
+            if (!isPull)
+            {
+                VirtualRoot.BuildEventPath<Per1MinuteEvent>("周期清理不活跃的缓存数据", LogEnum.None, typeof(ClientDataSetBase), PathPriority.Normal, message =>
+                {
                     DateTime time = message.BornOn.AddMinutes(-10);
                     string[] loginNameToRemoves = _clientDatasByLoginName.Where(a => a.Value.LastAccessOn <= time).Select(a => a.Key).ToArray();
-                    foreach (var loginName in loginNameToRemoves) {
+                    foreach (var loginName in loginNameToRemoves)
+                    {
                         _clientDatasByLoginName.TryRemove(loginName, out _);
                     }
                 });
             }
         }
 
-        protected bool TryGetClientDatas(string loginName, out ClientDatas clientDatas) {
+        protected bool TryGetClientDatas(string loginName, out ClientDatas clientDatas)
+        {
             return _clientDatasByLoginName.TryGetValue(loginName, out clientDatas);
         }
 
@@ -133,33 +155,40 @@ namespace Lucky.Core.Impl {
             out int total,
             out CoinSnapshotData[] coinSnapshots,
             out int onlineCount,
-            out int miningCount) {
+            out int miningCount)
+        {
 
             Stopwatch stopwatch = new Stopwatch();
             stopwatch.Start();
             coinSnapshots = new CoinSnapshotData[0];
             onlineCount = 0;
             miningCount = 0;
-            if (!IsReadied || query == null) {
+            if (!IsReadied || query == null)
+            {
                 total = 0;
                 return new List<ClientData>();
             }
             List<ClientData> list = new List<ClientData>();
             ClientData[] data = null;
             bool isIntranet = user == null;
-            if (isIntranet) {
+            if (isIntranet)
+            {
                 data = _dicByObjectId.Values.ToArray();
             }
-            else if (user.IsAdmin()) {
+            else if (user.IsAdmin())
+            {
                 data = _dicByObjectId.Values.ToArray();
             }
-            else {
+            else
+            {
                 string loginName = user.LoginName;
-                if (string.IsNullOrEmpty(loginName)) {
+                if (string.IsNullOrEmpty(loginName))
+                {
                     total = 0;
                     return new List<ClientData>();
                 }
-                if (!_clientDatasByLoginName.TryGetValue(loginName, out ClientDatas clientDatas)) {
+                if (!_clientDatasByLoginName.TryGetValue(loginName, out ClientDatas clientDatas))
+                {
                     clientDatas = new ClientDatas(loginName, _dicByObjectId.Values.Where(a => a.LoginName == loginName).ToList());
                     _clientDatasByLoginName[loginName] = clientDatas;
                 }
@@ -177,14 +206,18 @@ namespace Lucky.Core.Impl {
             bool isFilterByGpuType = query.GpuType != GpuType.Empty;
             bool isFilterByGpuName = !string.IsNullOrEmpty(query.GpuName);
             bool isFilterByGpuDriver = !string.IsNullOrEmpty(query.GpuDriver);
-            for (int i = 0; i < data.Length; i++) {
+            for (int i = 0; i < data.Length; i++)
+            {
                 var item = data[i];
                 bool isInclude = true;
-                if (isInclude && isFilterByGroup) {
+                if (isInclude && isFilterByGroup)
+                {
                     isInclude = item.GroupId == query.GroupId.Value;
                 }
-                if (isInclude) {
-                    switch (query.MineState) {
+                if (isInclude)
+                {
+                    switch (query.MineState)
+                    {
                         case MineStatus.All:
                             break;
                         case MineStatus.Mining:
@@ -197,29 +230,38 @@ namespace Lucky.Core.Impl {
                             break;
                     }
                 }
-                if (isInclude && isFilterByMinerIp) {
-                    if (query.MinerIp.StartsWith("#")) {
-                        if (!string.IsNullOrEmpty(item.MinerIp)) {
+                if (isInclude && isFilterByMinerIp)
+                {
+                    if (query.MinerIp.StartsWith("#"))
+                    {
+                        if (!string.IsNullOrEmpty(item.MinerIp))
+                        {
                             // MinerIp可能带有端口号
                             int index = item.MinerIp.IndexOf(':');
                             string minerIp = item.MinerIp;
-                            if (index != -1) {
+                            if (index != -1)
+                            {
                                 minerIp = minerIp.Substring(0, index);
                             }
                             isInclude = minerIp.EndsWith(query.MinerIp.Substring(1, query.MinerIp.Length - 1));
                         }
                     }
-                    else {
+                    else
+                    {
                         isInclude = !string.IsNullOrEmpty(item.LocalIp) && item.LocalIp.Contains(query.MinerIp);
-                        if (!isInclude) {
-                            if (query.MinerIp.IndexOf(':') != -1) {
+                        if (!isInclude)
+                        {
+                            if (query.MinerIp.IndexOf(':') != -1)
+                            {
                                 isInclude = query.MinerIp.Equals(item.MinerIp);
                             }
-                            else if (!string.IsNullOrEmpty(item.MinerIp)) {
+                            else if (!string.IsNullOrEmpty(item.MinerIp))
+                            {
                                 // MinerIp可能带有端口号
                                 int index = item.MinerIp.IndexOf(':');
                                 string minerIp = item.MinerIp;
-                                if (index != -1) {
+                                if (index != -1)
+                                {
                                     minerIp = minerIp.Substring(0, index);
                                 }
                                 isInclude = query.MinerIp.Equals(minerIp);
@@ -227,42 +269,55 @@ namespace Lucky.Core.Impl {
                         }
                     }
                 }
-                if (isInclude && isFilterByMinerName) {
+                if (isInclude && isFilterByMinerName)
+                {
                     isInclude = (!string.IsNullOrEmpty(item.MinerName) && item.MinerName.IndexOf(query.MinerName, StringComparison.OrdinalIgnoreCase) != -1)
                         || (!string.IsNullOrEmpty(item.WorkerName) && item.WorkerName.IndexOf(query.MinerName, StringComparison.OrdinalIgnoreCase) != -1);
                 }
-                if (isInclude && isFilterByVersion) {
+                if (isInclude && isFilterByVersion)
+                {
                     isInclude = !string.IsNullOrEmpty(item.Version) && item.Version.Contains(query.Version);
                 }
-                if (isInclude) {
-                    if (isFilterByWork) {
+                if (isInclude)
+                {
+                    if (isFilterByWork)
+                    {
                         isInclude = item.WorkId == query.WorkId.Value;
                     }
-                    else {
-                        if (isInclude && isFilterByCoin) {
+                    else
+                    {
+                        if (isInclude && isFilterByCoin)
+                        {
                             isInclude = query.Coin.Equals(item.MainCoinCode) || query.Coin.Equals(item.DualCoinCode);
                         }
-                        if (isInclude && isFilterByPool) {
+                        if (isInclude && isFilterByPool)
+                        {
                             isInclude = query.Pool.Equals(item.MainCoinPool) || query.Pool.Equals(item.DualCoinPool);
                         }
-                        if (isInclude && isFilterByWallet) {
+                        if (isInclude && isFilterByWallet)
+                        {
                             isInclude = query.Wallet.Equals(item.MainCoinWallet) || query.Wallet.Equals(item.DualCoinWallet);
                         }
-                        if (isInclude && isFilterByKernel) {
+                        if (isInclude && isFilterByKernel)
+                        {
                             isInclude = !string.IsNullOrEmpty(item.Kernel) && item.Kernel.IgnoreCaseContains(query.Kernel);
                         }
                     }
                 }
-                if (isInclude && isFilterByGpuType) {
+                if (isInclude && isFilterByGpuType)
+                {
                     isInclude = item.GpuType == query.GpuType;
                 }
-                if (isInclude && isFilterByGpuName) {
+                if (isInclude && isFilterByGpuName)
+                {
                     isInclude = !string.IsNullOrEmpty(item.GpuInfo) && item.GpuInfo.IgnoreCaseContains(query.GpuName);
                 }
-                if (isInclude && isFilterByGpuDriver) {
+                if (isInclude && isFilterByGpuDriver)
+                {
                     isInclude = !string.IsNullOrEmpty(item.GpuDriver) && item.GpuDriver.IgnoreCaseContains(query.GpuDriver);
                 }
-                if (isInclude) {
+                if (isInclude)
+                {
                     list.Add(item);
                 }
             }
@@ -272,73 +327,93 @@ namespace Lucky.Core.Impl {
             var results = list.Take(query).ToList();
             DateTime time = DateTime.Now.AddSeconds(_isPull ? -20 : -180);
             // 一定时间未上报算力视为0算力
-            foreach (var clientData in results) {
-                if (clientData.MinerActiveOn < time) {
+            foreach (var clientData in results)
+            {
+                if (clientData.MinerActiveOn < time)
+                {
                     clientData.DualCoinSpeed = 0;
                     clientData.MainCoinSpeed = 0;
                 }
             }
             stopwatch.Stop();
             _queryClientsMilliseconds.Enqueue(stopwatch.ElapsedMilliseconds);
-            while (_queryClientsMilliseconds.Count > 100) {
+            while (_queryClientsMilliseconds.Count > 100)
+            {
                 _queryClientsMilliseconds.Dequeue();
             }
             return results;
         }
 
-        public ClientData GetByClientId(Guid clientId) {
-            if (!IsReadied) {
+        public ClientData GetByClientId(Guid clientId)
+        {
+            if (!IsReadied)
+            {
                 return null;
             }
             _dicByClientId.TryGetValue(clientId, out ClientData clientData);
             return clientData;
         }
 
-        public ClientData GetByObjectId(string objectId) {
-            if (!IsReadied) {
+        public ClientData GetByObjectId(string objectId)
+        {
+            if (!IsReadied)
+            {
                 return null;
             }
-            if (objectId == null) {
+            if (objectId == null)
+            {
                 return null;
             }
             _dicByObjectId.TryGetValue(objectId, out ClientData clientData);
             return clientData;
         }
 
-        public void UpdateClient(string objectId, string propertyName, object value) {
-            if (!IsReadied) {
+        public void UpdateClient(string objectId, string propertyName, object value)
+        {
+            if (!IsReadied)
+            {
                 return;
             }
-            if (objectId == null) {
+            if (objectId == null)
+            {
                 return;
             }
             if (_dicByObjectId.TryGetValue(objectId, out ClientData clientData)
-                && ClientData.TryGetReflectionUpdateProperty(propertyName, out PropertyInfo propertyInfo)) {
+                && ClientData.TryGetReflectionUpdateProperty(propertyName, out PropertyInfo propertyInfo))
+            {
                 value = VirtualRoot.ConvertValue(propertyInfo.PropertyType, value);
                 var oldValue = propertyInfo.GetValue(clientData, null);
-                if (oldValue != value) {
+                if (oldValue != value)
+                {
                     propertyInfo.SetValue(clientData, value, null);
                     DoUpdateSave(MinerData.Create(clientData));
                 }
             }
         }
 
-        public void UpdateClients(string propertyName, Dictionary<string, object> values) {
-            if (!IsReadied) {
+        public void UpdateClients(string propertyName, Dictionary<string, object> values)
+        {
+            if (!IsReadied)
+            {
                 return;
             }
-            if (values.Count == 0) {
+            if (values.Count == 0)
+            {
                 return;
             }
-            if (ClientData.TryGetReflectionUpdateProperty(propertyName, out PropertyInfo propertyInfo)) {
+            if (ClientData.TryGetReflectionUpdateProperty(propertyName, out PropertyInfo propertyInfo))
+            {
                 values.ChangeValueType(propertyInfo.PropertyType);
                 List<MinerData> minerDatas = new List<MinerData>();
-                foreach (var kv in values) {
+                foreach (var kv in values)
+                {
                     string objectId = kv.Key;
                     object value = kv.Value;
-                    if (_dicByObjectId.TryGetValue(objectId, out ClientData clientData)) {
+                    if (_dicByObjectId.TryGetValue(objectId, out ClientData clientData))
+                    {
                         var oldValue = propertyInfo.GetValue(clientData, null);
-                        if (oldValue != value) {
+                        if (oldValue != value)
+                        {
                             propertyInfo.SetValue(clientData, value, null);
                             minerDatas.Add(MinerData.Create(clientData));
                         }
@@ -348,60 +423,78 @@ namespace Lucky.Core.Impl {
             }
         }
 
-        public void RemoveByObjectId(string objectId) {
-            if (!IsReadied) {
+        public void RemoveByObjectId(string objectId)
+        {
+            if (!IsReadied)
+            {
                 return;
             }
-            if (objectId == null) {
+            if (objectId == null)
+            {
                 return;
             }
-            if (_dicByObjectId.TryRemove(objectId, out ClientData clientData) && clientData != null) {
+            if (_dicByObjectId.TryRemove(objectId, out ClientData clientData) && clientData != null)
+            {
                 _dicByClientId.TryRemove(clientData.ClientId, out _);
                 DoRemoveSave(clientData);
-                foreach (var item in _clientDatasByLoginName) {
+                foreach (var item in _clientDatasByLoginName)
+                {
                     item.Value.Remove(clientData);
                 }
             }
         }
 
-        public void RemoveByObjectIds(List<string> objectIds) {
-            if (!IsReadied) {
+        public void RemoveByObjectIds(List<string> objectIds)
+        {
+            if (!IsReadied)
+            {
                 return;
             }
-            if (objectIds == null || objectIds.Count == 0) {
+            if (objectIds == null || objectIds.Count == 0)
+            {
                 return;
             }
             List<ClientData> removedMinerDatas = new List<ClientData>();
-            foreach (var objectId in objectIds) {
-                if (_dicByObjectId.TryRemove(objectId, out ClientData clientData)) {
+            foreach (var objectId in objectIds)
+            {
+                if (_dicByObjectId.TryRemove(objectId, out ClientData clientData))
+                {
                     removedMinerDatas.Add(clientData);
                     _dicByClientId.TryRemove(clientData.ClientId, out _);
                 }
             }
             DoRemoveSave(removedMinerDatas.ToArray());
-            foreach (var clientData in removedMinerDatas) {
-                foreach (var item in _clientDatasByLoginName) {
+            foreach (var clientData in removedMinerDatas)
+            {
+                foreach (var item in _clientDatasByLoginName)
+                {
                     item.Value.Remove(clientData);
                 }
             }
         }
 
-        public bool IsAnyClientInGroup(Guid groupId) {
-            if (!IsReadied) {
+        public bool IsAnyClientInGroup(Guid groupId)
+        {
+            if (!IsReadied)
+            {
                 return false;
             }
             return _dicByObjectId.Values.Any(a => a.GroupId == groupId);
         }
 
-        public bool IsAnyClientInWork(Guid workId) {
-            if (!IsReadied) {
+        public bool IsAnyClientInWork(Guid workId)
+        {
+            if (!IsReadied)
+            {
                 return false;
             }
             return _dicByObjectId.Values.Any(a => a.WorkId == workId);
         }
 
-        public IEnumerable<ClientData> AsEnumerable() {
-            if (!IsReadied) {
+        public IEnumerable<ClientData> AsEnumerable()
+        {
+            if (!IsReadied)
+            {
                 return new List<ClientData>();
             }
             return _dicByObjectId.Values;

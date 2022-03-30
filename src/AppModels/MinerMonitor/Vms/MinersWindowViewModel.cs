@@ -527,6 +527,7 @@ namespace Lucky.MinerMonitor.Vms
             }, IsSelectedAny);
             this.ConnectionMethodSetting = new DelegateCommand(() =>
             {
+                VirtualRoot.Execute(new ShowMinerConnSettingCommand(new MinerConnSettingViewModel(this.SelectedMinerTweaks)));
 
             }, IsSelectedAny);
             this.OneKeyWorkerNames = new DelegateCommand(() =>

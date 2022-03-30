@@ -187,6 +187,8 @@ namespace Lucky.Views
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            grid1.Focus();
+
             if (e.LeftButton == MouseButtonState.Pressed)
             {
                 DragMove();

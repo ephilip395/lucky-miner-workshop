@@ -18,7 +18,7 @@
 	WindowStartupLocation="CenterScreen"
 	MouseDown="Window_MouseDown"
     d:DataContext="{d:DesignData Source=Design/MainWindowViewModel.xaml}">
-    <Grid>
+    <Grid x:Name="grid1" Focusable="True">
         <Grid Margin="1">
 
             <Grid.RowDefinitions>

@@ -75,6 +75,17 @@ namespace Lucky.MinerMonitor {
         public MinerSettingViewModel Vm { get; private set; }
     }
 
+    [MessageType(description: "打开挖矿端网络设置界面")]
+    public class ShowMinerConnSettingCommand : Cmd
+    {
+        public ShowMinerConnSettingCommand(MinerConnSettingViewModel vm)
+        {
+            this.Vm = vm;
+        }
+
+        public MinerConnSettingViewModel Vm { get; private set; }
+    }
+
     [MessageType(description: "打开群控矿机列表页")]
     public class ShowMinerTweaksWindowCommand : Cmd {
         public ShowMinerTweaksWindowCommand(bool isToggle) {
