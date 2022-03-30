@@ -434,6 +434,7 @@ namespace Lucky.MinerMonitor.Vms
         public ICommand OneKeyOverClock { get; private set; }
         public ICommand OneKeyWorkerNames { get; private set; }
         public ICommand OneKeySetting { get; private set; }
+        public ICommand ConnectionMethodSetting { get; private set; }
         public ICommand EnableRemoteDesktop { get; private set; }
         public ICommand RemoteDesktop { get; private set; }
         public ICommand BlockWAU { get; private set; }
@@ -523,6 +524,10 @@ namespace Lucky.MinerMonitor.Vms
             this.OneKeySetting = new DelegateCommand(() =>
             {
                 VirtualRoot.Execute(new ShowMinerTweakSettingCommand(new MinerSettingViewModel(this.SelectedMinerTweaks)));
+            }, IsSelectedAny);
+            this.ConnectionMethodSetting = new DelegateCommand(() =>
+            {
+
             }, IsSelectedAny);
             this.OneKeyWorkerNames = new DelegateCommand(() =>
             {

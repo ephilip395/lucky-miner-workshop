@@ -4,25 +4,27 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ui="http://schemas.modernwpf.com/2019"
+        ui:WindowHelper.UseModernWindowStyle="True"
 	ResizeMode="NoResize"
 	SizeToContent="Height"
 	WindowStartupLocation="CenterOwner"
     Title="设置选中的矿机"
     d:DataContext="{d:DesignData Source=../Design/MinerTweakSettingViewModel.xaml}"
 	mc:Ignorable="d" Width="300" MinHeight="120">
-	<Grid Margin="16">
+    <Grid Margin="16">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="36"></RowDefinition>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
-			<CheckBox
+            <CheckBox
 				Content="开机自动启动"
 				IsChecked="{Binding IsAutoBoot}" />
-			<CheckBox
+            <CheckBox
 				Content="自动挖矿"
 				IsChecked="{Binding IsAutoStart}" />
-		</StackPanel>
+        </StackPanel>
         <WrapPanel Grid.Row="1" Margin="0 0 20 0" HorizontalAlignment="Right">
             <TextBlock Foreground="{DynamicResource SystemControlHighlightAccentBrush}" VerticalAlignment="Center">该操作需挖矿端在线</TextBlock>
             <Button
@@ -36,5 +38,5 @@
 					Text="确定" />
             </Button>
         </WrapPanel>
-	</Grid>
+    </Grid>
 </Window>

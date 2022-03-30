@@ -49,9 +49,10 @@
             <ui:AppBarButton Icon="DisableUpdates" Label="禁用更新" IsEnabled="{Binding IsSelectedAny}" Command="{Binding BlockWAU}" />
             <ui:AppBarButton Icon="ReportHacked" Label="禁用休眠" IsEnabled="{Binding IsSelectedAny}" Command="{Binding PowerCfgOff}" />
             <ui:AppBarButton Icon="SwitchApps" Label="虚拟内存..." IsEnabled="{Binding IsSelectedAny}" Command="{Binding VirtualMemory}" />
-            <ui:AppBarButton Icon="Mappin" Label="IP设置..." IsEnabled="{Binding IsSelectedAny}" Command="{Binding LocalIpConfig}" />
-            <ui:AppBarButton Icon="Up" Label="超频..." IsEnabled="{Binding IsSelectedAny}" Command="{Binding OneKeyOverClock}" />
-            <ui:AppBarButton Icon="Setting" Label="矿机配置..." IsEnabled="{Binding IsSelectedAny}" Command="{Binding OneKeySetting}" />
+            <ui:AppBarButton Icon="Mappin" Label="IP设置" IsEnabled="{Binding IsSelectedAny}" Command="{Binding LocalIpConfig}" />
+            <ui:AppBarButton Icon="Up" Label="超频" IsEnabled="{Binding IsSelectedAny}" Command="{Binding OneKeyOverClock}" />
+            <ui:AppBarButton Icon="Setting" Label="矿机配置" IsEnabled="{Binding IsSelectedAny}" Command="{Binding OneKeySetting}" />
+            <ui:AppBarButton Icon="World" Label="联网方式" IsEnabled="{Binding IsSelectedAny}" Command="{Binding ConnectionMethodSetting}" />
             <ui:AppBarButton Icon="Shuffle" Label="A卡计算模式" IsEnabled="{Binding IsSelectedAny}" Command="{Binding SwitchRadeonGpu}"  />
             <ui:AppBarButton Icon="Upload" Label="软件升级" Click="ItemUpgrade_Click" IsEnabled="{Binding IsSelectedAny}">
                 <ui:FlyoutService.Flyout>
