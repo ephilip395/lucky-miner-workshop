@@ -13,7 +13,7 @@ namespace Lucky
         public const long LongG = 1024 * 1024 * 1024;
 
         private const string _revision = "0";
-        public const string Version = "1.0.0";
+        public const string Version = "1.1.0";
         public const string AssemblyVersion = Version + "." + _revision;
         public const string Lucky = "Lucky";
         public const string Copyright = "Copyright ©Lucky";

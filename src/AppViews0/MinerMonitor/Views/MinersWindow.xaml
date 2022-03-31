@@ -127,7 +127,7 @@
                     <TextBlock VerticalAlignment="Center">% 红色</TextBlock>
                 </WrapPanel>
             </WrapPanel>
-            <uc:MainBar Grid.Column="1"></uc:MainBar>
+            <uc:MainBar Grid.Column="1" Margin="0 0 16 0"></uc:MainBar>
         </Grid>
     </Grid>
 </Window>
