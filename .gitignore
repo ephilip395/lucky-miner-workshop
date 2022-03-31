@@ -10,6 +10,7 @@
 *.userosscache
 *.sln.docstates
 LuckyDaemon.exe
+sha1
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
