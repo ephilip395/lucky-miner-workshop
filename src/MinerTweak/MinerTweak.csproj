@@ -111,7 +111,7 @@
     <Compile Include="Windows\WindowsUtil.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Daemon\DaemonUtil.cs" />
+    <Compile Include="DaemonUtil.cs" />
     <Compile Include="OhGodAnETHlargementPill\OhGodAnETHlargementPillUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
