@@ -100,15 +100,7 @@
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource ErrorTemplate}">
         </Setter>
     </Style>
-    <Style TargetType="TextBox" BasedOn="{StaticResource TextBoxBase}">		
-    </Style>
-    <Style TargetType="ScrollViewer">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
-    </Style>
-    <Style TargetType="TabItem">
-		<Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
-	</Style>
-	<Style x:Key="ListBoxBarItem" TargetType="ListBoxItem">
+    <Style x:Key="ListBoxBarItem" TargetType="ListBoxItem">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
 		<Setter Property="Template">
 			<Setter.Value>

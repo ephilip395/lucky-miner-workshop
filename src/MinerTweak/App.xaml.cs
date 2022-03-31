@@ -34,8 +34,8 @@ namespace Lucky
             AppUtil.Init(this);
             AppUtil.IsHotKeyEnabled = true;
             InitializeComponent();
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
-            PresetManager.Current.ColorPreset = "Default";
+            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+            //PresetManager.Current.ColorPreset = "Default";
 
         }
 

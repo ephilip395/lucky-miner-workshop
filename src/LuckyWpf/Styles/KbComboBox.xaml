@@ -179,7 +179,5 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="ComboBoxItem">
-        <Setter Property="Height" Value="30"></Setter>
-    </Style>
+    
 </ResourceDictionary>

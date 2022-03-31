@@ -13,8 +13,7 @@
 	mc:Ignorable="d" d:DesignWidth="1200">
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<Style x:Key="Lbl" TargetType="TextBlock">
-				<Setter Property="Foreground" Value="{StaticResource LableColor}"></Setter>
+			<Style x:Key="Lbl" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
 				<Setter Property="TextAlignment" Value="Right"></Setter>
 			</Style>
 		</ResourceDictionary>
@@ -28,36 +27,29 @@
                 </Grid.ColumnDefinitions>
                 <WrapPanel Grid.Column="0" Margin="0 0 70 0">
                     <controls:KbButton 
-						Background="Transparent"
 						Margin="4 0 0 0"
 						ToolTip="{x:Static app:AppStatic.WindowsEditionToolTip}"
                         Cursor="Hand"
                         Command="{x:Static app:AppStatic.WindowsProperty}"
-                        Foreground="{x:Static app:AppStatic.WindowsEditionColor}"
                         Content="{x:Static app:AppStatic.WindowsEdition}"
 						CornerRadius="2">
                     </controls:KbButton>
-                    <TextBlock Text=" / " Foreground="{StaticResource LableColor}"></TextBlock>
+                    <TextBlock Text=" / "></TextBlock>
                     <controls:KbButton 
 						x:Name="BtnShowVirtualMemory"
 						Command="{x:Static app:AppStatic.ShowVirtualMemory}"
 						Content="{x:Static app:AppStatic.TotalVirtualMemoryGbText}" 
-						Background="Transparent" 
-						Cursor="Hand"
-						Foreground="{StaticResource LableColor}"></controls:KbButton>
-                    <TextBlock Text=" / " Foreground="{StaticResource LableColor}"></TextBlock>
+						Cursor="Hand"></controls:KbButton>
+                    <TextBlock Text=" / "></TextBlock>
                     <TextBlock 
                         Text="{x:Static app:AppStatic.DriverVersion}" 
-                        ToolTip="{x:Static app:AppStatic.DriverVersionToolTip}" 
-                        Foreground="{x:Static app:AppStatic.DriverVersionColor}"></TextBlock>
+                        ToolTip="{x:Static app:AppStatic.DriverVersionToolTip}"></TextBlock>
                     <TextBlock 
-                        Text=" / " 
-                        Foreground="{StaticResource LableColor}"></TextBlock>
+                        Text=" / "></TextBlock>
                     <TextBlock 
                         Text="{x:Static app:AppStatic.GpuSetInfo}" 
                         MaxWidth="260" 
-                        ToolTip="{x:Static app:AppStatic.GpuSetInfo}" 
-                        Foreground="{StaticResource LableColor}"></TextBlock>
+                        ToolTip="{x:Static app:AppStatic.GpuSetInfo}"></TextBlock>
                 </WrapPanel>
                 <controls:KbButton 
                     Grid.Column="1"
@@ -88,7 +80,6 @@
                         </Path>
                         <TextBlock
 						    Margin="2 0 0 0"
-                            Foreground="{StaticResource LableColor}"
 						    VerticalAlignment="Center"
 						    Text="{x:Static app:AppStatic.VersionFullName}" />
                     </WrapPanel>

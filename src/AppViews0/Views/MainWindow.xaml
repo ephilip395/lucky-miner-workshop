@@ -15,105 +15,96 @@
 	Title="{x:Static app:AppStatic.AppName}"
 	d:DesignHeight="630"
 	d:DesignWidth="1100"
+    ui:WindowHelper.UseModernWindowStyle="True"
+    Background="{DynamicResource AppBackgroundBrush}"
 	WindowStartupLocation="CenterScreen"
 	MouseDown="Window_MouseDown"
     d:DataContext="{d:DesignData Source=Design/MainWindowViewModel.xaml}">
     <Grid x:Name="grid1" Focusable="True">
-        <Grid Margin="1">
+        
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
 
-            <Border Grid.Row="1"
-                    Padding="16 16 16 32"
-                    BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
-                    BorderThickness="0"
-                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
-                <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="auto"/>
-                </Grid.ColumnDefinitions>
-                <uc:MinerProfileIndex2 Grid.Column="0" IsEnabled="{Binding MinerProfile.IsWorker,Converter={StaticResource BoolInvertConverter}}"/>
-                <uc:StartStopMineButton Grid.Column="1" StartButtonBackground="{StaticResource BtnBackground}" StartButtonForeground="White" />
-                </Grid>
-            </Border>
-
-            <TabControl Grid.Row="2" x:Name="MainTabControl" TabStripPlacement="Bottom">
-                
-                <TabItem x:Name="TabItemSpeedTable">
-                    <TabItem.Header>
-                        <TextBlock Text="挖矿状态" Padding="2 0"></TextBlock>
-                    </TabItem.Header>
-                    <Border x:Name="SpeedTableContainer"
-                    BorderThickness="1"
-                    BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
-                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}" />
-                </TabItem>
-                <TabItem x:Name="TabItemOverClockTable">
-                    <TabItem.Header>
-                        <TextBlock Text="超频" Padding="2 0"></TextBlock>
-                    </TabItem.Header>
-                    <Border x:Name="OverClockTableContainer"
-                    BorderThickness="1"
-                    BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
-                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}" />
-                </TabItem>
-                <TabItem x:Name="TabItemMinerProfileOption">
-                    <TabItem.Header>
-                        <TextBlock Text="高级设置" Padding="2 0"></TextBlock>
-                    </TabItem.Header>
-                    <Border x:Name="MinerProfileOptionContainer"
-                    BorderThickness="1"
-                    BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
-                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"></Border>
-                </TabItem>
-                <TabItem x:Name="TabItemConnectionMethodOption">
-                    <TabItem.Header>
-                        <TextBlock Text="网络连接" Padding="2 0"></TextBlock>
-                    </TabItem.Header>
-                    <Border x:Name="ConnectionMethodOptionContainer"
-                    BorderThickness="1"
-                    BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
-                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"></Border>
-                </TabItem>
-                <TabItem x:Name="TabItemGroupMonitorOption">
-                    <TabItem.Header>
-                        <TextBlock Text="外网群控" Padding="2 0"></TextBlock>
-                    </TabItem.Header>
-                    <Border x:Name="GroupMonitorOptionContainer"
-                    BorderThickness="1"
-                    BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
-                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"></Border>
-                </TabItem>
-                <TabItem x:Name="TabItemOutput">
-                    <TabItem.Header>
-                        <TextBlock Text="输出" Padding="2 0"></TextBlock>
-                    </TabItem.Header>
-                    <Border x:Name="OutputContainer"
-                    BorderThickness="1"
-                    BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
-                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"></Border>
-                </TabItem>
-                <TabItem x:Name="TabItemDeveloperTools" Visibility="{x:Static app:AppStatic.IsDevModeVisible }">
-                    <TabItem.Header>
-                        <TextBlock Text="开发者工具" Padding="2 0"></TextBlock>
-                    </TabItem.Header>
-                    <Border x:Name="DeveloperToolsContainer"
-                    BorderThickness="1"
-                    BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"
-                    Background="{DynamicResource SystemControlBackgroundAltHighBrush}"></Border>
-                </TabItem>
-            </TabControl>
-
-            <!--下状态栏-->
-            <uc:StateBar Grid.Row="3" x:Name="StateBar" Padding="0 0 0 2"/>
-
-
+        <Grid Grid.Row="1"
+                Margin="16 16 16 32">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <uc:MinerProfileIndex2 Grid.Column="0" 
+                                    IsEnabled="{Binding MinerProfile.IsWorker,Converter={StaticResource BoolInvertConverter}}"/>
+            <uc:StartStopMineButton Grid.Column="1" 
+                                        StartButtonBackground="{DynamicResource SystemControlBackgroundAccentBrush}" 
+                                        StartButtonForeground="{DynamicResource SystemControlForegroundChromeWhiteBrush}" />
         </Grid>
+
+        <TabControl Grid.Row="2" x:Name="MainTabControl" TabStripPlacement="Bottom">
+                
+            <TabItem x:Name="TabItemSpeedTable">
+                <TabItem.Header>
+                    <TextBlock Text="挖矿状态" Padding="2 0"></TextBlock>
+                </TabItem.Header>
+                <Border x:Name="SpeedTableContainer"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}" />
+            </TabItem>
+            <TabItem x:Name="TabItemOverClockTable">
+                <TabItem.Header>
+                    <TextBlock Text="超频" Padding="2 0"></TextBlock>
+                </TabItem.Header>
+                <Border x:Name="OverClockTableContainer"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"/>
+            </TabItem>
+            <TabItem x:Name="TabItemMinerProfileOption">
+                <TabItem.Header>
+                    <TextBlock Text="高级设置" Padding="2 0"></TextBlock>
+                </TabItem.Header>
+                <Border x:Name="MinerProfileOptionContainer"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
+            </TabItem>
+            <TabItem x:Name="TabItemConnectionMethodOption">
+                <TabItem.Header>
+                    <TextBlock Text="网络连接" Padding="2 0"></TextBlock>
+                </TabItem.Header>
+                <Border x:Name="ConnectionMethodOptionContainer"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
+            </TabItem>
+            <TabItem x:Name="TabItemGroupMonitorOption">
+                <TabItem.Header>
+                    <TextBlock Text="外网群控" Padding="2 0"></TextBlock>
+                </TabItem.Header>
+                <Border x:Name="GroupMonitorOptionContainer"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
+            </TabItem>
+            <TabItem x:Name="TabItemOutput">
+                <TabItem.Header>
+                    <TextBlock Text="输出" Padding="2 0"></TextBlock>
+                </TabItem.Header>
+                <Border x:Name="OutputContainer"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
+            </TabItem>
+            <TabItem x:Name="TabItemDeveloperTools" Visibility="{x:Static app:AppStatic.IsDevModeVisible }">
+                <TabItem.Header>
+                    <TextBlock Text="开发者工具" Padding="2 0"></TextBlock>
+                </TabItem.Header>
+                <Border x:Name="DeveloperToolsContainer"
+                BorderThickness="1"
+                BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
+            </TabItem>
+        </TabControl>
+
+        <!--下状态栏-->
+        <uc:StateBar Grid.Row="3" x:Name="StateBar" Padding="0 0 0 2"/>
+
     </Grid>
 </Window>

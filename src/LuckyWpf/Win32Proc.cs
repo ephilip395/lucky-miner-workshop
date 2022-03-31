@@ -3,18 +3,23 @@ using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 
-namespace Lucky {
-    public static class Win32Proc {
-        public static class SafeNativeMethods {
+namespace Lucky
+{
+    public static class Win32Proc
+    {
+        public static class SafeNativeMethods
+        {
             #region enum struct class
             [StructLayout(LayoutKind.Sequential)]
-            public struct POINT {
+            public struct POINT
+            {
                 public int X;
                 public int Y;
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            public struct MINMAXINFO {
+            public struct MINMAXINFO
+            {
                 public POINT ptReserved;
                 public POINT ptMaxSize;
                 public POINT ptMaxPosition;
@@ -23,7 +28,8 @@ namespace Lucky {
             };
 
             [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-            public class MONITORINFO {
+            public class MONITORINFO
+            {
                 public int cbSize = Marshal.SizeOf(typeof(MONITORINFO));
                 public RECT rcMonitor = new RECT();
                 public RECT rcWork = new RECT();
@@ -31,7 +37,8 @@ namespace Lucky {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            internal struct APPBARDATA {
+            internal struct APPBARDATA
+            {
                 /// <summary>
                 /// initialize this field using: Marshal.SizeOf(typeof(APPBARDATA));
                 /// </summary>
@@ -44,7 +51,8 @@ namespace Lucky {
             }
 
             [StructLayout(LayoutKind.Sequential)]
-            public struct RECT {
+            public struct RECT
+            {
                 public int Left, Top, Right, Bottom;
             }
 
@@ -65,19 +73,22 @@ namespace Lucky {
             private static extern bool _GetMonitorInfoW([In] IntPtr hMonitor, [Out] MONITORINFO lpmi);
 
             [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-            public static MONITORINFO GetMonitorInfoW(IntPtr hMonitor) {
+            public static MONITORINFO GetMonitorInfoW(IntPtr hMonitor)
+            {
                 var mi = new MONITORINFO();
-                if (!_GetMonitorInfoW(hMonitor, mi)) {
+                if (!_GetMonitorInfoW(hMonitor, mi))
+                {
                     throw new Win32Exception();
                 }
                 return mi;
             }
         }
 
-        public enum WindowsTaskbarEdge {
-            Left = 0, 
-            Top = 1, 
-            Right = 2, 
+        public enum WindowsTaskbarEdge
+        {
+            Left = 0,
+            Top = 1,
+            Right = 2,
             Bottom = 3
         }
 
@@ -86,13 +97,15 @@ namespace Lucky {
         /// </summary>
         /// <param name="margin">任务栏与工作区的接触边距离屏幕边的距离</param>
         /// <returns></returns>
-        public static WindowsTaskbarEdge GetWindowsTaskbarEdge(out double margin) {
+        public static WindowsTaskbarEdge GetWindowsTaskbarEdge(out double margin)
+        {
             IntPtr hwnd = SafeNativeMethods.FindWindow("Shell_TrayWnd", null);
             var abd = new SafeNativeMethods.APPBARDATA();
             abd.cbSize = Marshal.SizeOf(abd);
             abd.hWnd = hwnd;
             SafeNativeMethods.SHAppBarMessage(5, ref abd);
-            switch (abd.uEdge) {
+            switch (abd.uEdge)
+            {
                 case (int)WindowsTaskbarEdge.Left:
                     margin = Math.Abs(abd.rc.Left - abd.rc.Right);
                     return WindowsTaskbarEdge.Left;
@@ -111,8 +124,10 @@ namespace Lucky {
             }
         }
 
-        public static IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled) {
-            switch (msg) {
+        public static IntPtr WindowProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            switch (msg)
+            {
                 case 0x0024:
                     WmGetMinMaxInfo(hwnd, lParam);
                     break;
@@ -122,11 +137,13 @@ namespace Lucky {
         }
 
         #region 最大化窗口时避免最大化到Windows任务栏
-        private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam) {
+        private static void WmGetMinMaxInfo(IntPtr hwnd, IntPtr lParam)
+        {
             SafeNativeMethods.MINMAXINFO mmi = (SafeNativeMethods.MINMAXINFO)Marshal.PtrToStructure(lParam, typeof(SafeNativeMethods.MINMAXINFO));
             const int MONITOR_DEFAULTTONEAREST = 0x00000002;
             IntPtr monitor = SafeNativeMethods.MonitorFromWindow(hwnd, MONITOR_DEFAULTTONEAREST);
-            if (monitor != IntPtr.Zero) {
+            if (monitor != IntPtr.Zero)
+            {
                 SafeNativeMethods.MONITORINFO monitorInfo = SafeNativeMethods.GetMonitorInfoW(monitor);
                 SafeNativeMethods.RECT rcWorkArea = monitorInfo.rcWork;
                 SafeNativeMethods.RECT rcMonitorArea = monitorInfo.rcMonitor;

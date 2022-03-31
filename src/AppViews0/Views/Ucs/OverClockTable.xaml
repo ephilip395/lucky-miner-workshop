@@ -11,14 +11,14 @@
 	d:DesignHeight="450" d:DesignWidth="1200"
     d:DataContext="{d:DesignData Source=../Design/SpeedTableViewModel.xaml}">
     <UserControl.Resources>
-        <Style x:Key="TextBox" TargetType="TextBox">
+        <Style x:Key="TextBox" TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="BorderBrush" Value="{StaticResource LightLineColor}"></Setter>
             <Setter Property="Width" Value="40"></Setter>
             <Setter Property="Height" Value="22"></Setter>
-            <Setter Property="Background" Value="Black"></Setter>
-            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Background" Value="{DynamicResource SystemControlForegroundAltHighBrush}"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlBackgroundBaseHighBrush}"></Setter>
         </Style>
-        <Style x:Key="overClockDataGrid"  TargetType="DataGrid">
+        <Style x:Key="overClockDataGrid"  TargetType="DataGrid"  BasedOn="{StaticResource {x:Type DataGrid}}">
             <Setter Property="CanUserAddRows" Value="False"></Setter>
             <Setter Property="CanUserDeleteRows" Value="False"></Setter>
             <Setter Property="SelectionMode" Value="Single"></Setter>
@@ -36,7 +36,6 @@
             <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource GridLinesBrush}" />
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundListLowBrush}" />
-            <Setter Property="Background" Value="Transparent" />
         </Style>
     </UserControl.Resources>
     <Grid>

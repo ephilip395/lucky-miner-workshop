@@ -9,19 +9,15 @@
 	mc:Ignorable="d" 
     d:DataContext="{d:DesignData Source=../Design/MinerProfileIndexViewModel.xaml}">
     <UserControl.Resources>
-        <Style TargetType="Button">
-            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightAltListAccentLowBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+        <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Padding" Value="7"/>
             <Setter Property="Margin" Value="2 0"/>
         </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightAltListAccentLowBrush}"/>
-            <Setter Property="BorderThickness" Value="1"/>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Padding" Value="7"/>
             <Setter Property="Margin" Value="2 0"/>
         </Style>
-        <Style TargetType="TextBlock" x:Key="label">
+        <Style TargetType="TextBlock" x:Key="label" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="Foreground" Value="{DynamicResource ResourceKey=SystemControlBackgroundBaseMediumHighBrush}"/>
             <Setter Property="Margin" Value="4 0 2 0" />
         </Style>
@@ -45,7 +41,6 @@
                 <Button
 					x:Name="ButtonMainCoin"
 					IsEnabled="{Binding ElementName=PopupMainCoin,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
-					Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 					Click="KbButtonMainCoin_Clicked"
                     PreviewMouseDown="BtnPopup_PreviewMouseDown"
                     PreviewMouseUp="BtnPopup_PreviewMouseUp">
@@ -56,7 +51,7 @@
 							Width="12"
 							Height="8"
 							Data="{StaticResource Icon_ComboBoxToogle}"
-							Fill="Black"
+							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill" />
                     </WrapPanel>
                 </Button>
@@ -76,7 +71,6 @@
                 <Button 
 					x:Name="ButtonKernel"
 					IsEnabled="{Binding ElementName=PopupKernel,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
-					Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 					Click="KbButtonKernel_Clicked"
                     PreviewMouseDown="BtnPopup_PreviewMouseDown"
                     PreviewMouseUp="BtnPopup_PreviewMouseUp">
@@ -87,7 +81,7 @@
 							Width="12"
 							Height="8"
 							Data="{StaticResource Icon_ComboBoxToogle}"
-							Fill="Black"
+							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill" />
                     </WrapPanel>
                 </Button>
@@ -105,7 +99,6 @@
                 <Button 
 					x:Name="ButtonMainCoinPool"
 					IsEnabled="{Binding ElementName=PopupMainCoinPool,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
-					Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 					Click="KbButtonMainCoinPool_Clicked"
                     PreviewMouseDown="BtnPopup_PreviewMouseDown"
                     PreviewMouseUp="BtnPopup_PreviewMouseUp">
@@ -116,7 +109,7 @@
 							Width="12"
 							Height="8"
 							Data="{StaticResource Icon_ComboBoxToogle}"
-							Fill="Black"
+							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill" />
                     </WrapPanel>
                 </Button>
@@ -134,7 +127,6 @@
             <Button 
 				x:Name="ButtonMainCoinPool1"
 				IsEnabled="{Binding ElementName=PopupMainCoinPool1,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
-				Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 				Click="KbButtonMainCoinPool1_Clicked"
 				PreviewMouseDown="BtnPopup_PreviewMouseDown"
 				PreviewMouseUp="BtnPopup_PreviewMouseUp">
@@ -145,7 +137,7 @@
 						Width="12"
 						Height="8"
 						Data="{StaticResource Icon_ComboBoxToogle}"
-						Fill="Black"
+						Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 						Stretch="Fill" />
                 </WrapPanel>
             </Button>
@@ -163,7 +155,6 @@
                 <Button 
 					x:Name="ButtonMainCoinWallet"
 					IsEnabled="{Binding ElementName=PopupMainCoinWallet,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
-					Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 					Click="KbButtonMainCoinWallet_Clicked"
 					PreviewMouseDown="BtnPopup_PreviewMouseDown"
 					PreviewMouseUp="BtnPopup_PreviewMouseUp">
@@ -174,7 +165,7 @@
 							Width="12"
 							Height="8"
 							Data="{StaticResource Icon_ComboBoxToogle}"
-							Fill="Black"
+							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill" />
                     </WrapPanel>
                 </Button>
@@ -194,7 +185,6 @@
                     <TextBox 
 						Width="122"
                         ToolTip="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool.Notice}"
-						Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 						IsReadOnly="{Binding MinerProfile.IsMining}"
 						VerticalContentAlignment="Center" 
 						Text="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool.PoolProfileVm.UserName}">
@@ -210,7 +200,6 @@
                     <TextBox 
 						Width="122"
                         ToolTip="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool1.Notice}"
-						Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 						IsReadOnly="{Binding MinerProfile.IsMining}"
 						VerticalContentAlignment="Center" 
 						Text="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool1.PoolProfileVm.UserName}">
@@ -273,7 +262,6 @@
                 Height="30"
 				VerticalContentAlignment="Center"
                 ToolTip="这是高级用户的工具，通常我们无需关心这一块。"
-				Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 				IsReadOnly="{Binding MinerProfile.IsMining}"
 				VerticalScrollBarVisibility="Auto"
 				Text="{Binding MinerProfile.CoinVm.CoinKernel.CoinKernelProfile.CustomArgs, Mode=TwoWay}">

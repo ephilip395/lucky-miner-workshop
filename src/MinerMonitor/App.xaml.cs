@@ -27,8 +27,8 @@ namespace Lucky
             AppUtil.Init(this);
             InitializeComponent();
 
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
-            PresetManager.Current.ColorPreset = "Default";
+            //ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+            //PresetManager.Current.ColorPreset = "Default";
 
         }
 
