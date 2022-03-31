@@ -4,6 +4,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
 	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
 	mc:Ignorable="d" 
     d:DataContext="{d:DesignData Source=../Design/MinerProfileIndexViewModel.xaml}">
@@ -24,6 +25,10 @@
             <Setter Property="Foreground" Value="{DynamicResource ResourceKey=SystemControlBackgroundBaseMediumHighBrush}"/>
             <Setter Property="Margin" Value="4 0 2 0" />
         </Style>
+        <ui:StackLayout
+            x:Key="HorizontalStackLayout"
+            Orientation="Horizontal"
+            Spacing="8" />
     </UserControl.Resources>
     <WrapPanel>
         <StackPanel>
@@ -275,25 +280,23 @@
                 </TextBox>
             </StackPanel>
 
-            <ItemsControl
-            Visibility="{Binding MinerProfile.CoinVm.CoinKernel.GpuInputSegmentVms,Converter={StaticResource NoRecordInvertVisibilityConverter}}"
-			ItemsSource="{Binding MinerProfile.CoinVm.CoinKernel.GpuInputSegmentVms}"
-			VerticalAlignment="Bottom"
-			ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-
-                <ItemsControl.ItemTemplate>
+            <ui:ItemsRepeater
+                Layout="{StaticResource HorizontalStackLayout}"
+                Visibility="{Binding MinerProfile.CoinVm.CoinKernel.GpuInputSegmentVms,Converter={StaticResource NoRecordInvertVisibilityConverter}}"
+			    ItemsSource="{Binding MinerProfile.CoinVm.CoinKernel.GpuInputSegmentVms}">
+                <ui:ItemsRepeater.ItemTemplate>
                     <DataTemplate>
                         <CheckBox 
-                        VerticalAlignment="Bottom"
-                        Margin="0 0 4 0" 
-                        IsChecked="{Binding IsChecked}" 
-                        FocusVisualStyle="{x:Null}" 
-                        Content="{Binding Name}" 
-                        ToolTip="{Binding Description}"></CheckBox>
+                            VerticalAlignment="Bottom"
+                            Margin="0 0 4 0" 
+                            IsChecked="{Binding IsChecked}" 
+                            FocusVisualStyle="{x:Null}" 
+                            Content="{Binding Name}" 
+                            ToolTip="{Binding Description}"></CheckBox>
                     </DataTemplate>
-                </ItemsControl.ItemTemplate>
+                </ui:ItemsRepeater.ItemTemplate>
 
-            </ItemsControl>
+            </ui:ItemsRepeater>
 
             <StackPanel Visibility="{Binding MinerProfile.CoinVm.CoinKernel.Kernel.KernelInputVm.IsSupportDevicesArg, Converter={StaticResource BoolToVisibilityConverter}}">
                 <TextBlock Style="{StaticResource label}" ToolTip="全不选等于全选" Text="显卡" />
@@ -313,6 +316,7 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </StackPanel>
+            
         </WrapPanel>
 
     </WrapPanel>
