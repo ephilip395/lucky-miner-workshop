@@ -18,15 +18,14 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+        
 		<DataGrid 
             x:Name="DataGrid"
 			ItemsSource="{Binding GpuSpeedVms.List}" 
 			HorizontalScrollBarVisibility="Auto"
             AutoGenerateColumns="False"
             HeadersVisibility="Column"
-            GridLinesVisibility="Horizontal"
-            VirtualizingPanel.VirtualizationMode="Recycling"
-            >
+            GridLinesVisibility="None">
 			<DataGrid.Resources>
                 <controls:BindingProxy x:Key="proxy" Data="{Binding}" />
 			</DataGrid.Resources>

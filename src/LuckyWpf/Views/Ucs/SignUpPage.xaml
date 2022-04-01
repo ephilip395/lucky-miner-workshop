@@ -8,61 +8,83 @@
 	xmlns:controls="clr-namespace:Lucky.Controls"
 	mc:Ignorable="d" d:DesignWidth="370">
     <UserControl.Resources>
-        <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource LblTbBase}">
-            <Setter Property="Width" Value="70"></Setter>
-            <Setter Property="Padding" Value="4 2 4 2"></Setter>
-        </Style>
-        <Style x:Key="TxtTb" TargetType="TextBox">
-            <Setter Property="Background" Value="White"></Setter>
-            <Setter Property="Padding" Value="4 6"></Setter>
+        <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Padding" Value="4"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
         </Style>
     </UserControl.Resources>
-    <StackPanel>
-        <WrapPanel Margin="0 10 0 3">
-            <TextBlock Style="{StaticResource LblTb}">登录名</TextBlock>
-            <TextBox x:Name="TbLoginName" Text="{Binding LoginName,UpdateSourceTrigger=LostFocus}" Width="270" Style="{StaticResource TxtTb}"></TextBox>
-            <TextBlock VerticalAlignment="Center" Foreground="Red">*</TextBlock>
-        </WrapPanel>
-        <WrapPanel Visibility="{Binding LoginNameExistMessage,Converter={StaticResource NotNullOrEmptyVisibilityConverter}}">
-            <TextBlock Style="{StaticResource LblTb}"></TextBlock>
+    <Grid Margin="16">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0">登录名</TextBlock>
+        <StackPanel Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+            <TextBox x:Name="TbLoginName" Text="{Binding LoginName,UpdateSourceTrigger=LostFocus}" Width="270"></TextBox>
+            <TextBlock Foreground="Red">*</TextBlock>
+        </StackPanel>
+
+        <WrapPanel Grid.Column="1" Grid.Row="1" Visibility="{Binding LoginNameExistMessage,Converter={StaticResource NotNullOrEmptyVisibilityConverter}}">
             <TextBlock Foreground="Red" Text="{Binding LoginNameExistMessage}"></TextBlock>
         </WrapPanel>
-        <WrapPanel Margin="0 3">
-            <TextBlock Style="{StaticResource LblTb}">密码</TextBlock>
+
+        <TextBlock Grid.Column="0" Grid.Row="2">密码</TextBlock>
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
             <PasswordBox
                 Width="270"
                 Padding="4 6"
-				Background="White" 
                 controls:PasswordBoxHelper.Attach="true" 
                 controls:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock VerticalAlignment="Center" Foreground="Red">*</TextBlock>
-        </WrapPanel>
-        <TextBlock TextWrapping="Wrap" FontSize="12" Padding="4 0" Foreground="Red">注意：用户名或密码忘记了无法找回，直接注册个新的就行了。</TextBlock>
-        <WrapPanel Margin="0 3">
-            <TextBlock Style="{StaticResource LblTb}">重复密码</TextBlock>
+            <TextBlock Foreground="Red">*</TextBlock>
+        </StackPanel>
+
+        <TextBlock Grid.Column="0" Grid.Row="3">重复密码</TextBlock>
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Horizontal">
             <PasswordBox
                 Width="270"
                 Padding="4 6"
-				Background="White" 
                 controls:PasswordBoxHelper.Attach="true" 
                 controls:PasswordBoxHelper.Password="{Binding PasswordAgain, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBlock VerticalAlignment="Center" Foreground="Red">*</TextBlock>
-        </WrapPanel>
-        <WrapPanel Margin="0 3">
-            <TextBlock Style="{StaticResource LblTb}">验证码</TextBlock>
-            <TextBox Text="{Binding ActionCaptcha,UpdateSourceTrigger=PropertyChanged}" Width="166" ToolTip="验证码不区分大小写" Style="{StaticResource TxtTb}"></TextBox>
-            <TextBlock Width="10" VerticalAlignment="Center" Foreground="Red">*</TextBlock>
+            <TextBlock Foreground="Red">*</TextBlock>
+        </StackPanel>
+
+        <TextBlock Grid.Column="0" Grid.Row="4">验证码</TextBlock>
+        <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBox Text="{Binding ActionCaptcha,UpdateSourceTrigger=PropertyChanged}" Width="166" ToolTip="验证码不区分大小写"/>
+            <TextBlock Foreground="Red">*</TextBlock>
             <WrapPanel VerticalAlignment="Center">
                 <Image Source="{Binding CaptchaUrl}" Height="27" Width="64"></Image>
-                <ui:AppBarButton Icon="Refresh" Command="{Binding RefreshCaptcha}" Width="27" Height="27" />
+                <Button VerticalAlignment="Center" FontFamily="Segoe MDL2 Assets" Content="&#xE72C;" Command="{Binding RefreshCaptcha}" />
             </WrapPanel>
-        </WrapPanel>
+        </StackPanel>
+
         <Button
+            Grid.Column="1" Grid.Row="5"
 			IsDefault="True"
 			Command="{Binding SignUp}" 
 			Margin="70 10 30 10"
 			Padding="15 8"
             Content="注册">
         </Button>
-    </StackPanel>
+
+        <TextBlock 
+            Grid.Column="0" 
+            Grid.Row="6"
+            Grid.ColumnSpan="2"
+            TextWrapping="Wrap" 
+            FontSize="12" 
+            Padding="4 0" 
+            Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}">注意：用户名或密码忘记了无法找回，直接注册个新的就行了。</TextBlock>
+
+    </Grid>
 </UserControl>

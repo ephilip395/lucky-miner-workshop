@@ -30,6 +30,7 @@
 
         <DataGrid 
 			Grid.Row="1"
+            IsReadOnly="True"
 			ItemsSource="{Binding QueryResults}" 
 			SelectedItem="{Binding SelectedResult}"
 			MouseUp="DataGrid_MouseUp"
@@ -41,11 +42,12 @@
                 <controls:BindingProxy x:Key="proxy" Data="{Binding}" />
             </DataGrid.Resources>
             <DataGrid.Columns>
-				<DataGridTemplateColumn Width="130" Header="名称" IsReadOnly="True">
+                
+				<DataGridTemplateColumn Width="130" Header="名称">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
                             <WrapPanel VerticalAlignment="Center">
-                                <TextBlock Margin="4 0 0 0" Text="{Binding Name}"></TextBlock>
+                                <TextBlock Text="{Binding Name}"></TextBlock>
                                 <Path
 									Width="14"
 									Height="14"
@@ -58,18 +60,16 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Width="200" IsReadOnly="True">
-					<DataGridTemplateColumn.Header>
-                        <TextBlock Text="地址"/>
-                    </DataGridTemplateColumn.Header>
-					<DataGridTemplateColumn.CellTemplate>
+
+                <DataGridTemplateColumn Width="200" Header="地址">
+                    <DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
                             <TextBlock VerticalAlignment="Center" Text="{Binding Server}"></TextBlock>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 
-                <DataGridTemplateColumn Width="40" IsReadOnly="True">
+                <DataGridTemplateColumn Width="60">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
                             <ui:HyperlinkButton
@@ -82,7 +82,7 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="40" IsReadOnly="True">
+                <DataGridTemplateColumn Width="60">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ui:HyperlinkButton
@@ -96,6 +96,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
 		</DataGrid>
+        
 		<TextBlock 
             Grid.Row="1" 
             Margin="0 30 0 0"

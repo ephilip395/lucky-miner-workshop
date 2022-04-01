@@ -53,7 +53,8 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <DataGrid 
+        <DataGrid
+            IsReadOnly="True"
 			Grid.Row="2"
 			ItemsSource="{Binding QueryResults}" 
 			SelectedItem="{Binding SelectedResult}"
@@ -65,14 +66,15 @@
             HeadersVisibility="Column">
 
             <DataGrid.Columns>
-				<DataGridTemplateColumn Width="50" Header="图标" IsReadOnly="True">
+				<DataGridTemplateColumn Width="50" Header="图标">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
                             <Image Width="26" Height="26" Source="{Binding IconImageSource}"/>
                         </DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="100" Header="编码" IsReadOnly="True">
+                
+                <DataGridTemplateColumn Width="100" Header="编码">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -90,9 +92,9 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 
-                <DataGridTextColumn Width="100" Header="最低显存" Binding="{Binding MinGpuMemoryGbText}" IsReadOnly="True"/>
+                <DataGridTextColumn Width="100" Header="最低显存" Binding="{Binding MinGpuMemoryGbText}"/>
 
-                <DataGridTemplateColumn Width="40" IsReadOnly="True">
+                <DataGridTemplateColumn>
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<ui:HyperlinkButton
@@ -107,6 +109,7 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
+                
 			</DataGrid.Columns>
 		</DataGrid>
 		<TextBlock 

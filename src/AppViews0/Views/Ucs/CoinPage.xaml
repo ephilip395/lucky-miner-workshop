@@ -73,69 +73,89 @@
 
         <TabControl Grid.Column="2">
 
-            <TabItem IsSelected="{Binding IsWalletTabSelected}">
-                <TabItem.Header>
-                    <Border Padding="10 0">
-                        <TextBlock Padding="2" Text="钱包"></TextBlock>
-                    </Border>
-                </TabItem.Header>
+            <TabItem IsSelected="{Binding IsWalletTabSelected}" Header="钱包">
                 <Grid>
-                    <DataGrid 
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <ui:CommandBar>
+                        <ui:CommandBar.Content>
+                            <WrapPanel>
+                                <TextBlock VerticalAlignment="Center" Margin="4 14" Text="总数"></TextBlock>
+                                <TextBlock VerticalAlignment="Center" Margin="4 14" Text="{Binding CurrentCoin.Wallets.Count}"></TextBlock>
+                            </WrapPanel>
+                        </ui:CommandBar.Content>
+                        <ui:AppBarButton  Icon="Add" Label="添加" Command="{Binding CurrentCoin.AddWallet}" />
+                    </ui:CommandBar>
+                    <DataGrid
+                        Grid.Row="1"
+                        IsReadOnly="True"
 			            AutoGenerateColumns="False"
 			            HeadersVisibility="Column"
-			            GridLinesVisibility="Horizontal"
-						BorderThickness="0"
+			            GridLinesVisibility="None"
 						ItemsSource="{Binding CurrentCoin.Wallets}">
                         <DataGrid.Resources>
                             <controls:BindingProxy x:Key="proxy" Data="{Binding}" />
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn MinWidth="100" IsReadOnly="True">
+                            <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel 
 											IsEnabled="{Binding IsTestWallet, Converter={StaticResource BoolInvertConverter}}"
 											HorizontalAlignment="Right" 
-											Background="Transparent" 
 											VerticalAlignment="Center" 
 											Orientation="Horizontal">
-                                            <controls:KbButton 
-												Command="{Binding Edit}" Background="Transparent" BorderThickness="0"
+                                            <Button 
+												Command="{Binding Edit}"
 												Margin="2 0"
-												CornerRadius="2" ToolTip="编辑">
-                                                <WrapPanel>
-                                                    <Path
-														Width="18"
-														Height="18"
-														Data="{StaticResource Icon_Edit}"
-														Fill="{StaticResource BtnBackground}"
-														Stretch="Fill" />
-                                                </WrapPanel>
-                                            </controls:KbButton>
-                                            <controls:KbButton 
-												Command="{Binding Remove}" Background="Transparent" BorderThickness="0"
+                                                ToolTip="编辑">
+                                                <Path
+													Width="18"
+													Height="18"
+													Data="{StaticResource Icon_Edit}"
+                                                    Fill="{DynamicResource SystemControlPageTextBaseHighBrush}"
+													Stretch="Fill" />
+                                            </Button>
+                                            <Button 
+												Command="{Binding Remove}"
 												Margin="2 0"
-												CornerRadius="2" ToolTip="删除">
-                                                <WrapPanel>
-                                                    <Path
-														Width="18"
-														Height="18"
-														Data="{StaticResource Icon_Delete}"
-														Fill="{StaticResource BtnBackground}"
-														Stretch="Fill" />
-                                                </WrapPanel>
-                                            </controls:KbButton>
+                                                ToolTip="删除">
+                                                <Path
+													Width="18"
+													Height="18"
+													Data="{StaticResource Icon_Delete}"
+													Fill="{DynamicResource SystemControlPageTextBaseHighBrush}"
+													Stretch="Fill" />
+                                            </Button>
+                                            <Button 
+												Command="{Binding SortDown}"
+												Margin="2 0"
+                                                ToolTip="下移">
+                                                <Path
+													Width="18"
+													Height="18"
+													Data="{StaticResource Icon_SortDown}"
+													Fill="{DynamicResource SystemControlPageTextBaseHighBrush}"
+													Stretch="Fill" />
+                                            </Button>
+                                            <Button 
+												Command="{Binding SortUp}"
+												Margin="2 0"
+                                                ToolTip="上移">
+                                                <Path
+													Width="18"
+													Height="18"
+													Data="{StaticResource Icon_SortUp}"
+													Fill="{DynamicResource SystemControlPageTextBaseHighBrush}"
+													Stretch="Fill" />
+                                            </Button>
                                         </StackPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="*" IsReadOnly="True">
-                                <DataGridTemplateColumn.Header>
-                                    <WrapPanel>
-                                        <TextBlock Text="钱包"></TextBlock>
-                                        <TextBlock Margin="4 0 0 0" Text="{Binding Data.CurrentCoin.Wallets.Count, Source={StaticResource proxy}}"></TextBlock>
-                                    </WrapPanel>
-                                </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn Width="*" Header="钱包">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <StackPanel>
@@ -149,12 +169,7 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn 
-								Visibility="{x:Static app:AppStatic.IsDevModeVisible}"
-								IsReadOnly="True">
-                                <DataGridTemplateColumn.Header>
-                                    <TextBlock Text="排序"></TextBlock>
-                                </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn Visibility="{x:Static app:AppStatic.IsDevModeVisible}" Header="排序">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding SortNumber}"></TextBlock>
@@ -163,118 +178,116 @@
                             </DataGridTemplateColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBlock Visibility="{Binding CurrentCoin.Wallets, Converter={StaticResource NoRecordVisibilityConverter}}" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center" Text="沒有记录"></TextBlock>
-                    <controls:KbButton 
-						HorizontalAlignment="Left"
-						VerticalAlignment="Top"
-						Command="{Binding CurrentCoin.AddWallet}" 
-						Background="Transparent" BorderThickness="0"
-						CornerRadius="2" ToolTip="添加">
-                        <WrapPanel>
-                            <Path
-								Width="18"
-								Height="18"
-								Data="{StaticResource Icon_Add}"
-								Fill="{StaticResource BtnBackground}"
-								Stretch="Fill" />
-                        </WrapPanel>
-                    </controls:KbButton>
+                    <TextBlock 
+                        Visibility="{Binding CurrentCoin.Wallets, Converter={StaticResource NoRecordVisibilityConverter}}" 
+                        Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}" 
+                        HorizontalAlignment="Center" 
+                        VerticalAlignment="Center" 
+                        Text="沒有记录"/>
                 </Grid>
             </TabItem>
 
-            <TabItem IsSelected="{Binding IsPoolTabSelected}">
-                <TabItem.Header>
-                    <Border Padding="10 0">
-                        <TextBlock Padding="2" Text="矿池"></TextBlock>
-                    </Border>
-                </TabItem.Header>
+            <TabItem IsSelected="{Binding IsPoolTabSelected}" Header="矿池">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ui:CommandBar>
+                        <ui:CommandBar.Content>
+                            <WrapPanel>
+                                <TextBlock VerticalAlignment="Center" Margin="4 14" Text="总数"></TextBlock>
+                                <TextBlock VerticalAlignment="Center" Margin="4 14" Text="{Binding CurrentCoin.Pools.Count}"></TextBlock>
+                            </WrapPanel>
+                        </ui:CommandBar.Content>
+                    </ui:CommandBar>
                     <DataGrid 
+                        Grid.Row="1"
+                        IsReadOnly="True"
 			            AutoGenerateColumns="False"
 			            HeadersVisibility="Column"
 			            GridLinesVisibility="Horizontal"
-						BorderThickness="0"
 						ItemsSource="{Binding CurrentCoin.Pools}"
                         SelectedItem="{Binding CurrentPool}">
                         <DataGrid.Resources>
                             <controls:BindingProxy x:Key="proxy" Data="{Binding}" />
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn IsReadOnly="True">
-                                <DataGridTemplateColumn.Header>
-                                    <WrapPanel>
-                                        <TextBlock Text="名称"></TextBlock>
-                                        <TextBlock Margin="4 0 0 0" Text="{Binding Data.CurrentCoin.Pools.Count, Source={StaticResource proxy}}"></TextBlock>
-                                    </WrapPanel>
-                                </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn Header="名称">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <WrapPanel>
+                                        <WrapPanel VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding Name}"></TextBlock>
                                             <Path
 												Width="14"
 												Height="14"
 												ToolTip="用户名密码模式"
 												Visibility="{Binding IsUserMode, Converter={StaticResource BoolToVisibilityConverter}}"
 												Data="{StaticResource Icon_User}"
-												Fill="{StaticResource LableColor}"
+												Fill="{DynamicResource SystemControlHyperlinkBaseMediumBrush}"
 												Stretch="Fill" />
-                                            <TextBlock Margin="4 0 0 0" Text="{Binding Name}"></TextBlock>
                                         </WrapPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn MinWidth="60" Header="品牌" Visibility="{x:Static app:AppStatic.IsDevModeVisible}" Binding="{Binding BrandItem.Value}" IsReadOnly="True">
+                            <DataGridTextColumn 
+                                MinWidth="60" 
+                                Header="品牌" 
+                                Visibility="{x:Static app:AppStatic.IsDevModeVisible}" 
+                                Binding="{Binding BrandItem.Value}">
                             </DataGridTextColumn>
-                            <DataGridTemplateColumn Width="*" IsReadOnly="True">
-                                <DataGridTemplateColumn.Header>
-                                    <TextBlock Text="地址"></TextBlock>
-                                </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn Width="*" Header="地址">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <StackPanel>
-                                            <TextBlock Text="{Binding Server}" FontWeight="Bold" ToolTip="矿池地址"></TextBlock>
-                                            <TextBlock Text="{Binding Url}" ToolTip="收益查看地址"></TextBlock>
-                                        </StackPanel>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Server}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
                         </DataGrid.Columns>
                     </DataGrid>
-                    <TextBlock Visibility="{Binding CurrentCoin.Pools, Converter={StaticResource NoRecordVisibilityConverter}}" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center" Text="沒有记录" Grid.Column="1" Margin="233.333,240,338,240"></TextBlock>
+                    <TextBlock
+                        Grid.Column="1"
+                        Visibility="{Binding CurrentCoin.Pools, Converter={StaticResource NoRecordVisibilityConverter}}"
+                        Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Text="沒有记录"
+                        Margin="233.333,240,338,240"/>
 
                 </Grid>
             </TabItem>
 
-            <TabItem 
-				IsSelected="{Binding IsKernelTabSelected}">
-                <TabItem.Header>
-                    <Border Padding="10 0">
-                        <TextBlock Padding="2" Text="内核"></TextBlock>
-                    </Border>
-                </TabItem.Header>
+            <TabItem IsSelected="{Binding IsKernelTabSelected}" Header="内核">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <ui:CommandBar>
+                        <ui:CommandBar.Content>
+                            <WrapPanel>
+                                <TextBlock VerticalAlignment="Center" Margin="4 14" Text="总数"></TextBlock>
+                                <TextBlock VerticalAlignment="Center" Margin="4 14" Text="{Binding CurrentCoin.CoinKernels.Count}"></TextBlock>
+                            </WrapPanel>
+                        </ui:CommandBar.Content>
+                    </ui:CommandBar>
                     <DataGrid 
+                        Grid.Row="1"
+                        IsReadOnly="True"
 			            AutoGenerateColumns="False"
 			            HeadersVisibility="Column"
-			            GridLinesVisibility="Horizontal"
-						BorderThickness="0"
+			            GridLinesVisibility="None"
 						ItemsSource="{Binding CurrentCoin.CoinKernels}"
                         SelectedItem="{Binding CurrentCoinKernel}">
                         <DataGrid.Resources>
                             <controls:BindingProxy x:Key="proxy" Data="{Binding}" />
                         </DataGrid.Resources>
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn IsReadOnly="True">
-                                <DataGridTemplateColumn.Header>
-                                    <WrapPanel>
-                                        <TextBlock Text="名称"></TextBlock>
-                                        <TextBlock Margin="4 0 0 0" Text="{Binding Data.CurrentCoin.CoinKernels.Count, Source={StaticResource proxy}}"></TextBlock>
-                                    </WrapPanel>
-                                </DataGridTemplateColumn.Header>
+                            <DataGridTemplateColumn Header="名称">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <WrapPanel>
+                                        <WrapPanel VerticalAlignment="Center">
                                             <TextBlock Text="{Binding Kernel.FullName}"></TextBlock>
                                             <Path
 												Margin="4 0 0 0"
@@ -282,7 +295,7 @@
 												Width="16"
 												Height="16"
 												Data="{StaticResource Icon_Hot}"
-												Fill="Red"
+												Fill="{DynamicResource SystemControlErrorTextForegroundBrush}"
 												Stretch="Fill" />
                                             <Path
 												Margin="4 0 0 0"
@@ -290,19 +303,17 @@
 												Width="16"
 												Height="16"
 												Data="{StaticResource Icon_Recommend}"
-												Fill="Red"
+												Fill="{DynamicResource SystemControlErrorTextForegroundBrush}"
 												Stretch="Fill" />
                                         </WrapPanel>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn IsReadOnly="True">
-                                <DataGridTemplateColumn.Header>
-                                    <TextBlock Text="支持显卡"></TextBlock>
-                                </DataGridTemplateColumn.Header>
+
+                            <DataGridTemplateColumn Header="支持显卡">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <WrapPanel>
+                                        <WrapPanel VerticalAlignment="Center">
                                             <Path
 												Margin="4 0 0 0"
 												Width="18"
@@ -325,16 +336,15 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTemplateColumn Width="*" IsReadOnly="True">
-                                <DataGridTemplateColumn.Header>
-                                    <TextBlock Text="币种级参数"></TextBlock>
-                                </DataGridTemplateColumn.Header>
+
+                            <DataGridTemplateColumn Width="*" Header="币种级参数">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Args}"></TextBlock>
+                                        <TextBlock VerticalAlignment="Center" Text="{Binding Args}"></TextBlock>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
+                            
                         </DataGrid.Columns>
                     </DataGrid>
                     <TextBlock Visibility="{Binding CurrentCoin.CoinKernels, Converter={StaticResource NoRecordVisibilityConverter}}" Foreground="Red" HorizontalAlignment="Center" VerticalAlignment="Center" Text="沒有记录" Grid.Column="2" Margin="280,239,328,239"></TextBlock>

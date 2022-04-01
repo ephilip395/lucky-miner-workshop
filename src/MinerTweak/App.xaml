@@ -14,6 +14,7 @@
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/KbTextBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/KbComboBox.xaml" />
 
+                <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/DataGrid1.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/LeftBarScrollViewer.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Notifications/Themes/Generic.xaml" />
 
@@ -46,10 +47,11 @@
                         </ResourceDictionary>
                     </ui:ThemeResources.ThemeDictionaries>
                 </ui:ThemeResources>
-                
+
                 <ui:XamlControlsResources />
 
             </ResourceDictionary.MergedDictionaries>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

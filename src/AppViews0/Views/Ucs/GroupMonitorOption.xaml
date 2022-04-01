@@ -53,7 +53,10 @@
                     HorizontalAlignment="Right"
                     Orientation="Horizontal"
                     Visibility="{Binding WsNextTrySecondsDelayVisible}">
-                    <WrapPanel Visibility="{Binding IsConnecting,Converter={StaticResource BoolToVisibilityInvertConverter}}" VerticalAlignment="Center" ToolTip="每重试失败1次重试间隔加时10秒直到重试成功或手动刷新时重置回10秒">
+                    <WrapPanel
+                        Visibility="{Binding IsConnecting,Converter={StaticResource BoolToVisibilityInvertConverter}}"
+                        VerticalAlignment="Center"
+                        ToolTip="每重试失败1次重试间隔加时10秒直到重试成功或手动刷新时重置回10秒">
                         <TextBlock Text="{Binding WsLastTryOnText}"></TextBlock>
                         <TextBlock>，</TextBlock>
                         <TextBlock Text="{Binding WsNextTrySecondsDelayText}"></TextBlock>
@@ -80,7 +83,7 @@
                         </WrapPanel>
                     </Button>
                 </StackPanel>
-                <TextBlock Grid.Row="1" Grid.Column="0" Style="{StaticResource LblTbBase}" Margin="8">登录名</TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" Margin="8">登录名</TextBlock>
                 <TextBox Grid.Row="1" Grid.Column="1"
                             x:Name="TbOuterUserId"
                             Width="180" 

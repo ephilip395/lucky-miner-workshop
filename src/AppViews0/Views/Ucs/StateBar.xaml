@@ -36,12 +36,6 @@
 						Content="{x:Static app:AppStatic.TotalVirtualMemoryGbText}" 
                         Background="Transparent"
 						Cursor="Hand"/>
-                    <TextBlock Text=" / " VerticalAlignment="Center"></TextBlock>
-                    <TextBlock 
-                        Text="{x:Static app:AppStatic.GpuSetInfo}" 
-                        VerticalAlignment="Center"
-                        MaxWidth="260" 
-                        ToolTip="{x:Static app:AppStatic.GpuSetInfo}"></TextBlock>
                 </StackPanel>
                 <Button 
                     Grid.Column="1"

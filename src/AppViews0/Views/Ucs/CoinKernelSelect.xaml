@@ -33,7 +33,8 @@
 
         <DataGrid 
             Grid.Row="1" 
-			Margin="0" 
+			Margin="0"
+            IsReadOnly="True"
 			ItemsSource="{Binding QueryResults}" 
 			SelectedItem="{Binding SelectedResult}"
 			MouseUp="DataGrid_MouseUp"
@@ -42,10 +43,11 @@
             HeadersVisibility="Column"
             GridLinesVisibility="None">
             <DataGrid.Columns>
-                <DataGridTemplateColumn Width="220" Header="名称" IsReadOnly="True">
+                
+                <DataGridTemplateColumn Width="220" Header="名称">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <WrapPanel VerticalAlignment="Center" Margin="4 0">
+                            <WrapPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding Kernel.FullName}" VerticalAlignment="Center" FontSize="14"/>
                                 <Path
 									    Margin="4 0 0 0"
@@ -67,7 +69,8 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="100" Header="显卡支持" IsReadOnly="True">
+                
+                <DataGridTemplateColumn Width="100" Header="显卡支持">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <WrapPanel VerticalAlignment="Center">
@@ -95,22 +98,28 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                
                 <DataGridTemplateColumn
                         Visibility="{x:Static app:AppStatic.IsMinerTweakVisible}"
-                        Width="100"
+                        Width="120"
                         MinWidth="100"
                         CanUserResize="False"
                         CanUserReorder="False"
-                        CanUserSort="False"
-                        IsReadOnly="True">
+                        CanUserSort="False">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Rectangle
-									    Width="{Binding Kernel.KernelProfileVm.DownloadPercent, ConverterParameter=100, Converter={StaticResource PercentToLengthConverter}}" 
-									    HorizontalAlignment="Left" Fill="#6FBBFE"></Rectangle>
-                                <WrapPanel VerticalAlignment="Center" Margin="6 0 0 0" HorizontalAlignment="Right">
-                                    <WrapPanel VerticalAlignment="Center" Visibility="{Binding Kernel.KernelProfileVm.BtnInstalledVisible, Converter={StaticResource VisibilityInvertConverter}}">
+								    Width="{Binding Kernel.KernelProfileVm.DownloadPercent, ConverterParameter=100, Converter={StaticResource PercentToLengthConverter}}" 
+									HorizontalAlignment="Left"
+                                    Fill="{DynamicResource SystemControlBackgroundAccentBrush}"/>
+                                <WrapPanel
+                                    VerticalAlignment="Center"
+                                    Margin="6 0 0 0"
+                                    HorizontalAlignment="Right">
+                                    <WrapPanel
+                                        VerticalAlignment="Center"
+                                        Visibility="{Binding Kernel.KernelProfileVm.BtnInstalledVisible, Converter={StaticResource VisibilityInvertConverter}}">
                                         <WrapPanel VerticalAlignment="Center" Visibility="{Binding Kernel.KernelProfileVm.IsDownloading, Converter={StaticResource BoolToVisibilityInvertConverter}}">
                                             <Button
                                                     VerticalAlignment="Center"

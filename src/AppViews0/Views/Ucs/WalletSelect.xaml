@@ -12,37 +12,24 @@
 	xmlns:vm="clr-namespace:Lucky.Vms;assembly=AppModels"
 	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
 	mc:Ignorable="d" 
-	d:DesignHeight="300"
-	MaxHeight="320">
+	d:DesignHeight="300">
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
-			<RowDefinition Height="*" MinHeight="100"></RowDefinition>
+			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
         
-		<WrapPanel HorizontalAlignment="Left">
+		<WrapPanel HorizontalAlignment="Left" Margin="4">
             <Button
-				Margin="4 2"
-				BorderThickness="0"
-				Height="24"
-				Padding="4 0"
                 Content="添加钱包"
 				Command="{Binding AddWallet}" />
 
             <Button
-				Margin="4 2"
-				BorderThickness="0"
-				Height="24"
-				Padding="4 0"
 				Click="KbButtonManageWallets_Click"
 				Command="{x:Static app:AppStatic.ManageWallet}"
 				CommandParameter="{Binding Coin}"
 				Content="管理" />
 
-            <TextBlock 
-                VerticalAlignment="Center" 
-                Text="矿工通常使用交易所为用户生成的充币地址。"
-                Foreground="{DynamicResource SystemControlHighlightListAccentHighBrush}" />
         </WrapPanel>
         
 		<DataGrid 
@@ -60,7 +47,6 @@
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
                             <TextBlock 
-                                Padding="4"
 								Text="{Binding Name}" 
 								ToolTip="{Binding Name}"
 								VerticalAlignment="Center"/>
@@ -70,8 +56,7 @@
 				<DataGridTemplateColumn Width="330" Header="地址" IsReadOnly="True">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-                            <TextBlock 
-                                Padding="4"
+                            <TextBlock
                                 Text="{Binding Address}" 
                                 ToolTip="{Binding Address}"
 								VerticalAlignment="Center" />

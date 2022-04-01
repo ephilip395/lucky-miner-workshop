@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 
-namespace Lucky.Vms {
-    public class CoinPageViewModel : ViewModelBase {
+namespace Lucky.Vms
+{
+    public class CoinPageViewModel : ViewModelBase
+    {
         private string _coinKeyword;
         private bool _isPoolTabSelected;
         private bool _isWalletTabSelected;
@@ -13,33 +15,43 @@ namespace Lucky.Vms {
         public ICommand Add { get; private set; }
         public ICommand ClearKeyword { get; private set; }
 
-        public CoinPageViewModel() {
-            if (WpfUtil.IsInDesignMode) {
+        public CoinPageViewModel()
+        {
+            if (WpfUtil.IsInDesignMode)
+            {
                 return;
             }
-            this.Add = new DelegateCommand(() => {
+            this.Add = new DelegateCommand(() =>
+            {
                 new CoinViewModel(Guid.NewGuid()).Edit.Execute(FormType.Add);
             });
-            this.ClearKeyword = new DelegateCommand(() => {
+            this.ClearKeyword = new DelegateCommand(() =>
+            {
                 this.CoinKeyword = string.Empty;
             });
-            if (AppRoot.CoinVms.TryGetCoinVm(MinerProfile.CoinId, out CoinViewModel coinVm)) {
+            if (AppRoot.CoinVms.TryGetCoinVm(MinerProfile.CoinId, out CoinViewModel coinVm))
+            {
                 _currentCoin = coinVm;
             }
         }
 
-        public MinerProfileViewModel MinerProfile {
-            get {
+        public MinerProfileViewModel MinerProfile
+        {
+            get
+            {
                 return AppRoot.MinerProfileVm;
             }
         }
 
         #region coin
 
-        public string CoinKeyword {
+        public string CoinKeyword
+        {
             get => _coinKeyword;
-            set {
-                if (_coinKeyword != value) {
+            set
+            {
+                if (_coinKeyword != value)
+                {
                     _coinKeyword = value;
                     OnPropertyChanged(nameof(CoinKeyword));
                     OnPropertyChanged(nameof(QueryResults));
@@ -51,34 +63,44 @@ namespace Lucky.Vms {
         private PoolViewModel _currentPool;
         private CoinKernelViewModel _currentCoinKernel;
 
-        public CoinViewModel CurrentCoin {
+        public CoinViewModel CurrentCoin
+        {
             get { return _currentCoin; }
-            set {
-                if (_currentCoin != value && value != null && value.Id != Guid.Empty) {
+            set
+            {
+                if (_currentCoin != value && value != null && value.Id != Guid.Empty)
+                {
                     _currentCoin = value;
                     OnPropertyChanged(nameof(CurrentCoin));
                 }
             }
         }
 
-        public List<CoinViewModel> QueryResults {
-            get {
+        public List<CoinViewModel> QueryResults
+        {
+            get
+            {
                 List<CoinViewModel> list;
-                if (!string.IsNullOrEmpty(CoinKeyword)) {
+                if (!string.IsNullOrEmpty(CoinKeyword))
+                {
                     list = AppRoot.CoinVms.AllCoins.
                         Where(a => (!string.IsNullOrEmpty(a.Code) && a.Code.IgnoreCaseContains(CoinKeyword))
                             || (!string.IsNullOrEmpty(a.EnName) && a.EnName.IgnoreCaseContains(CoinKeyword))).OrderBy(a => a.Code).ToList();
                 }
-                else {
+                else
+                {
                     list = AppRoot.CoinVms.AllCoins.OrderBy(a => a.Code).ToList();
                 }
-                if (list.Count == 1) {
+                if (list.Count == 1)
+                {
                     CurrentCoin = list.FirstOrDefault();
                 }
-                if (CurrentCoin == null) {
+                if (CurrentCoin == null)
+                {
                     CurrentCoin = list.FirstOrDefault();
                 }
-                else {
+                else
+                {
                     CurrentCoin = list.FirstOrDefault(a => a.Id == CurrentCoin.Id);
                 }
                 return list;
@@ -86,46 +108,59 @@ namespace Lucky.Vms {
         }
         #endregion
 
-        public bool IsPoolTabSelected {
+        public bool IsPoolTabSelected
+        {
             get => _isPoolTabSelected;
-            set {
-                if (_isPoolTabSelected != value) {
+            set
+            {
+                if (_isPoolTabSelected != value)
+                {
                     _isPoolTabSelected = value;
                     OnPropertyChanged(nameof(IsPoolTabSelected));
                 }
             }
         }
-        public bool IsWalletTabSelected {
+        public bool IsWalletTabSelected
+        {
             get => _isWalletTabSelected;
-            set {
-                if (_isWalletTabSelected != value) {
+            set
+            {
+                if (_isWalletTabSelected != value)
+                {
                     _isWalletTabSelected = value;
                     OnPropertyChanged(nameof(IsWalletTabSelected));
                 }
             }
         }
 
-        public bool IsKernelTabSelected {
+        public bool IsKernelTabSelected
+        {
             get => _isKernelTabSelected;
-            set {
-                if (_isKernelTabSelected != value) {
+            set
+            {
+                if (_isKernelTabSelected != value)
+                {
                     _isKernelTabSelected = value;
                     OnPropertyChanged(nameof(IsKernelTabSelected));
                 }
             }
         }
 
-        public PoolViewModel CurrentPool {
+        public PoolViewModel CurrentPool
+        {
             get => _currentPool;
-            set {
+            set
+            {
                 _currentPool = value;
                 OnPropertyChanged(nameof(CurrentPool));
             }
         }
 
-        public CoinKernelViewModel CurrentCoinKernel {
+        public CoinKernelViewModel CurrentCoinKernel
+        {
             get => _currentCoinKernel;
-            set {
+            set
+            {
                 _currentCoinKernel = value;
                 OnPropertyChanged(nameof(CurrentCoinKernel));
             }

@@ -82,7 +82,8 @@
 												<Setter Property="Padding" Value="0"></Setter>
 												<Setter Property="BorderThickness" Value="0"></Setter>
 												<Setter Property="Background" Value="Transparent"></Setter>
-											</Style>
+                                                <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseHighBrush}"/>
+                                            </Style>
 										</WrapPanel.Resources>
 										<Button Command="{Binding Set}" CommandParameter="0">0G</Button>
 										<Button Command="{Binding Set}" CommandParameter="1">2G</Button>
@@ -93,7 +94,7 @@
 										<Button Command="{Binding Set}" CommandParameter="6">64G</Button>
 										<Button Command="{Binding Set}" CommandParameter="7">128G</Button>
 									</WrapPanel>
-                                    <StackPanel Canvas.Left="252" Canvas.Top="-12">
+                                    <StackPanel Canvas.Left="256" Canvas.Top="-44">
                                         <WrapPanel>
                                             <TextBox Width="48" Height="20" VerticalAlignment="Center" Background="White" Text="{Binding VirtualMemoryMaxSizeMb}"></TextBox>
                                             <TextBlock VerticalAlignment="Center">Mb</TextBlock>

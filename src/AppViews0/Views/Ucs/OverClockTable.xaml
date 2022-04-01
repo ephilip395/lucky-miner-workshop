@@ -26,7 +26,6 @@
             <Setter Property="CanUserReorderColumns" Value="True" />
             <Setter Property="CanUserSortColumns" Value="False" />
             <Setter Property="HeadersVisibility" Value="Column"></Setter>
-            <Setter Property="ColumnHeaderHeight" Value="50"></Setter>
             <Setter Property="AutoGenerateColumns" Value="False"></Setter>
             <Setter Property="CanUserResizeRows" Value="False"></Setter>
             <Setter Property="IsReadOnly" Value="True"></Setter>
@@ -91,7 +90,12 @@
 
         <DataGrid 
             Grid.Row="1"
+            IsReadOnly="True"
             Style="{StaticResource overClockDataGrid}"
+            HorizontalScrollBarVisibility="Auto"
+            AutoGenerateColumns="False"
+            HeadersVisibility="Column"
+            GridLinesVisibility="None"
 			ItemsSource="{Binding GpuSpeedVms.List}">
             
             <DataGrid.Resources>
@@ -101,31 +105,23 @@
             
             <DataGrid.Columns>
 
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True">
-                    <DataGridTemplateColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="序号"></TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.HeaderTemplate>
+                <DataGridTemplateColumn MinWidth="80" Width="80" Header="序号">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding GpuVm.IndexText}"></TextBlock>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding GpuVm.IndexText}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn MinWidth="80" Width="3*" IsReadOnly="True">
-                    <DataGridTemplateColumn.Header>
-                        <TextBlock Text="名称"></TextBlock>
-                    </DataGridTemplateColumn.Header>
+                <DataGridTemplateColumn MinWidth="80" Width="3*" Header="名称">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding GpuVm.Name}"></TextBlock>
+                            <TextBlock VerticalAlignment="Center" Text="{Binding GpuVm.Name}"></TextBlock>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True">
+                <DataGridTemplateColumn MinWidth="80" Width="80">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -148,11 +144,11 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel VerticalAlignment="Center">
                                 <WrapPanel>
-                                    <TextBlock Foreground="{Binding GpuVm.TemperatureForeground}" Text="{Binding GpuVm.TemperatureText}"></TextBlock>
-                                    <TextBlock Foreground="{Binding GpuVm.TemperatureForeground}" Visibility="{Binding GpuVm.IsMemoryTemperatureVisible}" Text=" / "></TextBlock>
-                                    <TextBlock Foreground="{Binding GpuVm.TemperatureForeground}" Visibility="{Binding GpuVm.IsMemoryTemperatureVisible}" Text="{Binding GpuVm.MemoryTemperatureText}"></TextBlock>
+                                    <TextBlock Text="{Binding GpuVm.TemperatureText}"></TextBlock>
+                                    <TextBlock Visibility="{Binding GpuVm.IsMemoryTemperatureVisible}" Text=" / "></TextBlock>
+                                    <TextBlock Visibility="{Binding GpuVm.IsMemoryTemperatureVisible}" Text="{Binding GpuVm.MemoryTemperatureText}"></TextBlock>
                                 </WrapPanel>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <CheckBox 
@@ -171,7 +167,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True" CanUserResize="False">
+                <DataGridTemplateColumn MinWidth="80" Width="80" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -190,7 +186,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding GpuVm.TempLimitText}"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <TextBox 
@@ -204,7 +200,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True" CanUserResize="False">
+                <DataGridTemplateColumn MinWidth="80" Width="80" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -224,7 +220,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding GpuVm.FanSpeedText}"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <TextBox 
@@ -238,7 +234,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True" CanUserResize="False">
+                <DataGridTemplateColumn MinWidth="80" Width="80" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -258,7 +254,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding GpuVm.CoreClockDeltaMText}"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <TextBox 
@@ -272,7 +268,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True" CanUserResize="False">
+                <DataGridTemplateColumn MinWidth="80" Width="80" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -291,7 +287,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding GpuVm.CoreVoltage}"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <TextBox 
@@ -306,7 +302,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True" CanUserResize="False">
+                <DataGridTemplateColumn MinWidth="80" Width="80" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -326,7 +322,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding GpuVm.MemoryClockDeltaMText}"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <TextBox 
@@ -340,7 +336,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True" Header="显存电压" CanUserResize="False">
+                <DataGridTemplateColumn MinWidth="80" Width="80" Header="显存电压" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -359,7 +355,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding GpuVm.MemoryVoltage}"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <TextBox 
@@ -374,7 +370,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True" Header="显存时序" CanUserResize="False" Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.GpuAllProfileVm.GpuVm.IsMemoryTimingVisible,Source={StaticResource proxy}}">
+                <DataGridTemplateColumn MinWidth="80" Width="80" Header="显存时序" CanUserResize="False" Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.GpuAllProfileVm.GpuVm.IsMemoryTimingVisible,Source={StaticResource proxy}}">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -395,7 +391,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding GpuVm.CurrentMemoryTimingLevel}"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <Border Visibility="{Binding GpuVm.IsMemoryTimingVisible}">
@@ -414,7 +410,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="80" Width="80" IsReadOnly="True" CanUserResize="False">
+                <DataGridTemplateColumn MinWidth="80" Width="80" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -434,7 +430,7 @@
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel>
+                            <StackPanel VerticalAlignment="Center">
                                 <TextBlock Text="{Binding GpuVm.PowerCapacityText}"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <TextBox 
@@ -448,8 +444,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-
 
             </DataGrid.Columns>
         </DataGrid>
