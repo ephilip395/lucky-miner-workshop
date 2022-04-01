@@ -3,7 +3,8 @@
 	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-	xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
 	xmlns:local="clr-namespace:Lucky.Views.Ucs"
 	xmlns:vm="clr-namespace:Lucky.Vms;assembly=AppModels"
@@ -11,68 +12,59 @@
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
 	d:DataContext="{d:DesignData Source=../Design/StateBarViewModel.xaml}"
 	mc:Ignorable="d" d:DesignWidth="1200">
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<Style x:Key="Lbl" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
-				<Setter Property="TextAlignment" Value="Right"></Setter>
-			</Style>
-		</ResourceDictionary>
-	</UserControl.Resources>
-    <Border Padding="4 0 4 0">
-        <StackPanel>
+    <Border>
+        <StackPanel Margin="4 0">
             <Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*"></ColumnDefinition>
 					<ColumnDefinition Width="auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <WrapPanel Grid.Column="0" Margin="0 0 70 0">
-                    <controls:KbButton 
-						Margin="4 0 0 0"
+                <StackPanel Grid.Column="0" 
+                            Orientation="Horizontal" 
+                            VerticalAlignment="Center">
+                    <Button
 						ToolTip="{x:Static app:AppStatic.WindowsEditionToolTip}"
                         Cursor="Hand"
+                        Background="Transparent"
                         Command="{x:Static app:AppStatic.WindowsProperty}"
-                        Content="{x:Static app:AppStatic.WindowsEdition}"
-						CornerRadius="2">
-                    </controls:KbButton>
-                    <TextBlock Text=" / "></TextBlock>
-                    <controls:KbButton 
+                        Content="{x:Static app:AppStatic.WindowsEdition}">
+                    </Button>
+                    <TextBlock Text=" / " VerticalAlignment="Center"></TextBlock>
+                    <Button
 						x:Name="BtnShowVirtualMemory"
 						Command="{x:Static app:AppStatic.ShowVirtualMemory}"
 						Content="{x:Static app:AppStatic.TotalVirtualMemoryGbText}" 
-						Cursor="Hand"></controls:KbButton>
-                    <TextBlock Text=" / "></TextBlock>
-                    <TextBlock 
-                        Text="{x:Static app:AppStatic.DriverVersion}" 
-                        ToolTip="{x:Static app:AppStatic.DriverVersionToolTip}"></TextBlock>
-                    <TextBlock 
-                        Text=" / "></TextBlock>
+                        Background="Transparent"
+						Cursor="Hand"/>
+                    <TextBlock Text=" / " VerticalAlignment="Center"></TextBlock>
                     <TextBlock 
                         Text="{x:Static app:AppStatic.GpuSetInfo}" 
+                        VerticalAlignment="Center"
                         MaxWidth="260" 
                         ToolTip="{x:Static app:AppStatic.GpuSetInfo}"></TextBlock>
-                </WrapPanel>
-                <controls:KbButton 
+                </StackPanel>
+                <Button 
                     Grid.Column="1"
                     ToolTip="检查更新"
 					Cursor="Hand"
-					Background="Transparent" 
+                    Background="Transparent"
                     Click="BtnCheckUpdate_Click"
 					Command="{x:Static app:AppStatic.ShowOnlineUpdate}">
-                    <WrapPanel>
+                    <StackPanel Orientation="Horizontal">
                         <Path 
                             x:Name="UpdateIcon"
 							Width="14"
 							Height="13"
 							Data="{StaticResource Icon_Update}"
-							Fill="{Binding CheckUpdateForeground}"
+							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill" />
-                        <Path 
+                        <Path
                             x:Name="LoadingIcon"
                             Visibility="Collapsed"
 							Width="14"
 							Height="14"
 							Data="{StaticResource Icon_Loading}"
-							Fill="{StaticResource BtnBackground}"
+							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill">
                             <Path.RenderTransform>
                                 <RotateTransform Angle="0" CenterX="7" CenterY="7"></RotateTransform>
@@ -82,8 +74,8 @@
 						    Margin="2 0 0 0"
 						    VerticalAlignment="Center"
 						    Text="{x:Static app:AppStatic.VersionFullName}" />
-                    </WrapPanel>
-                </controls:KbButton>
+                    </StackPanel>
+                </Button>
             </Grid>
 		</StackPanel>
 	</Border>

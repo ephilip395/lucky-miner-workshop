@@ -104,7 +104,7 @@
         </TabControl>
 
         <!--下状态栏-->
-        <uc:StateBar Grid.Row="3" x:Name="StateBar" Padding="0 0 0 2"/>
+        <uc:StateBar Grid.Row="3" x:Name="StateBar"/>
 
     </Grid>
 </Window>
