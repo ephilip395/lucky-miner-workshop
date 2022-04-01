@@ -9,11 +9,12 @@
     xmlns:vm="clr-namespace:Lucky.Vms;assembly=AppModels"
     xmlns:local="clr-namespace:Lucky.Views.Ucs" 
 	mc:Ignorable="d"
-    d:DesignWidth="520"
-    Background="White">
+    d:DesignWidth="520">
     <UserControl.Resources>
-        <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource LblTbBase}">
+        <Style x:Key="LblTb" TargetType="TextBlock">
             <Setter Property="Width" Value="70"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlForegroundBaseMediumHighBrush}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
     <StackPanel Margin="10">
@@ -48,31 +49,17 @@
             </WrapPanel>
         </WrapPanel>
         <StackPanel Margin="70 0 0 0" Visibility="{Binding IsAddressEditable, Converter={StaticResource BoolToVisibilityConverter}}">
-            <TextBlock VerticalAlignment="Center" Foreground="Red">0. 别名随便填，别名是帮助自己区分钱包地址的个性名称；</TextBlock>
-            <TextBlock VerticalAlignment="Center" Foreground="Red">1. 钱包地址保存后不可修改；</TextBlock>
-            <TextBlock VerticalAlignment="Center" Foreground="Red">2. 矿工通常使用交易所为用户生成的充币地址挖矿。</TextBlock>
+            <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource SystemControlHighlightListAccentHighBrush}">0. 别名随便填，别名是帮助自己区分钱包地址的个性名称；</TextBlock>
+            <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource SystemControlHighlightListAccentHighBrush}">1. 钱包地址保存后不可修改；</TextBlock>
+            <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource SystemControlHighlightListAccentHighBrush}">2. 矿工通常使用交易所为用户生成的充币地址挖矿。</TextBlock>
         </StackPanel>
-        <controls:KbButton
+        <Button
             Command="{Binding Save}" 
             Visibility="{Binding IsTestWallet, Converter={StaticResource BoolToVisibilityInvertConverter}}"
             Margin="0 10 0 0"
             Padding="15 2"
-            HorizontalAlignment="Center"
-            Background="{StaticResource BtnBackground}"
-            Foreground="{StaticResource BtnForeground}"
-            CornerRadius="2">
-            <WrapPanel>
-                <Path
-                    Width="12"
-                    Height="12"
-                    Data="{StaticResource Icon_Ok}"
-                    Fill="{StaticResource BtnForeground}"
-                    Stretch="Fill" />
-                <TextBlock
-                    Padding="4"
-                    VerticalAlignment="Center"
-                    Text="确定" />
-            </WrapPanel>
-        </controls:KbButton>
+            Content="确定"
+            HorizontalAlignment="Center" />
+
     </StackPanel>
 </UserControl>

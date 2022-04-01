@@ -4,78 +4,38 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
 	xmlns:blankWindow="http://luckycm.monsterorb.com"
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
 	xmlns:local="clr-namespace:Lucky.Views.Ucs"
 	xmlns:vm="clr-namespace:Lucky.Vms;assembly=AppModels"
 	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
-	BorderBrush="{StaticResource WindowBorderBrush}"
-	BorderThickness="1"
-	Background="White"
 	mc:Ignorable="d" 
 	d:DesignHeight="300"
     d:DataContext="{d:DesignData Source=../Design/CoinSelectViewModel.xaml}">
-    <Grid Background="{StaticResource ToolbarBackground}">
+
+    <Grid>
 		<Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*" MinHeight="100"></RowDefinition>
 		</Grid.RowDefinitions>
-		<WrapPanel HorizontalAlignment="Left">
-			<WrapPanel>
-				<TextBlock Padding="2 6">搜索</TextBlock>
-				<controls:KbTextBox 
-					x:Name="TbKeyword" Width="154" Height="24"
-					Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" 
-					VerticalContentAlignment="Center"
-					Hint="请输入想搜索的币种"
-					BorderBrush="{StaticResource LightLineColor}"
-					BorderThickness="1"
-					Background="White"
-					SelectedColor="#409EFF" />
-				<controls:KbButton 
-					Height="20"
-					Background="Transparent" 
-					BorderThickness="0"
-					Command="{Binding ClearKeyword}"
-					Visibility="{Binding ElementName=TbKeyword,Path=Text, Converter={StaticResource NotNullOrEmptyVisibilityConverter}}"
-					Margin="-14 0 0 0" 
-					HorizontalAlignment="Left">
-					<Path
-						Width="8"
-						Height="8"
-						Data="{StaticResource Icon_Close}"
-						Fill="{StaticResource BtnBackground}"
-						Stretch="Fill" />
-				</controls:KbButton>
-			</WrapPanel>
-			
-            <TextBlock VerticalAlignment="Center" Foreground="{StaticResource LableColor}">按字母表排序</TextBlock>
-		</WrapPanel>
-		<controls:KbButton 
-			Background="Transparent" 
-			BorderThickness="0" 
-			Padding="0 0 4 0"
-			Command="{Binding HideView}"
-			HorizontalAlignment="Right">
-			<Path
-				Width="14"
-				Height="14"
-				Data="{StaticResource Icon_Close}"
-				Fill="Black"
-				Stretch="Fill" />
-		</controls:KbButton>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Padding="2 6" VerticalAlignment="Center">搜索</TextBlock>
+            <TextBox 
+                VerticalAlignment="Center"
+				x:Name="TbKeyword" Width="154" Height="24"
+				Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" 
+				VerticalContentAlignment="Center"
+                ui:ControlHelper.PlaceholderText="请输入想搜索的币种"/>
+        </StackPanel>
         <ListBox 
             Grid.Row="1"
-			Background="{StaticResource ToolbarBackground}"
             ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             Visibility="{Binding IsPromoteHotCoin,Converter={StaticResource BoolToVisibilityConverter}}"
 			ItemsSource="{Binding HotCoins}"
-            SelectedItem="{Binding SelectedHotCoin}"
-			ItemContainerStyle="{StaticResource ListBoxBarItem}"
-            
-			BorderThickness="0">
+            SelectedItem="{Binding SelectedHotCoin}">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapPanel>
@@ -84,12 +44,10 @@
             </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Border Padding="10 0" Background="Transparent" MouseUp="DataGrid_MouseUp">
+                    <Border Padding="10 0" MouseUp="DataGrid_MouseUp">
                         <StackPanel>
-                            <Image Width="26" Height="26" Source="{Binding IconImageSource}">
-                            </Image>
-                            <TextBlock HorizontalAlignment="Center" Text="{Binding Code}">
-                            </TextBlock>
+                            <Image Width="26" Height="26" Source="{Binding IconImageSource}"/>
+                            <TextBlock HorizontalAlignment="Center" Text="{Binding Code}"/>
                         </StackPanel>
                     </Border>
                 </DataTemplate>
@@ -101,56 +59,51 @@
 			SelectedItem="{Binding SelectedResult}"
 			MouseUp="DataGrid_MouseUp"
 			PreviewKeyDown="DataGrid_PreviewKeyDown"
-			HorizontalScrollBarVisibility="Auto"
+            HorizontalScrollBarVisibility="Auto"
             AutoGenerateColumns="False"
-            HeadersVisibility="Column"
-            GridLinesVisibility="Horizontal"
-			BorderThickness="0 1">
-			<DataGrid.Columns>
-				<DataGridTemplateColumn Width="40" Header="图标" IsReadOnly="True">
+            GridLinesVisibility="None"
+            HeadersVisibility="Column">
+
+            <DataGrid.Columns>
+				<DataGridTemplateColumn Width="50" Header="图标" IsReadOnly="True">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-                            <Image Width="26" Height="26" Source="{Binding IconImageSource}">
-							</Image>
-						</DataTemplate>
+                            <Image Width="26" Height="26" Source="{Binding IconImageSource}"/>
+                        </DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTemplateColumn Width="100" Header="编码" IsReadOnly="True">
-					<DataGridTemplateColumn.CellTemplate>
-						<DataTemplate>
-							<WrapPanel>
-								<TextBlock Text="{Binding Code}"></TextBlock>
-								<Path
+                <DataGridTemplateColumn Width="100" Header="编码" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Code}" VerticalAlignment="Center" />
+                                <Path
 									Margin="4 0 0 0"
 									Visibility="{Binding IsHot,Converter={StaticResource BoolToVisibilityConverter}}"
 									Width="16"
 									Height="16"
 									Data="{StaticResource Icon_Hot}"
-									Fill="Red"
+									Fill="{DynamicResource SystemControlErrorTextForegroundBrush}"
 									Stretch="Fill" />
-							</WrapPanel>
-						</DataTemplate>
-					</DataGridTemplateColumn.CellTemplate>
-				</DataGridTemplateColumn>
-				<DataGridTextColumn Width="140" Header="中文名" Binding="{Binding CnName}" IsReadOnly="True">
-				</DataGridTextColumn>
-				<DataGridTextColumn Width="140" Header="算法" Binding="{Binding AlgoItem.Value}" IsReadOnly="True">
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="100" Header="最低显存" Binding="{Binding MinGpuMemoryGbText}" IsReadOnly="True">
-                </DataGridTextColumn>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+                <DataGridTextColumn Width="100" Header="最低显存" Binding="{Binding MinGpuMemoryGbText}" IsReadOnly="True"/>
+
                 <DataGridTemplateColumn Width="40" IsReadOnly="True">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<controls:KbLinkButton
+							<ui:HyperlinkButton
 								VerticalAlignment="Center"
 								Padding="0"
 								Visibility="{Binding TutorialUrl,Converter={StaticResource NotNullOrEmptyVisibilityConverter}}"
 								Command="{x:Static app:AppStatic.ViewUrl}"
 								CommandParameter="{Binding TutorialUrl}"
-								KbDisplayLine="False"
 								Content="教程"
 								Background="Transparent">
-							</controls:KbLinkButton>
+                            </ui:HyperlinkButton>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -160,7 +113,7 @@
             Grid.Row="2" 
             Margin="0 30 0 0"
             Visibility="{Binding QueryResults, Converter={StaticResource NoRecordVisibilityConverter}}" 
-            Foreground="Red" 
+            Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}" 
             VerticalAlignment="Center" 
             HorizontalAlignment="Center">没有记录</TextBlock>
 	</Grid>

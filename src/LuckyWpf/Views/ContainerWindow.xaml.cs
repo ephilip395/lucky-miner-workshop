@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace Lucky.Views
 {
-    public partial class ContainerWindow : BlankWindow
+    public partial class ContainerWindow : Window
     {
         #region static
         private static readonly Dictionary<Type, ContainerWindow> s_windowDicByType = new Dictionary<Type, ContainerWindow>();

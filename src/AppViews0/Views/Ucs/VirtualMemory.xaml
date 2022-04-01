@@ -9,7 +9,6 @@
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
 	xmlns:vm="clr-namespace:Lucky.Vms;assembly=AppModels"
 	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
-	Background="White"
 	mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="360">
 	<Grid Margin="20 0">
 		<Grid.RowDefinitions>

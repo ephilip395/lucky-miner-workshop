@@ -4,79 +4,47 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
 	xmlns:blankWindow="http://luckycm.monsterorb.com"
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
 	xmlns:local="clr-namespace:Lucky.Views.Ucs"
 	xmlns:vm="clr-namespace:Lucky.Vms;assembly=AppModels"
 	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
-	BorderBrush="{StaticResource WindowBorderBrush}"
-	BorderThickness="1"
-	Background="White"
 	mc:Ignorable="d" 
 	d:DesignHeight="300"
 	MaxHeight="320">
-	<Grid Background="{StaticResource ToolbarBackground}">
+	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="*" MinHeight="100"></RowDefinition>
 		</Grid.RowDefinitions>
+        
 		<WrapPanel HorizontalAlignment="Left">
-			<controls:KbButton
+            <Button
 				Margin="4 2"
 				BorderThickness="0"
 				Height="24"
 				Padding="4 0"
-				Background="{StaticResource BtnBackground}"
-                Foreground="{StaticResource BtnForeground}"
-				Command="{Binding AddWallet}"
-				CornerRadius="2">
-				<WrapPanel>
-					<Path
-						Width="14"
-						Height="14"
-						Data="{StaticResource Icon_Add}"
-						Fill="{StaticResource BtnForeground}"
-						Stretch="Fill" />
-					<TextBlock Margin="4 0 0 0" Text="添加钱包"></TextBlock>
-				</WrapPanel>
-			</controls:KbButton>
-			<controls:KbButton
+                Content="添加钱包"
+				Command="{Binding AddWallet}" />
+
+            <Button
 				Margin="4 2"
 				BorderThickness="0"
 				Height="24"
 				Padding="4 0"
 				Click="KbButtonManageWallets_Click"
-				Background="{StaticResource BtnBackground}"
-                Foreground="{StaticResource BtnForeground}"
 				Command="{x:Static app:AppStatic.ManageWallet}"
 				CommandParameter="{Binding Coin}"
-				CornerRadius="2">
-				<WrapPanel>
-					<Path
-						Width="14"
-						Height="14"
-						Data="{StaticResource Icon_Wallet}"
-						Fill="{StaticResource BtnForeground}"
-						Stretch="Fill" />
-					<TextBlock Margin="4 0 0 0" Text="管理"></TextBlock>
-				</WrapPanel>
-			</controls:KbButton>
-            <TextBlock VerticalAlignment="Center" Foreground="{StaticResource LableColor}">矿工通常使用交易所为用户生成的充币地址挖矿。</TextBlock>
-		</WrapPanel>
-		<controls:KbButton 
-			Background="Transparent" 
-			BorderThickness="0" 
-			Padding="0 0 4 0"
-			Command="{Binding HideView}"
-			HorizontalAlignment="Right">
-			<Path
-				Width="14"
-				Height="14"
-				Data="{StaticResource Icon_Close}"
-				Fill="Black"
-				Stretch="Fill" />
-		</controls:KbButton>
+				Content="管理" />
+
+            <TextBlock 
+                VerticalAlignment="Center" 
+                Text="矿工通常使用交易所为用户生成的充币地址。"
+                Foreground="{DynamicResource SystemControlHighlightListAccentHighBrush}" />
+        </WrapPanel>
+        
 		<DataGrid 
 			Grid.Row="1"
 			Margin="0" 
@@ -86,24 +54,28 @@
 			PreviewKeyDown="DataGrid_PreviewKeyDown"
             AutoGenerateColumns="False"
             HeadersVisibility="Column"
-            GridLinesVisibility="Horizontal"
-			BorderThickness="0">
+            GridLinesVisibility="None">
 			<DataGrid.Columns>
 				<DataGridTemplateColumn Width="100" Header="别名" IsReadOnly="True">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBlock 
+                            <TextBlock 
+                                Padding="4"
 								Text="{Binding Name}" 
 								ToolTip="{Binding Name}"
-								VerticalAlignment="Center"></TextBlock>
-						</DataTemplate>
+								VerticalAlignment="Center"/>
+                        </DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
 				<DataGridTemplateColumn Width="330" Header="地址" IsReadOnly="True">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBlock Text="{Binding Address}" ToolTip="钱包地址"></TextBlock>
-						</DataTemplate>
+                            <TextBlock 
+                                Padding="4"
+                                Text="{Binding Address}" 
+                                ToolTip="{Binding Address}"
+								VerticalAlignment="Center" />
+                        </DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
 			</DataGrid.Columns>
@@ -112,7 +84,7 @@
             Grid.Row="1" 
             Margin="0 30 0 0"
             Visibility="{Binding QueryResults, Converter={StaticResource NoRecordVisibilityConverter}}" 
-            Foreground="Red" 
+            Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}" 
             VerticalAlignment="Center" 
             HorizontalAlignment="Center">没有记录</TextBlock>
 	</Grid>

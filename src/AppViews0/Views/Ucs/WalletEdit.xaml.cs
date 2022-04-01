@@ -1,10 +1,14 @@
 ﻿using Lucky.Vms;
 using System.Windows.Controls;
 
-namespace Lucky.Views.Ucs {
-    public partial class WalletEdit : UserControl {
-        public static void ShowWindow(FormType formType, WalletViewModel source) {
-            ContainerWindow.ShowWindow(new ContainerWindowViewModel {
+namespace Lucky.Views.Ucs
+{
+    public partial class WalletEdit : UserControl
+    {
+        public static void ShowWindow(FormType formType, WalletViewModel source)
+        {
+            ContainerWindow.ShowWindow(new ContainerWindowViewModel
+            {
                 Title = "钱包",
                 FormType = formType,
                 Width = 520,
@@ -14,7 +18,8 @@ namespace Lucky.Views.Ucs {
                 CloseVisible = System.Windows.Visibility.Visible
             }, ucFactory: (window) =>
             {
-                WalletViewModel vm = new WalletViewModel(source) {
+                WalletViewModel vm = new WalletViewModel(source)
+                {
                     AfterClose = source.AfterClose
                 };
                 window.BuildCloseWindowOncePath(vm.Id);
@@ -24,7 +29,8 @@ namespace Lucky.Views.Ucs {
 
         public WalletViewModel Vm { get; private set; }
 
-        public WalletEdit(WalletViewModel vm) {
+        public WalletEdit(WalletViewModel vm)
+        {
             this.Vm = vm;
             this.DataContext = vm;
             InitializeComponent();

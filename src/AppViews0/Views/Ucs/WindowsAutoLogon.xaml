@@ -26,23 +26,21 @@
         </Grid.RowDefinitions>
         <TextBlock 
 			Grid.Row="0" Grid.Column="0" 
-            Style="{StaticResource LblTbBase}"
 			Text="Windows 登录名"></TextBlock>
         <TextBox 
             x:Name="TbLoginName"
 			Grid.Row="0" Grid.Column="1" Margin="0 2"
             ToolTip="填写在挖矿端注册的群控登录名"
-			Text="{Binding UserName}" Background="White" 
+			Text="{Binding UserName}"
 			VerticalContentAlignment="Center"></TextBox>
 
         <TextBlock 
 			Grid.Row="1" Grid.Column="0"
-            Style="{StaticResource LblTbBase}"
 			Text="Windows 密码"></TextBlock>
         <PasswordBox 
 			Grid.Row="1" Grid.Column="1" Margin="0 2" Height="26"
 			x:Name="PbPassword" VerticalContentAlignment="Center" 
-            Background="White" controls:PasswordBoxHelper.Attach="true" 
+            controls:PasswordBoxHelper.Attach="true" 
             controls:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         <WrapPanel Grid.Row="2" Grid.Column="2" Margin="0 8 0 0">

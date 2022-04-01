@@ -4,67 +4,35 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
-	xmlns:blankWindow="http://luckycm.monsterorb.com"
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"	
     xmlns:app="clr-namespace:Lucky;assembly=AppModels"
 	xmlns:local="clr-namespace:Lucky.Views.Ucs"
 	xmlns:vm="clr-namespace:Lucky.Vms;assembly=AppModels"
-	BorderBrush="{StaticResource WindowBorderBrush}"
-	BorderThickness="1"
-	Background="White"
 	mc:Ignorable="d" 
 	d:DesignHeight="600"
     d:DataContext="{d:DesignData Source=../Design/CoinKernelSelectViewModel.xaml}">
-    <Grid Background="{StaticResource ToolbarBackground}">
+    <Grid>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*" MinHeight="100"></RowDefinition>
         </Grid.RowDefinitions>
-        <Border Grid.Row="0">
-            <WrapPanel>
-                <TextBlock Padding="2 6">搜索</TextBlock>
-                <controls:KbTextBox 
-					x:Name="TbKeyword" Width="144" Height="24"
-					Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" 
-					VerticalContentAlignment="Center"
-					Hint="请输入想搜索的内核"
-					BorderBrush="{StaticResource LightLineColor}"
-					BorderThickness="1"
-					Background="White"
-					SelectedColor="#409EFF" />
-                <controls:KbButton 
-					Height="20"
-					Background="Transparent" 
-					BorderThickness="0"
-					Command="{Binding ClearKeyword}"
-					Visibility="{Binding ElementName=TbKeyword,Path=Text, Converter={StaticResource NotNullOrEmptyVisibilityConverter}}"
-					Margin="-14 0 0 0" 
-					HorizontalAlignment="Left">
-                    <Path
-						Width="8"
-						Height="8"
-						Data="{StaticResource Icon_Close}"
-						Fill="{StaticResource BtnBackground}"
-						Stretch="Fill" />
-                </controls:KbButton>
-            </WrapPanel>
-        </Border>
-        <controls:KbButton 
-			Background="Transparent" 
-			BorderThickness="0" 
-			Padding="0 0 4 0"
-			Command="{Binding HideView}"
-			HorizontalAlignment="Right">
-            <Path
-				Width="14"
-				Height="14"
-				Data="{StaticResource Icon_Close}"
-				Fill="Black"
-				Stretch="Fill" />
-        </controls:KbButton>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Padding="2 6" VerticalAlignment="Center">搜索</TextBlock>
+            <TextBox 
+            VerticalAlignment="Center"
+			x:Name="TbKeyword"
+            Width="144"
+			Text="{Binding Keyword, UpdateSourceTrigger=PropertyChanged}" 
+			VerticalContentAlignment="Center"
+			ui:ControlHelper.PlaceholderText="请输入想搜索的内核" />
+        </StackPanel>
+
         <DataGrid 
-			Grid.Row="1"
+            Grid.Row="1" 
 			Margin="0" 
 			ItemsSource="{Binding QueryResults}" 
 			SelectedItem="{Binding SelectedResult}"
@@ -72,116 +40,121 @@
 			PreviewKeyDown="DataGrid_PreviewKeyDown"
             AutoGenerateColumns="False"
             HeadersVisibility="Column"
-            GridLinesVisibility="Horizontal"
-			BorderThickness="0 1">
+            GridLinesVisibility="None">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="220" Header="名称" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <WrapPanel>
-                                <TextBlock Text="{Binding Kernel.FullName}" VerticalAlignment="Center" FontSize="14"></TextBlock>
+                            <WrapPanel VerticalAlignment="Center" Margin="4 0">
+                                <TextBlock Text="{Binding Kernel.FullName}" VerticalAlignment="Center" FontSize="14"/>
                                 <Path
-									Margin="4 0 0 0"
-									Visibility="{Binding IsHot,Converter={StaticResource BoolToVisibilityConverter}}"
-									Width="16"
-									Height="16"
-									Data="{StaticResource Icon_Hot}"
-									Fill="Red"
-									Stretch="Fill" />
+									    Margin="4 0 0 0"
+									    Visibility="{Binding IsHot,Converter={StaticResource BoolToVisibilityConverter}}"
+									    Width="16"
+									    Height="16"
+									    Data="{StaticResource Icon_Hot}"
+									    Fill="{DynamicResource SystemControlErrorTextForegroundBrush}"
+									    Stretch="Fill" />
                                 <Path
-									Margin="4 0 0 0"
-									Visibility="{Binding IsRecommend,Converter={StaticResource BoolToVisibilityConverter}}"
-									Width="16"
-									Height="16"
-									Data="{StaticResource Icon_Recommend}"
-									Fill="Red"
-									Stretch="Fill" />
+									    Margin="4 0 0 0"
+									    Visibility="{Binding IsRecommend,Converter={StaticResource BoolToVisibilityConverter}}"
+									    Width="16"
+									    Height="16"
+									    Data="{StaticResource Icon_Recommend}"
+									    Fill="{DynamicResource SystemControlErrorTextForegroundBrush}"
+									    Stretch="Fill" />
                             </WrapPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Width="100" Header="显卡" IsReadOnly="True">
+                <DataGridTemplateColumn Width="100" Header="显卡支持" IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <WrapPanel>
+                            <WrapPanel VerticalAlignment="Center">
                                 <Path
-									Margin="4 0 0 0"
-									Width="20"
-									Height="16"
-									ToolTip="支持N卡"
-									Visibility="{Binding IsNvidiaIconVisible}"
-									Data="{StaticResource Icon_Nvidia}"
-									Fill="Green"
-									Stretch="Fill" />
+                                        VerticalAlignment="Center"
+									    Margin="4 0 0 0"
+									    Width="20"
+									    Height="16"
+									    ToolTip="支持N卡"
+									    Visibility="{Binding IsNvidiaIconVisible}"
+									    Data="{StaticResource Icon_Nvidia}"
+									    Fill="Green"
+									    Stretch="Fill" />
                                 <Path
-									Margin="4 0 0 0"
-									Width="20"
-									Height="16"
-									ToolTip="支持A卡"
-									Visibility="{Binding IsAmdIconVisible}"
-									Data="{StaticResource Icon_AMD}"
-									Fill="Red"
-									Stretch="Fill" />
+                                        VerticalAlignment="Center"
+									    Margin="4 0 0 0"
+									    Width="20"
+									    Height="16"
+									    ToolTip="支持A卡"
+									    Visibility="{Binding IsAmdIconVisible}"
+									    Data="{StaticResource Icon_AMD}"
+									    Fill="Red"
+									    Stretch="Fill" />
                             </WrapPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn
-                    Visibility="{x:Static app:AppStatic.IsMinerTweakVisible}"
-                    Width="100"
-                    MinWidth="100"
-                    Header="安装"
-                    CanUserResize="False"
-                    CanUserReorder="False"
-                    CanUserSort="False"
-                    IsReadOnly="True">
+                        Visibility="{x:Static app:AppStatic.IsMinerTweakVisible}"
+                        Width="100"
+                        MinWidth="100"
+                        CanUserResize="False"
+                        CanUserReorder="False"
+                        CanUserSort="False"
+                        IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid>
                                 <Rectangle
-									Width="{Binding Kernel.KernelProfileVm.DownloadPercent, ConverterParameter=100, Converter={StaticResource PercentToLengthConverter}}" 
-									HorizontalAlignment="Left" Fill="#6FBBFE"></Rectangle>
-                                <WrapPanel Margin="6 0 0 0">
-                                    <WrapPanel Visibility="{Binding Kernel.KernelProfileVm.BtnInstalledVisible, Converter={StaticResource VisibilityInvertConverter}}">
-                                        <WrapPanel Visibility="{Binding Kernel.KernelProfileVm.IsDownloading, Converter={StaticResource BoolToVisibilityInvertConverter}}">
-                                            <controls:KbButton 
-												Visibility="{Binding Kernel.KernelProfileVm.BtnInstallVisible}"
-												Width="78"
-												Padding="8 4"
-												Command="{Binding Kernel.KernelProfileVm.Install}"
-										        Content="{Binding Kernel.KernelProfileVm.InstallText}"
-												Foreground="White"
-												Background="{StaticResource BtnBackground}">
-                                            </controls:KbButton>
+									    Width="{Binding Kernel.KernelProfileVm.DownloadPercent, ConverterParameter=100, Converter={StaticResource PercentToLengthConverter}}" 
+									    HorizontalAlignment="Left" Fill="#6FBBFE"></Rectangle>
+                                <WrapPanel VerticalAlignment="Center" Margin="6 0 0 0" HorizontalAlignment="Right">
+                                    <WrapPanel VerticalAlignment="Center" Visibility="{Binding Kernel.KernelProfileVm.BtnInstalledVisible, Converter={StaticResource VisibilityInvertConverter}}">
+                                        <WrapPanel VerticalAlignment="Center" Visibility="{Binding Kernel.KernelProfileVm.IsDownloading, Converter={StaticResource BoolToVisibilityInvertConverter}}">
+                                            <Button
+                                                    VerticalAlignment="Center"
+												    Visibility="{Binding Kernel.KernelProfileVm.BtnInstallVisible}"
+												    Width="78"
+												    Padding="8 4"
+												    Command="{Binding Kernel.KernelProfileVm.Install}"
+										            Content="{Binding Kernel.KernelProfileVm.InstallText}"
+												    Foreground="White"
+												    Background="{StaticResource BtnBackground}">
+                                            </Button>
                                         </WrapPanel>
                                     </WrapPanel>
-                                    <TextBlock
-										TextAlignment="Center"
-										Width="64"
-										Padding="8 4"
-										Text="{Binding Kernel.KernelProfileVm.DownloadMessage}"
-										ToolTip="{Binding Kernel.KernelProfileVm.DownloadMessage}"
-										Visibility="{Binding Kernel.KernelProfileVm.IsDownloading, Converter={StaticResource BoolToVisibilityConverter}}"></TextBlock>
-                                    <controls:KbButton 
-										Command="{Binding Kernel.KernelProfileVm.CancelDownload}"
-										ToolTip="取消下载"
-										Visibility="{Binding Kernel.KernelProfileVm.IsDownloading, Converter={StaticResource BoolToVisibilityConverter}}"
-										Background="Transparent" BorderThickness="0">
-                                        <Path
-											Width="14"
-											Height="14"
-											Data="{StaticResource Icon_Cancel}"
-											Fill="{StaticResource BtnBackground}"
-											Stretch="Fill" />
-                                    </controls:KbButton>
-                                    <controls:KbButton HorizontalAlignment="Center"
-										Visibility="{Binding Kernel.KernelProfileVm.BtnInstalledVisible}"
-										Command="{Binding Kernel.KernelProfileVm.UnInstall}"
-										Width="78"
-										Padding="8 4"
-										Content="{Binding Kernel.KernelProfileVm.UnInstallText}"
-										Foreground="Black">
-                                    </controls:KbButton>
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                                        <TextBlock
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+										        TextAlignment="Center"
+										        Text="{Binding Kernel.KernelProfileVm.DownloadMessage}"
+										        ToolTip="{Binding Kernel.KernelProfileVm.DownloadMessage}"
+										        Visibility="{Binding Kernel.KernelProfileVm.IsDownloading, Converter={StaticResource BoolToVisibilityConverter}}"/>
+                                        <Button
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Center"
+										        Command="{Binding Kernel.KernelProfileVm.CancelDownload}"
+										        ToolTip="取消下载"
+										        Visibility="{Binding Kernel.KernelProfileVm.IsDownloading, Converter={StaticResource BoolToVisibilityConverter}}">
+                                            <Path
+											        Width="14"
+											        Height="14"
+											        Data="{StaticResource Icon_Cancel}"
+											        Fill="White"
+											        Stretch="Fill" />
+                                        </Button>
+                                    </StackPanel>
+                                    <Button
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+										    Visibility="{Binding Kernel.KernelProfileVm.BtnInstalledVisible}"
+										    Command="{Binding Kernel.KernelProfileVm.UnInstall}"
+										    Width="78"
+										    Padding="8 4"
+										    Content="{Binding Kernel.KernelProfileVm.UnInstallText}"/>
+
                                 </WrapPanel>
                             </Grid>
                         </DataTemplate>
@@ -189,6 +162,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
         <TextBlock 
             Grid.Row="1" 
             Margin="0 30 0 0"
