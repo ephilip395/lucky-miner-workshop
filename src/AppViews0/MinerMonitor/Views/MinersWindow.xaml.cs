@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using ModernWpf;
 
 namespace Lucky.MinerMonitor.Views
 {
@@ -116,6 +117,24 @@ namespace Lucky.MinerMonitor.Views
             {
                 this.DragMove();
             }
+        }
+
+        private void ThemeBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            Vm.IsDarkMode = !Vm.IsDarkMode;
+            UIThread.Execute(() =>
+            {
+                if (ThemeManager.Current.ActualApplicationTheme == ApplicationTheme.Dark)
+                {
+                    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+                }
+                else
+                {
+                    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                }
+            });
+
         }
 
     }

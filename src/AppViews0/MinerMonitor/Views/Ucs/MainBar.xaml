@@ -11,13 +11,13 @@
     
 	<WrapPanel>
 
-        <ui:HyperlinkButton Command="{x:Static app:AppStatic.ShowOnlineUpdate}">
+        <Button Command="{x:Static app:AppStatic.ShowOnlineUpdate}" Background="Transparent">
             <WrapPanel>
                 <Path 
 					Width="14"
 					Height="13"
 					Data="{StaticResource Icon_Update}"
-					Fill="{DynamicResource SystemControlHyperlinkTextBrush}"
+					Fill="{DynamicResource SystemControlPageTextBaseHighBrush}"
 					Stretch="Fill" />
 
                 <TextBlock
@@ -27,6 +27,6 @@
 					Text="{x:Static app:AppStatic.CurrentVersion}" />
                 
             </WrapPanel>
-        </ui:HyperlinkButton>
+        </Button>
     </WrapPanel>
 </UserControl>

@@ -2297,5 +2297,18 @@ namespace Lucky.MinerMonitor.Vms
         {
             get => RpcRoot.IsInnerNet;
         }
+
+        public bool IsDarkMode
+        {
+            get
+            {
+                return LuckyRegistry.GetIsDarkMode();
+            }
+            set
+            {
+                LuckyRegistry.SetIsDarkMode(value);
+                OnPropertyChanged(nameof(IsDarkMode));
+            }
+        }
     }
 }
