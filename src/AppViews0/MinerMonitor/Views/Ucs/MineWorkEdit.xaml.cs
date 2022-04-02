@@ -18,8 +18,7 @@ namespace Lucky.MinerMonitor.Views.Ucs
                 IsMaskTheParent = true,
                 Width = 1000,
                 Height = 560,
-                CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed,
+                CloseVisible = Visibility.Visible,
                 IconName = "Icon_MineWork"
             }, ucFactory: (window) =>
             {

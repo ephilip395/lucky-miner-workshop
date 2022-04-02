@@ -15,7 +15,6 @@ namespace Lucky.Views.Ucs {
                 IsMaskTheParent = true,
                 IconName = "Icon_Kernel",
                 CloseVisible = Visibility.Visible,
-                FooterVisible = Visibility.Collapsed
             }, ucFactory: (window) =>
             {
                 CoinKernelViewModel vm = new CoinKernelViewModel(source);

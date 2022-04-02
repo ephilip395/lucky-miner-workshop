@@ -17,7 +17,6 @@ namespace Lucky.MinerMonitor.Views.Ucs
                 IconName = "Icon_Ip",
                 Width = 450,
                 IsMaskTheParent = true,
-                FooterVisible = Visibility.Collapsed,
                 CloseVisible = Visibility.Visible
             }, ucFactory: (window) =>
             {

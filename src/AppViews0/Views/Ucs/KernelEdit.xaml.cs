@@ -15,7 +15,6 @@ namespace Lucky.Views.Ucs {
                 IsMaskTheParent = true,
                 Width = 620,
                 CloseVisible = Visibility.Visible,
-                FooterVisible = Visibility.Collapsed
             }, ucFactory: (window) => {
                 KernelViewModel vm = new KernelViewModel(source);
                 window.BuildCloseWindowOncePath(vm.Id);

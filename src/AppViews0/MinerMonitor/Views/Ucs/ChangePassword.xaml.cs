@@ -12,7 +12,6 @@ namespace Lucky.MinerMonitor.Views.Ucs {
                 IsMaskTheParent = true,
                 Width = 300,
                 CloseVisible = Visibility.Visible,
-                FooterVisible = Visibility.Collapsed,
                 IconName = "Icon_Password"
             }, ucFactory: (window) => {
                 var uc = new ChangePassword();

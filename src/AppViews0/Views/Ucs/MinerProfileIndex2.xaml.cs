@@ -32,19 +32,19 @@ namespace Lucky.Views.Ucs
                             {
                                 return;
                             }
-                            if (this.PopupKernel.Child != null && this.PopupKernel.IsOpen)
+                            if (this.KernelFlyout.Content != null && this.KernelFlyout.IsOpen)
                             {
                                 OpenKernelPopup();
                             }
-                            if (this.PopupMainCoinPool.Child != null && this.PopupMainCoinPool.IsOpen)
+                            if (this.MainCoinPoolFlyout.Content != null && this.MainCoinPoolFlyout.IsOpen)
                             {
                                 OpenMainCoinPoolPopup();
                             }
-                            if (this.PopupMainCoin != null && this.PopupMainCoin.IsOpen)
+                            if (this.MainCoinFlyout != null && this.MainCoinFlyout.IsOpen)
                             {
                                 OpenMainCoinPopup();
                             }
-                            if (this.PopupMainCoinWallet != null && this.PopupMainCoinWallet.IsOpen)
+                            if (this.MainCoinWalletFlyout != null && this.MainCoinWalletFlyout.IsOpen)
                             {
                                 OpenMainCoinWalletPopup();
                             }
@@ -82,12 +82,11 @@ namespace Lucky.Views.Ucs
             {
                 return;
             }
-            var popup = PopupKernel;
-            popup.IsOpen = true;
+            var popup = KernelFlyout;
             var selected = coinVm.CoinKernel;
             CoinKernelSelectViewModel vm = null;
             // 如果服务器上下文刷新了则视图模型一定不等，因为上下文刷新后服务器视图模型会清空重建
-            bool newVm = popup.Child == null || ((CoinKernelSelectViewModel)((CoinKernelSelect)popup.Child).DataContext).Coin != coinVm;
+            bool newVm = popup.Content == null || ((CoinKernelSelectViewModel)((CoinKernelSelect)popup.Content).DataContext).Coin != coinVm;
             if (newVm)
             {
                 vm = new CoinKernelSelectViewModel(coinVm, selected, onOk: selectedResult =>
@@ -102,27 +101,27 @@ namespace Lucky.Views.Ucs
                         {
                             selectedResult?.Kernel?.OnPropertyChanged(nameof(selectedResult.Kernel.FullName));
                         }
-                        popup.IsOpen = false;
+                        popup.Hide();
                     }
                 })
                 {
                     HideView = new DelegateCommand(() =>
                     {
-                        popup.IsOpen = false;
+                        popup.Hide();
                     })
                 };
             }
-            if (popup.Child == null)
+            if (popup.Content == null)
             {
-                popup.Child = new CoinKernelSelect(vm);
+                popup.Content = new CoinKernelSelect(vm);
             }
             else if (newVm)
             {
-                ((CoinKernelSelect)popup.Child).DataContext = vm;
+                ((CoinKernelSelect)popup.Content).DataContext = vm;
             }
             else
             {
-                ((CoinKernelSelect)popup.Child).Vm.SelectedResult = selected;
+                ((CoinKernelSelect)popup.Content).Vm.SelectedResult = selected;
             }
         }
 
@@ -133,12 +132,11 @@ namespace Lucky.Views.Ucs
             {
                 return;
             }
-            var popup = PopupMainCoinPool;
-            popup.IsOpen = true;
+            var popup = MainCoinPoolFlyout;
             var selected = coinVm.CoinProfile.MainCoinPool;
             PoolSelectViewModel vm = null;
             // 如果服务器上下文刷新了则视图模型一定不等，因为上下文刷新后服务器视图模型会清空重建
-            bool newVm = popup.Child == null || ((PoolSelectViewModel)((PoolSelect)popup.Child).DataContext).Coin != coinVm;
+            bool newVm = popup.Content == null || ((PoolSelectViewModel)((PoolSelect)popup.Content).DataContext).Coin != coinVm;
             if (newVm)
             {
                 vm = new PoolSelectViewModel(coinVm, selected, onOk: selectedResult =>
@@ -153,27 +151,27 @@ namespace Lucky.Views.Ucs
                         {
                             selectedResult.OnPropertyChanged(nameof(selectedResult.Name));
                         }
-                        popup.IsOpen = false;
+                        popup.Hide();
                     }
                 })
                 {
                     HideView = new DelegateCommand(() =>
                     {
-                        popup.IsOpen = false;
+                        popup.Hide();
                     })
                 };
             }
-            if (popup.Child == null)
+            if (popup.Content == null)
             {
-                popup.Child = new PoolSelect(vm);
+                popup.Content = new PoolSelect(vm);
             }
             else if (newVm)
             {
-                ((PoolSelect)popup.Child).DataContext = vm;
+                ((PoolSelect)popup.Content).DataContext = vm;
             }
             else
             {
-                ((PoolSelect)popup.Child).Vm.SelectedResult = selected;
+                ((PoolSelect)popup.Content).Vm.SelectedResult = selected;
             }
         }
 
@@ -184,12 +182,11 @@ namespace Lucky.Views.Ucs
             {
                 return;
             }
-            var popup = PopupMainCoinPool1;
-            popup.IsOpen = true;
+            var popup = MainCoinPool1Flyout;
             var selected = coinVm.CoinProfile.MainCoinPool1;
             PoolSelectViewModel vm = null;
             // 如果服务器上下文刷新了则视图模型一定不等，因为上下文刷新后服务器视图模型会清空重建
-            bool newVm = popup.Child == null || ((PoolSelectViewModel)((PoolSelect)popup.Child).DataContext).Coin != coinVm;
+            bool newVm = popup.Content == null || ((PoolSelectViewModel)((PoolSelect)popup.Content).DataContext).Coin != coinVm;
             if (newVm)
             {
                 vm = new PoolSelectViewModel(coinVm, selected, onOk: selectedResult =>
@@ -204,38 +201,37 @@ namespace Lucky.Views.Ucs
                         {
                             selectedResult.OnPropertyChanged(nameof(selectedResult.Name));
                         }
-                        popup.IsOpen = false;
+                        popup.Hide();
                     }
                 }, usedByPool1: true)
                 {
                     HideView = new DelegateCommand(() =>
                     {
-                        popup.IsOpen = false;
+                        popup.Hide();
                     })
                 };
             }
-            if (popup.Child == null)
+            if (popup.Content == null)
             {
-                popup.Child = new PoolSelect(vm);
+                popup.Content = new PoolSelect(vm);
             }
             else if (newVm)
             {
-                ((PoolSelect)popup.Child).DataContext = vm;
+                ((PoolSelect)popup.Content).DataContext = vm;
             }
             else
             {
-                ((PoolSelect)popup.Child).Vm.SelectedResult = selected;
+                ((PoolSelect)popup.Content).Vm.SelectedResult = selected;
             }
         }
 
         private void OpenMainCoinPopup()
         {
-            var popup = PopupMainCoin;
-            popup.IsOpen = true;
+            var popup = MainCoinFlyout;
             var selected = Vm.MinerProfile.CoinVm;
             CoinSelectViewModel vm = null;
             // 如果服务器上下文刷新了则视图模型一定不等，因为上下文刷新后服务器视图模型会清空重建
-            bool newVm = popup.Child == null || ((CoinSelectViewModel)((CoinSelect)popup.Child).DataContext).SelectedResult != selected;
+            bool newVm = popup.Content == null || ((CoinSelectViewModel)((CoinSelect)popup.Content).DataContext).SelectedResult != selected;
             if (newVm)
             {
                 vm = new CoinSelectViewModel(AppRoot.CoinVms.MainCoins.Where(a => a.IsSupported), selected, onOk: selectedResult =>
@@ -250,27 +246,27 @@ namespace Lucky.Views.Ucs
                         {
                             selectedResult.OnPropertyChanged(nameof(selectedResult.Code));
                         }
-                        popup.IsOpen = false;
+                        popup.Hide();
                     }
                 }, isPromoteHotCoin: true)
                 {
                     HideView = new DelegateCommand(() =>
                     {
-                        popup.IsOpen = false;
+                        popup.Hide();
                     })
                 };
             }
-            if (popup.Child == null)
+            if (popup.Content == null)
             {
-                popup.Child = new CoinSelect(vm);
+                popup.Content = new CoinSelect(vm);
             }
             else if (newVm)
             {
-                ((CoinSelect)popup.Child).DataContext = vm;
+                ((CoinSelect)popup.Content).DataContext = vm;
             }
             else
             {
-                ((CoinSelect)popup.Child).Vm.SelectedResult = selected;
+                ((CoinSelect)popup.Content).Vm.SelectedResult = selected;
             }
         }
 
@@ -281,13 +277,12 @@ namespace Lucky.Views.Ucs
             {
                 return;
             }
-            var popup = PopupMainCoinWallet;
-            popup.IsOpen = true;
+            var popup = MainCoinWalletFlyout;
             var selected = coinVm.CoinProfile.SelectedWallet;
             bool isDualCoin = false;
             WalletSelectViewModel vm = null;
             // 如果服务器上下文刷新了则视图模型一定不等，因为上下文刷新后服务器视图模型会清空重建
-            bool newVm = popup.Child == null || ((WalletSelectViewModel)((WalletSelect)popup.Child).DataContext).Coin != coinVm;
+            bool newVm = popup.Content == null || ((WalletSelectViewModel)((WalletSelect)popup.Content).DataContext).Coin != coinVm;
             if (newVm)
             {
                 vm = new WalletSelectViewModel(coinVm, isDualCoin, selected, onOk: selectedResult =>
@@ -304,23 +299,23 @@ namespace Lucky.Views.Ucs
                             selectedResult.OnPropertyChanged(nameof(selectedResult.Name));
                             selectedResult.OnPropertyChanged(nameof(selectedResult.Address));
                         }
-                        popup.IsOpen = false;
+                        popup.Hide();
                     }
                 })
                 {
                     HideView = new DelegateCommand(() =>
                     {
-                        popup.IsOpen = false;
+                        popup.Hide();
                     })
                 };
             }
-            if (popup.Child == null)
+            if (popup.Content == null)
             {
-                popup.Child = new WalletSelect(vm);
+                popup.Content = new WalletSelect(vm);
             }
             else if (newVm)
             {
-                ((WalletSelect)popup.Child).DataContext = vm;
+                ((WalletSelect)popup.Content).DataContext = vm;
             }
         }
 
@@ -335,7 +330,6 @@ namespace Lucky.Views.Ucs
             }
             OpenKernelPopup();
             UserActionHappend();
-            e.Handled = true;
         }
 
         private void KbButtonMainCoinPool_Clicked(object sender, RoutedEventArgs e)
@@ -347,7 +341,6 @@ namespace Lucky.Views.Ucs
             }
             OpenMainCoinPoolPopup();
             UserActionHappend();
-            e.Handled = true;
         }
 
         private void KbButtonMainCoin_Clicked(object sender, RoutedEventArgs e)
@@ -359,7 +352,6 @@ namespace Lucky.Views.Ucs
             }
             OpenMainCoinPopup();
             UserActionHappend();
-            e.Handled = true;
         }
 
         private void KbButtonMainCoinWallet_Clicked(object sender, RoutedEventArgs e)
@@ -382,7 +374,6 @@ namespace Lucky.Views.Ucs
             {
                 OpenMainCoinWalletPopup();
             }
-            e.Handled = true;
         }
 
         private static void UserActionHappend()
@@ -412,7 +403,6 @@ namespace Lucky.Views.Ucs
             }
             OpenMainCoinPool1Popup();
             UserActionHappend();
-            e.Handled = true;
         }
     }
 }

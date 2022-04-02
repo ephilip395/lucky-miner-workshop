@@ -10,7 +10,6 @@ namespace Lucky.Views.Ucs {
                 Width = 520,
                 Height = 320,
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed,
                 IsMaskTheParent = false,
                 IsChildWindow = true
             }, ucFactory: (window) => {

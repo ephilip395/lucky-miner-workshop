@@ -13,7 +13,8 @@ namespace Lucky.Views.Ucs
                 IconName = "Icon_SignUp",
                 IsMaskTheParent = true,
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed
+                Width = 380,
+                Height = 280,
             }, ucFactory: (window) =>
             {
                 SignUpPageViewModel vm = new SignUpPageViewModel();

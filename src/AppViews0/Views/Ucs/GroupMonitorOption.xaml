@@ -15,6 +15,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -45,10 +46,9 @@
                                 Text="{Binding WsDescription}">
                         </TextBlock>
                     </WrapPanel>
-                    
                 </WrapPanel>
                 <StackPanel 
-                    Grid.Row="0" Grid.Column="1"
+                    Grid.Row="0" Grid.Column="2"
                     Margin="0 2 8 0"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal"
@@ -86,8 +86,6 @@
                 <TextBlock Grid.Row="1" Grid.Column="0" Margin="8">登录名</TextBlock>
                 <TextBox Grid.Row="1" Grid.Column="1"
                             x:Name="TbOuterUserId"
-                            Width="180" 
-                            Height="26" 
                             Text="{Binding OuterUserId}"></TextBox>
                 <Button Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="0 8"
 							Command="{x:Static app:AppStatic.ShowSignUpPage}"

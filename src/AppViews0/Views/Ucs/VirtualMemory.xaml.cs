@@ -17,7 +17,6 @@ namespace Lucky.Views.Ucs {
                 MinHeight = 360,
                 IsChildWindow = true,
                 IsMaskTheParent = false,
-                FooterVisible = Visibility.Collapsed
             }, ucFactory: (window) => new VirtualMemory(), fixedSize: false);
         }
 

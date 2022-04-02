@@ -48,13 +48,6 @@ namespace Lucky.Vms
 
         public ResourceDictionary UcResourceDic { get; set; }
 
-        public string LuckyVersion
-        {
-            get
-            {
-                return $"行运矿工v{EntryAssemblyInfo.CurrentVersionStr}({EntryAssemblyInfo.CurrentVersionTag})";
-            }
-        }
 
         /// <summary>
         /// 是否遮罩住父窗口。如果为true则会为该窗口设置父窗口。IsMaskTheParent和IsChildWindow配合着使用可以实现有父窗口但不遮罩父窗口的效果。
@@ -265,28 +258,6 @@ namespace Lucky.Vms
             }
         }
 
-        public Visibility FooterVisible
-        {
-            get { return _footerVisible; }
-            set
-            {
-                if (_footerVisible != value)
-                {
-                    _footerVisible = value;
-                    OnPropertyChanged(nameof(FooterVisible));
-                }
-            }
-        }
-
-        public string FooterText
-        {
-            get => _footerText;
-            set
-            {
-                _footerText = value;
-                OnPropertyChanged(nameof(FooterText));
-            }
-        }
 
         public Visibility CloseVisible
         {

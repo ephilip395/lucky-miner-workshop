@@ -41,6 +41,7 @@
 			PreviewKeyDown="DataGrid_PreviewKeyDown"
             AutoGenerateColumns="False"
             HeadersVisibility="Column"
+            MaxHeight="500"
             GridLinesVisibility="None">
             <DataGrid.Columns>
                 

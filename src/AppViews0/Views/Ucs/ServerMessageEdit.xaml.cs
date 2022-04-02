@@ -10,7 +10,6 @@ namespace Lucky.Views.Ucs {
                 Width = 540,
                 FormType = formType,
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed
             }, ucFactory: (window) =>
             {
                 ServerMessageViewModel vm = new ServerMessageViewModel(data);

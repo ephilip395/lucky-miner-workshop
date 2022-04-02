@@ -63,6 +63,7 @@
             HorizontalScrollBarVisibility="Auto"
             AutoGenerateColumns="False"
             GridLinesVisibility="None"
+            MaxHeight="500"
             HeadersVisibility="Column">
 
             <DataGrid.Columns>

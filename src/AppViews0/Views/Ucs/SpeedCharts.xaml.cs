@@ -18,7 +18,6 @@ namespace Lucky.Views.Ucs {
                 Width = 760,
                 Height = 460,
                 CloseVisible = Visibility.Visible,
-                FooterVisible = Visibility.Collapsed
             }, ucFactory: (window) => {
                 SpeedCharts uc = new SpeedCharts();
                 return uc;

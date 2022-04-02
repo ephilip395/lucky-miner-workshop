@@ -9,7 +9,6 @@ namespace Lucky.Views.Ucs {
                 IconName = "Icon_Group",
                 IsMaskTheParent = true,
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed,
                 Width = 660,
                 Height = 420
             }, ucFactory: (window) => new CoinGroupPage(), fixedSize: false);

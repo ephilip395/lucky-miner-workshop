@@ -17,7 +17,6 @@ namespace Lucky.MinerMonitor.Views.Ucs
                 Height = 190,
                 IsMaskTheParent = true,
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed
             }, ucFactory: (window) =>
             {
                 window.BuildCloseWindowOncePath(vm.Id);

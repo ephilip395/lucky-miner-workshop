@@ -18,7 +18,6 @@ namespace Lucky.MinerMonitor.Views.Ucs {
                 Height = 360,
                 MinHeight = 360,
                 IsMaskTheParent = true,
-                FooterVisible = Visibility.Collapsed
             }, ucFactory: (window) => {
                 MinerMonitorRoot.MinerMonitorService.GetDrivesAsync(vm.MinerTweakVm);
                 window.BuildEventPath<GetDrivesResponsedEvent>("收到了GetDrives的响应时绑定到界面", LogEnum.DevConsole, typeof(VirtualMemory), PathPriority.Normal, path: message => {

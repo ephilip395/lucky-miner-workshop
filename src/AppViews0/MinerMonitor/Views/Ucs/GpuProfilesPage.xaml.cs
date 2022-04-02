@@ -28,7 +28,6 @@ namespace Lucky.MinerMonitor.Views.Ucs
                 IsMaskTheParent = false,
                 IsChildWindow = true,
                 CloseVisible = Visibility.Visible,
-                FooterVisible = Visibility.Collapsed
             }, ucFactory: (window) =>
             {
                 var vm = new GpuProfilesPageViewModel(minerClientsWindowVm);

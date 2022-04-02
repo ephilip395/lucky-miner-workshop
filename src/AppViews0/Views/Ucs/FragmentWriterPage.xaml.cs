@@ -8,7 +8,6 @@ namespace Lucky.Views.Ucs {
                 Title = "命令行片段书写器",
                 IconName = "Icon_FragmentWriter",
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed,
                 Width = 1200,
                 Height = 620
             }, 

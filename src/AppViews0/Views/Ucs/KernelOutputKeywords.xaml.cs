@@ -10,7 +10,6 @@ namespace Lucky.Views.Ucs {
                 Width = 800,
                 Height = 400,
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed
             }, ucFactory: (window) => {
                 window.Owner = WpfUtil.GetTopWindow();
                 return new KernelOutputKeywords();

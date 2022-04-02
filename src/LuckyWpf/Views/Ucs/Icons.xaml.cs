@@ -10,7 +10,6 @@ namespace Lucky.Views.Ucs {
                 Title = "图标",
                 IconName = "Icon_Icon",
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed,
                 Width = 1440,
                 Height = 800
             },

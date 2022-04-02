@@ -22,6 +22,11 @@
 
         <StackPanel Margin="6 10 10 10">
 
+            <CheckBox 
+                VerticalContentAlignment="Center"
+                Visibility="{x:Static app:AppStatic.IsMinerTweakVisible}"
+			    IsChecked="{Binding IsAdvParamsVisual}" Content="高级参数可见"/>
+
             <WrapPanel Margin="{StaticResource RowThickness}" VerticalAlignment="Center" Visibility="{x:Static app:AppStatic.IsMinerTweakVisible}">
                 <CheckBox VerticalAlignment="Center" IsChecked="{Binding IsAutoBoot}">
                     <TextBlock>开机启动</TextBlock>
@@ -30,7 +35,6 @@
 
             <WrapPanel Margin="{StaticResource RowThickness}" VerticalAlignment="Center" Visibility="{x:Static app:AppStatic.IsMinerTweakVisible}">
                 <CheckBox
-					Padding="0"
 					FocusVisualStyle="{x:Null}"
 					VerticalContentAlignment="Center"
 					IsChecked="{Binding IsAutoStart}">
@@ -238,11 +242,6 @@
                             LargeChange="10" />
                 <TextBlock VerticalAlignment="Center">℃ 开始挖矿</TextBlock>
             </WrapPanel>
-
-            <CheckBox 
-                VerticalContentAlignment="Center"
-                Visibility="{x:Static app:AppStatic.IsMinerTweakVisible}"
-			    IsChecked="{Binding IsAdvParamsVisual}" Content="高级参数可见"/>
 
 
         </StackPanel>

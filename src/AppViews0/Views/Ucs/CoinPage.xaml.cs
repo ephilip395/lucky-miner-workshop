@@ -13,7 +13,6 @@ namespace Lucky.Views.Ucs
                 Title = "币种",
                 IconName = "Icon_Coin",
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed,
                 Width = DevMode.IsDevMode ? AppRoot.MainWindowWidth : 1000,
                 Height = 520
             },

@@ -18,7 +18,6 @@ namespace Lucky.MinerMonitor.Views.Ucs
                 Width = 850,
                 Height = 340,
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed,
                 IconName = "Icon_ColumnsShow"
             }, ucFactory: (window) =>
             {

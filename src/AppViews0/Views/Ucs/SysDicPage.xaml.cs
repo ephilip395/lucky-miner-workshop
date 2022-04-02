@@ -12,7 +12,6 @@ namespace Lucky.Views.Ucs
                 Title = "系统字典",
                 IconName = "Icon_SysDic",
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed,
                 Width = 1000,
                 Height = 520
             }, ucFactory: (window) => new SysDicPage(), fixedSize: false);

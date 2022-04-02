@@ -12,7 +12,6 @@ namespace Lucky.Views.Ucs {
                 Width = 294,
                 Height = 120,
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed
             },
             ucFactory: (window) => {
                 var uc = new KernelDownloading {

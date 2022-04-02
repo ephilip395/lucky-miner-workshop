@@ -15,23 +15,7 @@
 
     <Grid>
         
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*"/>
-			<RowDefinition Height="Auto"></RowDefinition>
-		</Grid.RowDefinitions>
-        
-		<!--上标题栏-->
-        <Border Grid.Row="0">
-            <DockPanel x:Name="Container" />
-        </Border>
-        
-		<Grid Grid.Row="2" Visibility="{Binding FooterVisible}">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"></ColumnDefinition>
-				<ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1" Margin="20 0 0 0" Text="{Binding FooterText}"></TextBlock>
-		</Grid>
+        <DockPanel x:Name="Container" />
         
 	</Grid>
 </Window>

@@ -9,7 +9,6 @@ namespace Lucky.Views.Ucs {
                 Title = "内核输出",
                 IconName = "Icon_KernelOutput",
                 CloseVisible = System.Windows.Visibility.Visible,
-                FooterVisible = System.Windows.Visibility.Collapsed,
                 Width = 1360,
                 Height = 720
             }, 

@@ -16,7 +16,6 @@ namespace Lucky.MinerMonitor.Views.Ucs {
                 IsMaskTheParent = false,
                 IsChildWindow = true,
                 CloseVisible = Visibility.Visible,
-                FooterVisible = Visibility.Collapsed
             }, ucFactory: (window) => new ActionCounts());
         }
 

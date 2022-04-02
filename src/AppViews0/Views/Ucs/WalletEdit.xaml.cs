@@ -14,7 +14,6 @@ namespace Lucky.Views.Ucs
                 Width = 520,
                 IconName = "Icon_Wallet",
                 IsMaskTheParent = true,
-                FooterVisible = System.Windows.Visibility.Collapsed,
                 CloseVisible = System.Windows.Visibility.Visible
             }, ucFactory: (window) =>
             {

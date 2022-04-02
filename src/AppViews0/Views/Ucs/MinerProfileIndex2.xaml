@@ -54,13 +54,11 @@
 							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill" />
                     </WrapPanel>
+                    <ui:FlyoutService.Flyout>
+                        <ui:Flyout x:Name="MainCoinFlyout" Placement="BottomEdgeAlignedLeft">
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
                 </Button>
-                <Popup 
-					x:Name="PopupMainCoin" 
-					PopupAnimation="Slide" 
-					PlacementTarget="{Binding ElementName=ButtonMainCoin}" 
-					Placement="Bottom" 
-					StaysOpen="False"></Popup>
             </WrapPanel>
         </StackPanel>
 
@@ -84,13 +82,11 @@
 							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill" />
                     </WrapPanel>
+                    <ui:FlyoutService.Flyout>
+                        <ui:Flyout x:Name="KernelFlyout" Placement="BottomEdgeAlignedLeft">
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
                 </Button>
-                <Popup 
-					x:Name="PopupKernel" 
-					PopupAnimation="Slide" 
-					PlacementTarget="{Binding ElementName=ButtonKernel}" 
-					Placement="Bottom" 
-					StaysOpen="False"></Popup>
             </WrapPanel>
         </StackPanel>
         <StackPanel>
@@ -112,13 +108,11 @@
 							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill" />
                     </WrapPanel>
+                    <ui:FlyoutService.Flyout>
+                        <ui:Flyout x:Name="MainCoinPoolFlyout" Placement="BottomEdgeAlignedLeft">
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
                 </Button>
-                <Popup 
-					x:Name="PopupMainCoinPool" 
-					PopupAnimation="Slide" 
-					PlacementTarget="{Binding ElementName=ButtonMainCoinPool}" 
-					Placement="Bottom" 
-					StaysOpen="False"></Popup>
             </WrapPanel>
         </StackPanel>
 
@@ -140,13 +134,11 @@
 						Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 						Stretch="Fill" />
                 </WrapPanel>
+                <ui:FlyoutService.Flyout>
+                    <ui:Flyout x:Name="MainCoinPool1Flyout" Placement="BottomEdgeAlignedLeft">
+                    </ui:Flyout>
+                </ui:FlyoutService.Flyout>
             </Button>
-            <Popup 
-				x:Name="PopupMainCoinPool1" 
-				PopupAnimation="Slide" 
-				PlacementTarget="{Binding ElementName=ButtonMainCoinPool1}" 
-				Placement="Bottom" 
-				StaysOpen="False"></Popup>
         </StackPanel>
 
         <StackPanel Visibility="{Binding MinerProfile.IsAllMainCoinPoolIsUserMode, Converter={StaticResource BoolToVisibilityInvertConverter}}">
@@ -168,13 +160,11 @@
 							Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							Stretch="Fill" />
                     </WrapPanel>
+                    <ui:FlyoutService.Flyout>
+                        <ui:Flyout x:Name="MainCoinWalletFlyout" Placement="BottomEdgeAlignedLeft">
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
                 </Button>
-                <Popup 
-					x:Name="PopupMainCoinWallet" 
-					PopupAnimation="Slide" 
-					PlacementTarget="{Binding ElementName=ButtonMainCoinWallet}" 
-					Placement="Bottom" 
-					StaysOpen="False"></Popup>
             </WrapPanel>
         </StackPanel>
 
@@ -230,7 +220,7 @@
 						IsEnabled="{Binding MinerProfile.IsMining, Converter={StaticResource BoolInvertConverter}}"
 						Visibility="{Binding MinerProfile.CoinVm.CoinKernel.Kernel.KernelInputVm.IsAutoDualWeight, Converter={StaticResource BoolToVisibilityConverter}}"
 						IsChecked="{Binding MinerProfile.CoinVm.CoinKernel.CoinKernelProfile.IsAutoDualWeight}" />
-                    <WrapPanel 
+                    <WrapPanel
 						Margin="4 0 0 0"
 						Visibility="{Binding MinerProfile.CoinVm.CoinKernel.CoinKernelProfile.IsAutoDualWeight, Converter={StaticResource BoolToVisibilityInvertConverter}}">
                         <Slider 
