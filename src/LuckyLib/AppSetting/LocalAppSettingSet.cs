@@ -3,25 +3,33 @@ using Lucky.Core;
 using System;
 using System.Collections.Generic;
 
-namespace Lucky.AppSetting {
-    public class LocalAppSettingSet : SetBase, IAppSettingSet {
+namespace Lucky.AppSetting
+{
+    public class LocalAppSettingSet : SetBase, IAppSettingSet
+    {
         private readonly Dictionary<string, AppSettingData> _dicByKey = new Dictionary<string, AppSettingData>(StringComparer.OrdinalIgnoreCase);
         private readonly string _dbFileFullName;
 
-        public LocalAppSettingSet(string dbFileFullName) {
+        public LocalAppSettingSet(string dbFileFullName)
+        {
             _dbFileFullName = dbFileFullName;
-            VirtualRoot.BuildCmdPath<SetLocalAppSettingCommand>(location: this.GetType(), LogEnum.DevConsole, path: message => {
-                if (message.AppSetting == null) {
+            VirtualRoot.BuildCmdPath<SetLocalAppSettingCommand>(location: this.GetType(), LogEnum.DevConsole, path: message =>
+            {
+                if (message.AppSetting == null)
+                {
                     return;
                 }
-                if (_dicByKey.TryGetValue(message.AppSetting.Key, out AppSettingData entity)) {
+                if (_dicByKey.TryGetValue(message.AppSetting.Key, out AppSettingData entity))
+                {
                     entity.Value = message.AppSetting.Value;
                 }
-                else {
+                else
+                {
                     entity = AppSettingData.Create(message.AppSetting);
                     _dicByKey[message.AppSetting.Key] = entity;
                 }
-                using (LiteDatabase db = new LiteDatabase(_dbFileFullName)) {
+                using (LiteDatabase db = new LiteDatabase(_dbFileFullName))
+                {
                     var col = db.GetCollection<AppSettingData>();
                     col.Upsert(entity);
                 }
@@ -29,23 +37,28 @@ namespace Lucky.AppSetting {
             });
         }
 
-        protected override void Init() {
-            using (LiteDatabase db = new LiteDatabase(_dbFileFullName)) {
+        protected override void Init()
+        {
+            using (LiteDatabase db = new LiteDatabase(_dbFileFullName))
+            {
                 var col = db.GetCollection<AppSettingData>();
-                foreach (var item in col.FindAll()) {
+                foreach (var item in col.FindAll())
+                {
                     _dicByKey.Add(item.Key, item);
                 }
             }
         }
 
-        public bool TryGetAppSetting(string key, out IAppSetting appSetting) {
+        public bool TryGetAppSetting(string key, out IAppSetting appSetting)
+        {
             InitOnce();
             var result = _dicByKey.TryGetValue(key, out AppSettingData data);
             appSetting = data;
             return result;
         }
 
-        public IEnumerable<IAppSetting> AsEnumerable() {
+        public IEnumerable<IAppSetting> AsEnumerable()
+        {
             InitOnce();
             return _dicByKey.Values;
         }

@@ -7,7 +7,6 @@ using Lucky.RemoteDesktop;
 using Lucky.View;
 using Lucky.Views;
 using Lucky.Views.Ucs;
-using Lucky.Views.Presents;
 using Lucky.Vms;
 using System;
 using System.Diagnostics;
@@ -34,7 +33,7 @@ namespace Lucky
             AppUtil.Init(this);
             AppUtil.IsHotKeyEnabled = true;
             InitializeComponent();
-            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+            ThemeManager.Current.ApplicationTheme = LuckyRegistry.GetIsDarkMode() ? ApplicationTheme.Dark : ApplicationTheme.Light;
             //PresetManager.Current.ColorPreset = "Default";
 
         }

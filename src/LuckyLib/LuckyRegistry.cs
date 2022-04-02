@@ -370,5 +370,17 @@ namespace Lucky
         }
         #endregion
         #endregion
+
+        #region IsDarkMode
+        public static bool GetIsDarkMode()
+        {
+            object value = Windows.WinRegistry.GetValue(Registry.Users, LuckyRegistrySubKey, "IsDarkMode");
+            return value != null && value.ToString() == "true";
+        }
+        public static void SetIsDarkMode(bool isDarkMode)
+        {
+            Windows.WinRegistry.SetValue(Registry.Users, LuckyRegistrySubKey, "IsDarkMode", isDarkMode ? "true" : "false");
+        }
+        #endregion
     }
 }

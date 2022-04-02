@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using ModernWpf;
 
 namespace Lucky.Views
 {
@@ -35,7 +36,7 @@ namespace Lucky.Views
 #if DEBUG
             NTStopwatch.Start();
 #endif
-            
+
             Loaded += (sender, e) =>
             {
                 hwndSource = PresentationSource.FromVisual((Visual)sender) as HwndSource;
@@ -75,9 +76,9 @@ namespace Lucky.Views
                         SpeedTableContainer.Child = GetSpeedTable();
                     }
                 }
-                else if(selectedItem == TabItemOverClockTable)
+                else if (selectedItem == TabItemOverClockTable)
                 {
-                    if(OverClockTableContainer.Child == null)
+                    if (OverClockTableContainer.Child == null)
                     {
                         OverClockTableContainer.Child = GetOverClockTable();
                     }
@@ -110,9 +111,9 @@ namespace Lucky.Views
                         OutputContainer.Child = new Output();
                     }
                 }
-                else if(selectedItem == TabItemDeveloperTools)
+                else if (selectedItem == TabItemDeveloperTools)
                 {
-                    if(DeveloperToolsContainer.Child == null)
+                    if (DeveloperToolsContainer.Child == null)
                     {
                         DeveloperToolsContainer.Child = new DeveloperTools();
                     }
@@ -209,7 +210,7 @@ namespace Lucky.Views
         private OverClockTable _overClockTable;
         private OverClockTable GetOverClockTable()
         {
-            if(_overClockTable == null)
+            if (_overClockTable == null)
             {
                 _overClockTable = new OverClockTable();
             }
@@ -233,5 +234,22 @@ namespace Lucky.Views
             }
         }
 
+        private void ThemeBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            Vm.IsDarkMode = !Vm.IsDarkMode;
+            UIThread.Execute(() =>
+            {
+                if (ThemeManager.Current.ActualApplicationTheme == ApplicationTheme.Dark)
+                {
+                    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+                }
+                else
+                {
+                    ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
+                }
+            });
+
+        }
     }
 }

@@ -76,5 +76,18 @@ namespace Lucky.Vms
                 return AppRoot.MinerProfileVm;
             }
         }
+
+        public bool IsDarkMode
+        {
+            get
+            {
+                return LuckyRegistry.GetIsDarkMode();
+            }
+            set
+            {
+                LuckyRegistry.SetIsDarkMode(value);
+                OnPropertyChanged(nameof(IsDarkMode));
+            }
+        }
     }
 }

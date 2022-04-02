@@ -97,7 +97,7 @@
                                     <StackPanel Canvas.Left="256" Canvas.Top="-44">
                                         <WrapPanel>
                                             <TextBox Width="48" Height="20" VerticalAlignment="Center" Background="White" Text="{Binding VirtualMemoryMaxSizeMb}"></TextBox>
-                                            <TextBlock VerticalAlignment="Center">Mb</TextBlock>
+                                            <TextBlock VerticalAlignment="Center">M</TextBlock>
                                         </WrapPanel>
                                         <TextBlock Margin="4 0 0 0" Text="{Binding VirtualMemoryMaxSizeGbText}"></TextBlock>
                                     </StackPanel>
