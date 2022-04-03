@@ -49,8 +49,8 @@
             <ui:AppBarSeparator />
             <ui:AppBarButton Icon="Refresh" Label="重启电脑" IsEnabled="{Binding IsSelectedAny}" Command="{Binding RestartWindows}" />
             <ui:AppBarButton Icon="Clear" Label="关闭电脑" IsEnabled="{Binding IsSelectedAny}" Command="{Binding ShutdownWindows}" />
-            <ui:AppBarButton Icon="Remote" Label="启动远程桌面"  IsEnabled="{Binding IsSelectedOne}"  Command="{Binding EnableRemoteDesktop}"/>
-            <ui:AppBarButton Icon="Remote" Label="配置远程桌面"  IsEnabled="{Binding IsSelectedOne}"  Command="{Binding RemoteDesktop}"/>
+            <ui:AppBarButton Icon="Remote" Label="开启远程桌面"  IsEnabled="{Binding IsSelectedOne}"  Command="{Binding EnableRemoteDesktop}"/>
+            <ui:AppBarButton Icon="Remote" Label="连接远程桌面"  IsEnabled="{Binding IsSelectedOne}"  Command="{Binding RemoteDesktop}"/>
             <ui:AppBarButton Icon="DisableUpdates" Label="禁用更新" IsEnabled="{Binding IsSelectedAny}" Command="{Binding BlockWAU}" />
             <ui:AppBarButton Icon="ReportHacked" Label="禁用休眠" IsEnabled="{Binding IsSelectedAny}" Command="{Binding PowerCfgOff}" />
             <ui:AppBarButton Icon="SwitchApps" Label="虚拟内存..." IsEnabled="{Binding IsSelectedAny}" Command="{Binding VirtualMemory}" />

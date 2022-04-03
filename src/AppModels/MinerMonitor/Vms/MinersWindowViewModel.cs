@@ -1411,7 +1411,7 @@ namespace Lucky.MinerMonitor.Vms
             get => _frozenColumnCount;
             set
             {
-                if (value >= 2)
+                if (value >= 0)
                 {
                     _frozenColumnCount = value;
                     OnPropertyChanged(nameof(FrozenColumnCount));
@@ -1424,7 +1424,7 @@ namespace Lucky.MinerMonitor.Vms
             }
         }
 
-        public List<int> FrozenColumns { get; } = new List<int> { 5, 4, 3 };
+        public List<int> FrozenColumns { get; } = new List<int> { 5, 4, 3, 2, 1, 0 };
 
         public int RejectPercent
         {

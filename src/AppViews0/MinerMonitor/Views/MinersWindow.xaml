@@ -98,8 +98,19 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
+                
                 <uc:MinersView Grid.Row="0"/>
-                <uc:MinersPagging Grid.Row="1"/>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <uc:MinersPagging Grid.Column="0"/>
+                    <uc:MainBar Grid.Column="1" Margin="0 0 16 0" VerticalAlignment="Center"></uc:MainBar>
+                </Grid>
+                
             </Grid>
 
         </Grid>
@@ -141,47 +152,6 @@
 
         </Grid>
 
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="auto"/>
-            </Grid.ColumnDefinitions>
-            <WrapPanel>
-                <WrapPanel Margin="20 0 0 0" VerticalAlignment="Center">
-                    <TextBlock VerticalAlignment="Center">卡温达到</TextBlock>
-                    <Slider 
-					    Minimum="0" 
-					    Maximum="100" 
-					    Width="100"
-					    IsSnapToTickEnabled="True"
-					    Value="{Binding MaxTemp}"></Slider>
-                    <TextBlock VerticalAlignment="Center" Text="{Binding MaxTemp}" Width="20"></TextBlock>
-                    <TextBlock VerticalAlignment="Center">℃ 红色，</TextBlock>
-                </WrapPanel>
-                <WrapPanel Margin="20 0 0 0" VerticalAlignment="Center">
-                    <TextBlock VerticalAlignment="Center">卡温低于</TextBlock>
-                    <Slider 
-					    Minimum="0" 
-					    Maximum="100" 
-					    Width="100"
-					    IsSnapToTickEnabled="True"
-					    Value="{Binding MinTemp}"></Slider>
-                    <TextBlock VerticalAlignment="Center" Text="{Binding MinTemp}" Width="20"></TextBlock>
-                    <TextBlock VerticalAlignment="Center">℃ 蓝色，</TextBlock>
-                </WrapPanel>
-                <WrapPanel Margin="20 0 0 0" VerticalAlignment="Center">
-                    <TextBlock VerticalAlignment="Center">拒绝率达到</TextBlock>
-                    <Slider 
-					    Minimum="0" 
-					    Maximum="20" 
-					    Width="100"
-					    IsSnapToTickEnabled="True"
-					    Value="{Binding RejectPercent}"></Slider>
-                    <TextBlock VerticalAlignment="Center" Text="{Binding RejectPercent}" Width="20"></TextBlock>
-                    <TextBlock VerticalAlignment="Center">% 红色</TextBlock>
-                </WrapPanel>
-            </WrapPanel>
-            <uc:MainBar Grid.Column="1" Margin="0 0 16 0"></uc:MainBar>
-        </Grid>
+        
     </Grid>
 </Window>
