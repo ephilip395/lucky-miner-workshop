@@ -671,14 +671,20 @@ namespace Lucky.MinerMonitor.Vms
                 }
                 else
                 {
-                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"确定将选中的矿机开始挖矿吗？", title: "确认", onYes: () =>
-                    {
-                        foreach (var item in SelectedMinerTweaks)
+                    this.ShowSoftDialog(new DialogWindowViewModel(
+                        message: $"选中的矿机开始挖矿？",
+                        title: "开始挖矿",
+                        btnYesText: "好的",
+                        btnNoText: "取消",
+                        onYes: () =>
                         {
-                            // 不能直接调用item的StopMine命令，因为该命令内部会有弹窗确认
-                            MinerMonitorRoot.MinerMonitorService.StartMineAsync(item, item.WorkId);
+                            foreach (var item in SelectedMinerTweaks)
+                            {
+                                // 不能直接调用item的StopMine命令，因为该命令内部会有弹窗确认
+                                MinerMonitorRoot.MinerMonitorService.StartMineAsync(item, item.WorkId);
+                            }
                         }
-                    }));
+                    ));
                 }
                 #endregion
             }, IsSelectedAny);
@@ -691,14 +697,20 @@ namespace Lucky.MinerMonitor.Vms
                 }
                 else
                 {
-                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"确定将选中的矿机停止挖矿吗？", title: "确认", onYes: () =>
-                    {
-                        foreach (var item in SelectedMinerTweaks)
+                    this.ShowSoftDialog(new DialogWindowViewModel(
+                        message: $"选中的矿机停止挖矿？",
+                        title: "停止挖矿",
+                        btnYesText: "好的",
+                        btnNoText: "取消",
+                        onYes: () =>
                         {
-                            // 不能直接调用item的StopMine命令，因为该命令内部会有弹窗确认
-                            MinerMonitorRoot.MinerMonitorService.StopMineAsync(item);
+                            foreach (var item in SelectedMinerTweaks)
+                            {
+                                // 不能直接调用item的StopMine命令，因为该命令内部会有弹窗确认
+                                MinerMonitorRoot.MinerMonitorService.StopMineAsync(item);
+                            }
                         }
-                    }));
+                    ));
                 }
                 #endregion
             }, IsSelectedAny);

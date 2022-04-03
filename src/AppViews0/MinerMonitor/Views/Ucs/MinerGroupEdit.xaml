@@ -10,50 +10,40 @@
 	mc:Ignorable="d"
 	d:DataContext="{d:DesignData Source=../Design/MinerGroupViewModel.xaml}"
 	xmlns:local="clr-namespace:Lucky.Views.Ucs" 
-    d:DesignWidth="520"
-    Background="White">
-	<UserControl.Resources>
-		<Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource LblTbBase}">
-			<Setter Property="Width" Value="70"></Setter>
-		</Style>
-	</UserControl.Resources>
-	<StackPanel Margin="10">
-		<WrapPanel Margin="0 2">
-			<TextBlock Style="{StaticResource LblTb}">名称:</TextBlock>
-			<TextBox x:Name="TbName" Width="420" VerticalContentAlignment="Center" Text="{Binding Name, ValidatesOnExceptions=True}">
-			</TextBox>
-		</WrapPanel>
+    d:DesignWidth="520">
+    <UserControl.Resources>
+        <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Width" Value="70"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+    <StackPanel Margin="10">
+        <WrapPanel Margin="0 2">
+            <TextBlock Style="{StaticResource LblTb}">名称:</TextBlock>
+            <TextBox x:Name="TbName" Width="420" VerticalContentAlignment="Center" Text="{Binding Name, ValidatesOnExceptions=True}">
+            </TextBox>
+        </WrapPanel>
 
-		<WrapPanel Margin="0 2">
-			<TextBlock Style="{StaticResource LblTb}" VerticalAlignment="Top">说明:</TextBlock>
-			<controls:KbMuiltilineTextBox 
+        <WrapPanel Margin="0 2">
+            <TextBlock Style="{StaticResource LblTb}" VerticalAlignment="Top">说明:</TextBlock>
+            <TextBox
                 x:Name="MTbDescription"
-				Width="420" Background="Transparent" Padding="0 4"
-				VerticalContentAlignment="Top" VerticalScrollBarVisibility="Auto"
-				Text="{Binding Description, Mode=TwoWay}" 
-				Height="100">
-			</controls:KbMuiltilineTextBox>
-		</WrapPanel>
-		<controls:KbButton
+				Width="420" 
+				Height="100"
+                Background="Transparent" 
+                Padding="0 4"
+				VerticalContentAlignment="Top" 
+                VerticalScrollBarVisibility="Auto"
+                Text="{Binding Description, Mode=TwoWay}"
+                TextWrapping="Wrap"
+                AcceptsReturn="True"/>
+        </WrapPanel>
+        <Button
 			Command="{Binding Save}" 
 			Margin="0 10 0 0"
 			Padding="15 2"
-			HorizontalAlignment="Center"
-			Background="{StaticResource BtnBackground}"
-			Foreground="{StaticResource BtnForeground}"
-			CornerRadius="2">
-			<WrapPanel>
-				<Path
-					Width="12"
-					Height="12"
-					Data="{StaticResource Icon_Ok}"
-					Fill="{StaticResource BtnForeground}"
-					Stretch="Fill" />
-				<TextBlock
-					Padding="4"
-					VerticalAlignment="Center"
-					Text="确定" />
-			</WrapPanel>
-		</controls:KbButton>
-	</StackPanel>
+			HorizontalAlignment="Center">
+            <TextBlock Text="确定" />
+        </Button>
+    </StackPanel>
 </UserControl>

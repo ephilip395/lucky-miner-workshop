@@ -11,6 +11,7 @@
     WindowStartupLocation="CenterScreen"
     d:DataContext="{d:DesignData Source=./Design/DialogWindowViewModel.xaml}"
     ui:WindowHelper.UseModernWindowStyle="True"
+    Background="{StaticResource AppBackgroundBrush}"
     mc:Ignorable="d" Width="400">
 
     <Grid>

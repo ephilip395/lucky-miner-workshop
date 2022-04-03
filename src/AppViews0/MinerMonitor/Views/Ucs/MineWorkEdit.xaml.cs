@@ -27,7 +27,7 @@ namespace Lucky.MinerMonitor.Views.Ucs
                 {
                     vm.Save.Execute(null);
                 };
-                NotiCenterWindow.Bind(window);
+                //NotiCenterWindow.Bind(window);
                 return new MineWorkEdit(vm);
             }, beforeShow: (window, uc) =>
             {

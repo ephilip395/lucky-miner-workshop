@@ -17,7 +17,6 @@ namespace Lucky.Views
             bool isPassword)
         {
             _isPassword = isPassword;
-            this.Title = title;
             InitializeComponent();
             TbTitle.Text = title;
             if (isPassword)

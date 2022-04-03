@@ -4,6 +4,8 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:ui="http://schemas.modernwpf.com/2019"
+
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
 	xmlns:uc="clr-namespace:Lucky.Views.Ucs"
 	xmlns:local="clr-namespace:Lucky.Views.Ucs"
@@ -14,14 +16,17 @@
     d:DataContext="{d:DesignData Source=../Design/MinerProfileIndexViewModel.xaml}"
 	Width="324">
     <UserControl.Resources>
+        
         <ResourceDictionary>
             <sys:Double x:Key="LeftWidth">40</sys:Double>
-            <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource LblTbBase}">
+            <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
                 <Setter Property="Width" Value="{StaticResource LeftWidth}"></Setter>
                 <Setter Property="FontSize" Value="11"></Setter>
+                <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
+    
     <StackPanel>
         <WrapPanel Margin="0 4">
             <TextBlock Text="币种" Style="{StaticResource LblTb}" />
@@ -31,7 +36,7 @@
 					Padding="4 5"
 					BorderThickness="1"
 					BorderBrush="{StaticResource LightLineColor}"
-					IsEnabled="{Binding ElementName=PopupMainCoin,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
+					IsEnabled="{Binding ElementName=MainCoinFlyout,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
 					Click="KbButtonMainCoin_Clicked"
                     PreviewMouseDown="BtnPopup_PreviewMouseDown"
                     PreviewMouseUp="BtnPopup_PreviewMouseUp">
@@ -51,15 +56,14 @@
 							Width="12"
 							Height="8"
 							Data="{StaticResource Icon_ComboBoxToogle}"
+							Fill="Black"
 							Stretch="Fill" />
                     </WrapPanel>
+                    <ui:FlyoutService.Flyout>
+                        <ui:Flyout x:Name="MainCoinFlyout" Placement="BottomEdgeAlignedLeft">
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
                 </Button>
-                <Popup 
-					x:Name="PopupMainCoin" 
-					PopupAnimation="Slide" 
-					PlacementTarget="{Binding ElementName=ButtonMainCoin}" 
-					Placement="Bottom" 
-					StaysOpen="False"></Popup>
             </WrapPanel>
         </WrapPanel>
 
@@ -74,39 +78,12 @@
 					Padding="4 5"
 					BorderThickness="1"
 					BorderBrush="{StaticResource LightLineColor}"
-					IsEnabled="{Binding ElementName=PopupKernel,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
+					IsEnabled="{Binding ElementName=KernelFlyout,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
 					Click="KbButtonKernel_Clicked"
                     PreviewMouseDown="BtnPopup_PreviewMouseDown"
                     PreviewMouseUp="BtnPopup_PreviewMouseUp">
                     <WrapPanel>
                         <TextBlock Width="160" Padding="0 0 10 0" Text="{Binding MinerProfile.CoinVm.CoinKernel.Kernel.FullName}"></TextBlock>
-                    </WrapPanel>
-                </Button>
-                <Popup 
-					x:Name="PopupKernel" 
-					PopupAnimation="Slide" 
-					PlacementTarget="{Binding ElementName=ButtonKernel}" 
-					Placement="Bottom" 
-					StaysOpen="False"></Popup>
-            </WrapPanel>
-        </WrapPanel>
-        <WrapPanel Margin="0 0 0 4">
-            <TextBlock 
-				Style="{StaticResource LblTb}"
-				Text="矿池" />
-            <WrapPanel>
-                <Button 
-					x:Name="ButtonMainCoinPool"
-					Padding="4 5"
-					BorderThickness="1"
-					BorderBrush="{StaticResource LightLineColor}"
-					IsEnabled="{Binding ElementName=PopupMainCoinPool,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
-					Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
-					Click="KbButtonMainCoinPool_Clicked"
-                    PreviewMouseDown="BtnPopup_PreviewMouseDown"
-                    PreviewMouseUp="BtnPopup_PreviewMouseUp">
-                    <WrapPanel>
-                        <TextBlock Width="105" Padding="0 0 10 0" Foreground="Black" Text="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool.Name}"></TextBlock>
                         <Path
 							Margin="0 2 0 0"
 							Width="12"
@@ -115,13 +92,40 @@
 							Fill="Black"
 							Stretch="Fill" />
                     </WrapPanel>
+                    <ui:FlyoutService.Flyout>
+                        <ui:Flyout x:Name="KernelFlyout" Placement="BottomEdgeAlignedLeft">
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
                 </Button>
-                <Popup 
-					x:Name="PopupMainCoinPool" 
-					PopupAnimation="Slide" 
-					PlacementTarget="{Binding ElementName=ButtonMainCoinPool}" 
-					Placement="Bottom" 
-					StaysOpen="False"></Popup>
+            </WrapPanel>
+        </WrapPanel>
+        <WrapPanel Margin="0 0 0 4">
+            <TextBlock Style="{StaticResource LblTb}" Text="矿池" />
+            <WrapPanel>
+                <Button 
+					x:Name="ButtonMainCoinPool"
+					Padding="4 5"
+					BorderThickness="1"
+					BorderBrush="{StaticResource LightLineColor}"
+					IsEnabled="{Binding ElementName=MainCoinPoolFlyout,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
+					Click="KbButtonMainCoinPool_Clicked"
+                    PreviewMouseDown="BtnPopup_PreviewMouseDown"
+                    PreviewMouseUp="BtnPopup_PreviewMouseUp">
+                    <WrapPanel>
+                        <TextBlock Width="105" Padding="0 0 10 0" Text="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool.Name}"></TextBlock>
+                        <Path
+							Margin="0 2 0 0"
+							Width="12"
+							Height="8"
+							Data="{StaticResource Icon_ComboBoxToogle}"
+							Fill="Black"
+							Stretch="Fill" />
+                    </WrapPanel>
+                    <ui:FlyoutService.Flyout>
+                        <ui:Flyout x:Name="MainCoinPoolFlyout" Placement="BottomEdgeAlignedLeft">
+                        </ui:Flyout>
+                    </ui:FlyoutService.Flyout>
+                </Button>
                 <Border Visibility="{Binding MinerProfile.CoinVm.CoinKernel.IsSupportPool1, Converter={StaticResource BoolToVisibilityConverter}}">
                     <WrapPanel Visibility="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool.NoPool1,Converter={StaticResource BoolToVisibilityInvertConverter}}">
                         <TextBlock 
@@ -133,13 +137,12 @@
 						    Padding="4 5"
 						    BorderThickness="1"
 						    BorderBrush="{StaticResource LightLineColor}"
-						    IsEnabled="{Binding ElementName=PopupMainCoinPool1,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
-						    Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
+						    IsEnabled="{Binding ElementName=MainCoinPool1Flyout,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
 						    Click="KbButtonMainCoinPool1_Clicked"
 							PreviewMouseDown="BtnPopup_PreviewMouseDown"
 							PreviewMouseUp="BtnPopup_PreviewMouseUp">
                             <WrapPanel>
-                                <TextBlock Width="105" Padding="0 0 10 0" Foreground="Black" Text="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool1.Name}"></TextBlock>
+                                <TextBlock Width="105" Padding="0 0 10 0" Text="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool1.Name}"></TextBlock>
                                 <Path
 								    Margin="0 2 0 0"
 								    Width="12"
@@ -148,13 +151,11 @@
 								    Fill="Black"
 								    Stretch="Fill" />
                             </WrapPanel>
+                            <ui:FlyoutService.Flyout>
+                                <ui:Flyout x:Name="MainCoinPool1Flyout" Placement="BottomEdgeAlignedLeft">
+                                </ui:Flyout>
+                            </ui:FlyoutService.Flyout>
                         </Button>
-                        <Popup 
-						    x:Name="PopupMainCoinPool1" 
-						    PopupAnimation="Slide" 
-						    PlacementTarget="{Binding ElementName=ButtonMainCoinPool1}" 
-						    Placement="Bottom" 
-						    StaysOpen="False"></Popup>
                     </WrapPanel>
                 </Border>
             </WrapPanel>
@@ -176,48 +177,10 @@
                             Height="30"
                             Padding="2 4 22 4"
                             ToolTip="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool.Notice}"
-							Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 							IsReadOnly="{Binding MinerProfile.IsMining}"
 							VerticalContentAlignment="Center" 
 							Text="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool.PoolProfileVm.UserName}">
                         </TextBox>
-                        <Path
-							Margin="4 0 0 0"
-							Width="96"
-							Height="16"
-							HorizontalAlignment="Left"
-							Data="M98 480.86h829.99v63.79H98z"
-							Fill="{StaticResource OpacityTapeBrush}"
-							Stretch="Fill"
-							Visibility="{Binding MinerProfile.CoinVm.CoinProfile.IsHideWallet, Converter={StaticResource BoolToVisibilityConverter}}" />
-                    </Grid>
-                    <Grid Margin="-20 0 0 0">
-                        <Button 
-					        ToolTip="显示用户名密码"
-					        Background="Transparent" BorderThickness="0"
-					        Command="{Binding MinerProfile.CoinVm.CoinProfile.ShowWallet}"
-					        HorizontalAlignment="Left">
-                            <Path
-						        Visibility="{Binding MinerProfile.CoinVm.CoinProfile.IsHideWallet, Converter={StaticResource BoolToVisibilityConverter}}"
-						        Width="16"
-						        Height="8"
-						        Data="{StaticResource Icon_CloseEye}"
-						        Fill="{StaticResource BtnBackground}"
-						        Stretch="Fill" />
-                        </Button>
-                        <Button 
-					        ToolTip="隐藏用户名密码"
-					        Background="Transparent" BorderThickness="0"
-					        Command="{Binding MinerProfile.CoinVm.CoinProfile.HideWallet}"
-					        HorizontalAlignment="Left">
-                            <Path
-						        Visibility="{Binding MinerProfile.CoinVm.CoinProfile.IsHideWallet, Converter={StaticResource BoolToVisibilityInvertConverter}}"
-						        Width="16"
-						        Height="12"
-						        Data="{StaticResource Icon_OpenEye}"
-						        Fill="{StaticResource BtnBackground}"
-						        Stretch="Fill" />
-                        </Button>
                     </Grid>
                 </WrapPanel>
             </Border>
@@ -237,48 +200,10 @@
 								Height="30"
 								Padding="2 4 22 4"
                                 ToolTip="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool1.Notice}"
-							    Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 							    IsReadOnly="{Binding MinerProfile.IsMining}"
 							    VerticalContentAlignment="Center" 
 							    Text="{Binding MinerProfile.CoinVm.CoinProfile.MainCoinPool1.PoolProfileVm.UserName}">
                             </TextBox>
-                            <Path
-							    Margin="4 0 0 0"
-							    Width="96"
-							    Height="16"
-							    HorizontalAlignment="Left"
-							    Data="M98 480.86h829.99v63.79H98z"
-							    Fill="{StaticResource OpacityTapeBrush}"
-							    Stretch="Fill"
-							    Visibility="{Binding MinerProfile.CoinVm.CoinProfile.IsHideWallet, Converter={StaticResource BoolToVisibilityConverter}}" />
-                        </Grid>
-                        <Grid Margin="-20 0 0 0">
-                            <Button 
-								ToolTip="显示用户名密码"
-								Background="Transparent" BorderThickness="0"
-								Command="{Binding MinerProfile.CoinVm.CoinProfile.ShowWallet}"
-								HorizontalAlignment="Left">
-                                <Path
-									Visibility="{Binding MinerProfile.CoinVm.CoinProfile.IsHideWallet, Converter={StaticResource BoolToVisibilityConverter}}"
-									Width="16"
-									Height="8"
-									Data="{StaticResource Icon_CloseEye}"
-									Fill="{StaticResource BtnBackground}"
-									Stretch="Fill" />
-                            </Button>
-                            <Button 
-								ToolTip="隐藏用户名密码"
-								Background="Transparent" BorderThickness="0"
-								Command="{Binding MinerProfile.CoinVm.CoinProfile.HideWallet}"
-								HorizontalAlignment="Left">
-                                <Path
-									Visibility="{Binding MinerProfile.CoinVm.CoinProfile.IsHideWallet, Converter={StaticResource BoolToVisibilityInvertConverter}}"
-									Width="16"
-									Height="12"
-									Data="{StaticResource Icon_OpenEye}"
-									Fill="{StaticResource BtnBackground}"
-									Stretch="Fill" />
-                            </Button>
                         </Grid>
                     </WrapPanel>
                 </WrapPanel>
@@ -300,8 +225,7 @@
                         ToolTip="请注意一定要填自己的钱包地址，不填也能挖是因为不填时会自动使用默认的测试钱包地址，这是为了方便大家测试。"
 						BorderThickness="1"
 						BorderBrush="{StaticResource LightLineColor}"
-						IsEnabled="{Binding ElementName=PopupMainCoinWallet,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
-						Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
+						IsEnabled="{Binding ElementName=MainCoinWalletFlyout,Path=IsOpen,Converter={StaticResource BoolInvertConverter}}"
 						Click="KbButtonMainCoinWallet_Clicked"
 						PreviewMouseDown="BtnPopup_PreviewMouseDown"
 						PreviewMouseUp="BtnPopup_PreviewMouseUp">
@@ -318,15 +242,8 @@
                         </Button.ContextMenu>
                         <WrapPanel>
                             <StackPanel Width="276">
-                                <TextBlock Foreground="Black" Text="{Binding MinerProfile.CoinVm.CoinProfile.SelectedWallet.Name}"></TextBlock>
-                                <TextBlock FontSize="11" Foreground="Black" Text="{Binding MinerProfile.CoinVm.CoinProfile.SelectedWallet.Address}"></TextBlock>
-                                <Path
-									Height="14"
-									Margin="0 -14 0 0" 
-									Data="M98 480.86h829.99v63.79H98z"
-									Fill="{StaticResource OpacityTapeBrush}"
-									Stretch="Fill"
-									Visibility="{Binding MinerProfile.CoinVm.CoinProfile.IsHideWallet, Converter={StaticResource BoolToVisibilityConverter}}" />
+                                <TextBlock Text="{Binding MinerProfile.CoinVm.CoinProfile.SelectedWallet.Name}"></TextBlock>
+                                <TextBlock FontSize="11" Text="{Binding MinerProfile.CoinVm.CoinProfile.SelectedWallet.Address}"></TextBlock>
                             </StackPanel>
                             <Path
 								Margin="-12 -2 0 6"
@@ -336,45 +253,14 @@
 								Fill="Black"
 								Stretch="Fill" />
                         </WrapPanel>
+                        <ui:FlyoutService.Flyout>
+                            <ui:Flyout x:Name="MainCoinWalletFlyout" Placement="BottomEdgeAlignedLeft">
+                            </ui:Flyout>
+                        </ui:FlyoutService.Flyout>
                     </Button>
-                    <Popup 
-						x:Name="PopupMainCoinWallet" 
-						PopupAnimation="Slide" 
-						PlacementTarget="{Binding ElementName=ButtonMainCoinWallet}" 
-						Placement="Bottom" 
-						StaysOpen="False"></Popup>
                 </WrapPanel>
             </WrapPanel>
             <WrapPanel HorizontalAlignment="Left" VerticalAlignment="Top" Margin="260 1 0 0">
-                <Button 
-					Padding="2"
-					Margin="0 -1 -4 2"
-					VerticalAlignment="Bottom"
-					Background="Transparent" BorderThickness="0"
-					Command="{Binding MinerProfile.CoinVm.CoinProfile.ShowWallet}"
-					HorizontalAlignment="Left">
-                    <Path
-						Visibility="{Binding MinerProfile.CoinVm.CoinProfile.IsHideWallet, Converter={StaticResource BoolToVisibilityConverter}}"
-						Width="16"
-						Height="8"
-						Data="{StaticResource Icon_CloseEye}"
-						Fill="{StaticResource BtnBackground}"
-						Stretch="Fill" />
-                </Button>
-                <Button 
-					Padding="2"
-					ToolTip="隐藏钱包地址"
-					Background="Transparent" BorderThickness="0"
-					Command="{Binding MinerProfile.CoinVm.CoinProfile.HideWallet}"
-					HorizontalAlignment="Left">
-                    <Path
-						Visibility="{Binding MinerProfile.CoinVm.CoinProfile.IsHideWallet, Converter={StaticResource BoolToVisibilityInvertConverter}}"
-						Width="16"
-						Height="12"
-						Data="{StaticResource Icon_OpenEye}"
-						Fill="{StaticResource BtnBackground}"
-						Stretch="Fill" />
-                </Button>
                 <Button 
 					Margin="4 0 0 0"
 					Padding="2"
@@ -386,7 +272,7 @@
 						Width="14"
 						Height="14"
 						Data="{StaticResource Icon_Copy}"
-						Fill="{StaticResource BtnBackground}"
+						Fill="{DynamicResource SystemControlPageTextBaseHighBrush}"
 						Stretch="Fill" />
                 </Button>
             </WrapPanel>
@@ -457,14 +343,14 @@
                 Height="30"
 				VerticalContentAlignment="Center"
                 ToolTip="这是高级用户的工具，通常我们无需关心这一块。"
-				Background="{Binding MinerProfile.IsMining,Converter={StaticResource TrueTransparentElseWhiteConverter}}"
 				IsReadOnly="{Binding MinerProfile.IsMining}"
 				VerticalScrollBarVisibility="Auto"
 				Text="{Binding MinerProfile.CoinVm.CoinKernel.CoinKernelProfile.CustomArgs, Mode=TwoWay}">
             </TextBox>
         </WrapPanel>
         
-        <Border Margin="0 0 0 4" Visibility="{Binding MinerProfile.CoinVm.CoinKernel.GpuInputSegmentVms,Converter={StaticResource NoRecordInvertVisibilityConverter}}">
+        <Border Margin="0 0 0 4"
+                Visibility="{Binding MinerProfile.CoinVm.CoinKernel.GpuInputSegmentVms,Converter={StaticResource NoRecordInvertVisibilityConverter}}">
             <ItemsControl
 			    ItemsSource="{Binding MinerProfile.CoinVm.CoinKernel.GpuInputSegmentVms}"
 			    BorderThickness="0"
@@ -492,7 +378,8 @@
             </ItemsControl>
         </Border>
         
-        <Grid Margin="0 0 0 4" Visibility="{Binding MinerProfile.CoinVm.CoinKernel.Kernel.KernelInputVm.IsSupportDevicesArg, Converter={StaticResource BoolToVisibilityConverter}}">
+        <Grid Margin="0 0 0 4"
+              Visibility="{Binding MinerProfile.CoinVm.CoinKernel.Kernel.KernelInputVm.IsSupportDevicesArg, Converter={StaticResource BoolToVisibilityConverter}}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
