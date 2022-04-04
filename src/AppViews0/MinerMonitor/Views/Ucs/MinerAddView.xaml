@@ -11,6 +11,8 @@
 	SizeToContent="Height"
 	WindowStartupLocation="CenterScreen"
 	mc:Ignorable="d" 
+    ui:WindowHelper.UseModernWindowStyle="True"
+    Background="{StaticResource AppBackgroundBrush}"
     Width="300" 
     MinHeight="120"
     Title="添加矿机"
@@ -24,14 +26,14 @@
         </Style>
     </Window.Resources>
 
-    <Grid>
+    <Grid Margin="16">
         
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
        
-        
         <StackPanel Grid.Row="0" Margin="16">
             <WrapPanel Margin="0 10 0 2">
                 <TextBlock Style="{StaticResource label}">IP</TextBlock>
@@ -50,27 +52,25 @@
                 </WrapPanel>
             </StackPanel>
         </StackPanel>
+        
         <Button
 			Grid.Row="1"
 			IsDefault="True"
-			Command="{Binding Save}" 
-			HorizontalAlignment="Center"
-			Padding="15 2"
-			Margin="0 0 0 10">
+			Command="{Binding Save}"
+            Background="{DynamicResource SystemControlBackgroundAccentBrush}"
+			HorizontalAlignment="Center">
             <TextBlock
 				Padding="4"
 				VerticalAlignment="Center"
 				Text="添加" />
         </Button>
-        <controls:KbButton
+        
+        <Button
 			Grid.Row="2"
-			IsDefault="True"
-            ToolTip="用矿机雷达发现矿机"
 			Command="{x:Static app:AppStatic.OpenMinerFinder}" 
 			HorizontalAlignment="Right"
-			Margin="0 0 4 10"
-			Background="White"
-			CornerRadius="2">
+            Background="Transparent"
+			Margin="0 10 4 10">
             <WrapPanel>
                 <Path
 					Width="16"
@@ -79,10 +79,9 @@
 					Fill="Green"
 					Stretch="Fill" />
                 <TextBlock
-					Padding="2 4"
 					VerticalAlignment="Center"
-					Text="矿机雷达" />
+					Text="用矿机雷达发现矿机" />
             </WrapPanel>
-        </controls:KbButton>
+        </Button>
     </Grid>
 </Window>

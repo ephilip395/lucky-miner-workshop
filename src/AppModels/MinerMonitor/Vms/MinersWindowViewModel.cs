@@ -606,7 +606,7 @@ namespace Lucky.MinerMonitor.Vms
                 }
                 else
                 {
-                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"确定删除选中的矿机吗？", title: "确认", onYes: () =>
+                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"删除选中的矿机？", onYes: () =>
                     {
                         this.ResetCountDown();
                         MinerMonitorRoot.MinerMonitorService.RemoveClientsAsync(SelectedMinerTweaks.Select(a => a.Id).ToList(), (response, e) =>
@@ -633,7 +633,7 @@ namespace Lucky.MinerMonitor.Vms
                 }
                 else
                 {
-                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"确定重启选中的电脑吗？", title: "确认", onYes: () =>
+                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"重启选中的电脑？", onYes: () =>
                     {
                         foreach (var item in SelectedMinerTweaks)
                         {
@@ -652,7 +652,7 @@ namespace Lucky.MinerMonitor.Vms
                 }
                 else
                 {
-                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"确定关闭选中的电脑吗？", title: "确认", onYes: () =>
+                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"关闭选中的电脑？", onYes: () =>
                     {
                         foreach (var item in SelectedMinerTweaks)
                         {
@@ -727,7 +727,7 @@ namespace Lucky.MinerMonitor.Vms
                 }
                 else
                 {
-                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"确定启用选中的矿机的Windows远程桌面功能吗？", title: "确认", onYes: () =>
+                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"启用选中的矿机的 Windows 远程桌面功能？", onYes: () =>
                     {
                         foreach (var item in SelectedMinerTweaks)
                         {
@@ -754,7 +754,7 @@ namespace Lucky.MinerMonitor.Vms
                 }
                 VirtualRoot.Execute(new ShowRemoteDesktopLoginDialogCommand(new RemoteDesktopLoginViewModel(windowsLoginName)
                 {
-                    Title = "设置远程桌面",
+                    Title = "配置远程桌面",
                     Password = windowsPassword,
                     OnOk = vm =>
                     {
@@ -763,7 +763,7 @@ namespace Lucky.MinerMonitor.Vms
                             item.WindowsLoginName = vm.LoginName;
                             item.WindowsPassword = vm.Password;
                         }
-                        VirtualRoot.Out.ShowSuccess("设置成功", toConsole: true);
+                        VirtualRoot.Out.ShowSuccess("操作成功", toConsole: true);
                     }
                 }));
                 #endregion
@@ -777,7 +777,7 @@ namespace Lucky.MinerMonitor.Vms
                 }
                 else
                 {
-                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"确定禁用选中的矿机的Windows自动更新功能吗？", title: "确认", onYes: () =>
+                    this.ShowSoftDialog(new DialogWindowViewModel(message: $"禁用选中的矿机的 Windows 自动更新功能？", onYes: () =>
                     {
                         foreach (var item in SelectedMinerTweaks)
                         {

@@ -75,7 +75,7 @@
 										Value="{Binding VirtualMemoryMaxSizeLog2}"></Slider>
                                     <WrapPanel Canvas.Top="24" Canvas.Left="-11">
                                         <WrapPanel.Resources>
-                                            <Style TargetType="Button">
+                                            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
                                                 <Setter Property="Cursor" Value="Hand"></Setter>
                                                 <Setter Property="Width" Value="29"></Setter>
                                                 <Setter Property="Margin" Value="1 0"></Setter>
@@ -96,7 +96,7 @@
                                     <StackPanel Canvas.Left="242" Canvas.Top="-20">
                                         <WrapPanel>
                                             <TextBox Width="48" Height="20" VerticalAlignment="Center" Text="{Binding VirtualMemoryMaxSizeMb}"></TextBox>
-                                            <TextBlock VerticalAlignment="Center">MB</TextBlock>
+                                            <TextBlock VerticalAlignment="Center">M</TextBlock>
                                         </WrapPanel>
                                         <TextBlock Margin="4 0 0 0" Text="{Binding VirtualMemoryMaxSizeGbText}"></TextBlock>
                                     </StackPanel>

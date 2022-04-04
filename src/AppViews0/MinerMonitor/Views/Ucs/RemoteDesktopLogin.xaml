@@ -12,39 +12,45 @@
 	xmlns:app="clr-namespace:Lucky;assembly=AppModels"
     d:DataContext="{d:DesignData Source=../Design/RemoteDesktopLoginViewModel.xaml}"
 	mc:Ignorable="d" d:DesignHeight="150" d:DesignWidth="400">
-	<Grid Margin="0 8 0 0">
+    <UserControl.Resources>
+        <Style x:Key="LeftLabel" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="Margin" Value="0 0 4 0" />
+        </Style>
+    </UserControl.Resources>
+    
+	<Grid Margin="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="auto"></ColumnDefinition>
             <ColumnDefinition Width="200"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock 
-			Grid.Row="0" Grid.Column="0" Margin="0 2" 
-			Text="Windows登录名" Style="{StaticResource LblTbBase}"></TextBlock>
+			Grid.Row="0" Grid.Column="0" Style="{StaticResource LeftLabel}"
+			Text="Windows登录名"></TextBlock>
         <TextBox 
             x:Name="TbLoginName"
 			Grid.Row="0" Grid.Column="1" Margin="0 2"
 			Text="{Binding LoginName, ValidatesOnExceptions=True}" 
-            Background="White" 
 			VerticalContentAlignment="Center"></TextBox>
 
         <TextBlock 
-			Grid.Row="1" Grid.Column="0" Margin="0 2" 
-			Text="Windows密码" Style="{StaticResource LblTbBase}"></TextBlock>
+			Grid.Row="1" Grid.Column="0" Style="{StaticResource LeftLabel}"
+			Text="Windows密码"></TextBlock>
         <PasswordBox 
             x:Name="PbPassword"
 			Grid.Row="1" Grid.Column="1" Margin="0 2"
 			VerticalContentAlignment="Center" 
-            Background="White" 
             controls:PasswordBoxHelper.Attach="true" 
             controls:PasswordBoxHelper.Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 6 0 0">
-            <TextBlock Foreground="Red">仅支持内网</TextBlock>
+        <StackPanel Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">
+            <TextBlock Foreground="{DynamicResource SystemControlHighlightAccentBrush}" HorizontalAlignment="Center">仅支持内网</TextBlock>
             <Button
                 Margin="0 6 0 0"
 				IsDefault="True"

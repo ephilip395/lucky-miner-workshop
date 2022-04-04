@@ -19,6 +19,12 @@
     ui:WindowHelper.UseModernWindowStyle="True"
     d:DataContext="{d:DesignData Source=Design/LoginWindowViewModel.xaml}">
 
+    <Window.Resources>
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+    </Window.Resources>
+        
     <Grid Margin="20">
 
         <Grid.ColumnDefinitions>
@@ -46,7 +52,6 @@
             </WrapPanel>
             <TextBlock 
 					Grid.Row="1" Grid.Column="0" 
-                    Style="{StaticResource LblTbBase}"
 					Visibility="{Binding IsInnerIp,Converter={StaticResource BoolToHiddenInvertConverter}}"
 					Text="登录名"></TextBlock>
             <TextBox 
@@ -59,7 +64,6 @@
 
             <TextBlock 
 					Grid.Row="2" Grid.Column="0"
-                    Style="{StaticResource LblTbBase}"
 					Visibility="{Binding IsInnerIp,Converter={StaticResource BoolToHiddenInvertConverter}}"
 					Text="密码"></TextBlock>
             <PasswordBox 

@@ -14,7 +14,7 @@
     d:DesignWidth="800">
     
 	<UserControl.Resources>
-		<Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource LblTbBase}">
+        <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
 			<Setter Property="Width" Value="60"></Setter>
 			<Setter Property="Padding" Value="0 0 4 0"></Setter>
 		</Style>
@@ -27,7 +27,7 @@
 		</Style>
 	</UserControl.Resources>
     
-	<Grid IsEnabled="{Binding IsEnabled}">
+	<Grid IsEnabled="{Binding IsEnabled}" Margin="4">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
@@ -115,13 +115,10 @@
 						<RowDefinition Height="Auto"></RowDefinition>
 					</Grid.RowDefinitions>
 					<WrapPanel>
-						<TextBlock 
+                        <TextBlock 
 							Visibility="{Binding CoinVm.OverClockDatas,Converter={StaticResource NoRecordInvertVisibilityConverter}}"
 							Style="{StaticResource LblTb}" Width="Auto">背包</TextBlock>
-						<TextBlock 
-							Visibility="{Binding CoinVm.OverClockDatas,Converter={StaticResource NoRecordVisibilityConverter}}"
-							Style="{StaticResource LblTb}" Width="Auto">没有推荐</TextBlock>
-						<ItemsControl
+                        <ItemsControl
 							MouseDown="ItemsControl_MouseDown"
 							ItemsSource="{Binding CoinVm.OverClockDatas}" 
 							ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -172,6 +169,7 @@
 			</WrapPanel>
 			<ScrollViewer 
 				Grid.Row="2" 
+                Margin="8"
 				VerticalScrollBarVisibility="Auto" 
 				PreviewMouseDown="ScrollViewer_PreviewMouseDown">
 				<ItemsControl 

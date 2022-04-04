@@ -26,7 +26,7 @@ namespace Lucky.Views
         {
             this.Vm = vm;
             this.DataContext = vm;
-            this.Title = vm.Title;
+            this.Title = vm.Title ?? "";
             InitializeComponent();
             if (!string.IsNullOrEmpty(vm.Icon))
             {

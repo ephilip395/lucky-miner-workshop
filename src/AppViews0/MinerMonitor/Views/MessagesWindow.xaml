@@ -74,8 +74,8 @@
 
         <uc:MinerOperationResultsView Grid.Row="1" />
 
-        <TextBlock Grid.Row="2" Padding="6 4" HorizontalAlignment="Right" VerticalAlignment="Bottom"
-                   Text="{Binding MinerTweakConsoleVm.LatestTimeSpanText}" />
+        <TextBlock Grid.Row="1" Padding="6 4" HorizontalAlignment="Right" VerticalAlignment="Top"
+                   Text="{Binding MinerTweakConsoleVm.LatestTimeSpanText}" Background="{StaticResource SystemControlBackgroundBaseMediumBrush}" />
 
         <uc:MinerMessagesView Grid.Row="3" />
 

@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-	xmlns:blankWindow="http://luckycm.monsterorb.com"
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:local="clr-namespace:Lucky.MinerMonitor.Views.Ucs"
@@ -12,17 +11,20 @@
 	d:DesignHeight="600"
     MinHeight="300"
 	mc:Ignorable="d">
+    
     <UserControl.Resources>
-        <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource LblTbBase}">
+        <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource CaptionTextBlockStyle}">
             <Setter Property="Width" Value="210"></Setter>
             <Setter Property="TextAlignment" Value="Left"></Setter>
         </Style>
     </UserControl.Resources>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
+        
         <ScrollViewer 
 		    VerticalScrollBarVisibility="Auto" 
 		    PreviewMouseDown="ScrollViewer_PreviewMouseDown">
@@ -37,13 +39,13 @@
                 </ItemsControl.Resources>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <GroupBox BorderThickness="1" BorderBrush="{StaticResource LightLineColor}" Background="White" Padding="10 4 10 0" Margin="10 0 10 10">
+                        <GroupBox BorderThickness="1" BorderBrush="{StaticResource LightLineColor}" Padding="10 4 10 0" Margin="10 0 10 10">
                             <GroupBox.Header>
-                                <WrapPanel>
-                                    <TextBlock Text="{Binding Name}"></TextBlock>
-                                    <TextBlock Text="（"></TextBlock>
-                                    <TextBox Height="18" IsReadOnly="True" BorderThickness="0" Text="{Binding MACAddress}"></TextBox>
-                                    <TextBlock Text="）"></TextBlock>
+                                <WrapPanel VerticalAlignment="Center">
+                                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+                                    <TextBlock VerticalAlignment="Center" Text="（"></TextBlock>
+                                    <TextBox VerticalAlignment="Center" Height="18" IsReadOnly="True" Text="{Binding MACAddress}"></TextBox>
+                                    <TextBlock VerticalAlignment="Center" Text="）"></TextBlock>
                                 </WrapPanel>
                             </GroupBox.Header>
                             <StackPanel>
@@ -140,6 +142,6 @@
             VerticalAlignment="Center" 
             Visibility="{Binding IsLoading,Converter={StaticResource BoolToVisibilityConverter}}"
             Foreground="{StaticResource LableColor}">从矿机获取数据中</TextBlock>
-        <TextBlock Grid.Row="1" Padding="4" Foreground="Red">注意：该操作有风险，可能导致矿机掉线，但通常过一段时间能恢复上线。</TextBlock>
+        <TextBlock Grid.Row="1" Padding="4" Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}">注意：该操作有风险，可能导致矿机掉线。</TextBlock>
     </Grid>
 </UserControl>

@@ -13,11 +13,17 @@
 	mc:Ignorable="d" d:DesignWidth="930">
     
     <UserControl.Resources>
-        <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource LblTbBase}">
+        <Style x:Key="LblTb" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="Padding" Value="4"></Setter>
+            <Setter Property="Foreground" Value="{DynamicResource SystemControlPageTextBaseMediumBrush}" />
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        <Style TargetType="TextBlock">
+        <Style TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="Padding" Value="4"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center" />
+        </Style>
+        <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+            <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
     </UserControl.Resources>
     
@@ -120,13 +126,13 @@
 					Stretch="Fill" />
                 <TextBlock Style="{StaticResource LblTb}">外网群控</TextBlock>
             </WrapPanel>
-            <WrapPanel VerticalAlignment="Center">
+            <WrapPanel VerticalAlignment="Center" Visibility="{Binding IsOuterUserEnabled, Converter={StaticResource BoolToVisibilityConverter}}">
                 <TextBlock Style="{StaticResource LblTb}" Width="Auto" Padding="8 0 10 0">外网群控用户</TextBlock>
                 <TextBlock Width="80" VerticalAlignment="Center" Text="{Binding OuterUserId}" />
             </WrapPanel>
             <WrapPanel VerticalAlignment="Center">
                 <TextBlock Style="{StaticResource LblTb}" Padding="0 0 4 0">远程桌面登录名</TextBlock>
-                <TextBox Width="80" IsReadOnly="True" BorderThickness="0" Text="{Binding WindowsLoginName,Mode=OneWay}"></TextBox>
+                <TextBlock Width="80" Text="{Binding WindowsLoginName}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}" Padding="0 0 4 0">远程桌面密码</TextBlock>
                 <TextBlock Width="80" VerticalAlignment="Center" Text="{Binding WindowsPasswordStar}" />
             </WrapPanel>
@@ -156,32 +162,26 @@
         </WrapPanel>
         
         <WrapPanel Margin="0 3">
+            
             <TextBlock Style="{StaticResource LblTb}" Text="{Binding MainCoinCode}"></TextBlock>
+            
             <WrapPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                    </Grid.ColumnDefinitions>
-                    <CheckBox x:Name="ChkHideMainCoinWallet" FocusVisualStyle="{x:Null}" VerticalAlignment="Center">
-                        <TextBlock Style="{StaticResource LblTb}">隐藏钱包</TextBlock>
-                    </CheckBox>
-                    <TextBox 
-						Grid.Column="1"
-						Visibility="{Binding ElementName=ChkHideMainCoinWallet,Path=IsChecked, Converter={StaticResource BoolToVisibilityInvertConverter}}"
-						BorderThickness="0"
-						Text="{Binding MainCoinWallet, Mode=OneWay}" 
-						IsReadOnly="True"></TextBox>
+                
+                <CheckBox x:Name="ChkHideMainCoinWallet" FocusVisualStyle="{x:Null}" VerticalAlignment="Center" MinWidth="10">
+                    <TextBlock Style="{StaticResource LblTb}">隐藏钱包</TextBlock>
+                </CheckBox>
+                <TextBlock
+					Visibility="{Binding ElementName=ChkHideMainCoinWallet,Path=IsChecked, Converter={StaticResource BoolToVisibilityInvertConverter}}"
+					Text="{Binding MainCoinWallet, Mode=OneWay}"></TextBlock>
 
-                </Grid>
-                
-                
+
+
                 <WrapPanel VerticalAlignment="Center">
                     <TextBlock Style="{StaticResource LblTb}">拒绝/找到</TextBlock>
                     <TextBlock Text="{Binding MainCoinRejectShare}" ToolTip="拒绝份额"></TextBlock>
                     <TextBlock Padding="1 0" Text="/"></TextBlock>
                     <TextBlock Text="{Binding MainCoinTotalShare}" ToolTip="找到份额"></TextBlock>
-                    <TextBlock Margin="10 0 0 0" Text="{Binding MainCoinRejectPercentText}" ToolTip="拒绝率" Foreground="{Binding MainCoinRejectPercentForeground}"></TextBlock>
+                    <TextBlock Margin="10 0 0 0" Text="{Binding MainCoinRejectPercentText}" ToolTip="拒绝率"></TextBlock>
                 </WrapPanel>
                 
                 <WrapPanel Margin="10 0 0 0" VerticalAlignment="Center">
@@ -190,15 +190,13 @@
                     <TextBlock 
 						Text="{Binding MainCoinCode}" 
 						Margin="2 0 0 0"
-						Padding="0"
-						Foreground="{StaticResource LableColor}"></TextBlock>
+						Padding="0"></TextBlock>
                     <TextBlock Text=", "></TextBlock>
                     <TextBlock Text="{Binding IncomeMainCoinCnyPerDayText}"></TextBlock>
                     <TextBlock 
 						Text="￥" 
 						Margin="2 0 0 0"
-						Padding="0"
-						Foreground="{StaticResource LableColor}"></TextBlock>
+						Padding="0"></TextBlock>
                     <TextBlock Padding="1 0" Text="/" Style="{StaticResource LblTb}" />
                     <TextBlock Padding="0" Text="天" Style="{StaticResource LblTb}" />
                 </WrapPanel>
@@ -267,20 +265,70 @@
                     </DataGrid.Resources>
                     <DataGrid.Columns>
 
-                        <DataGridTextColumn Header="编号" Binding="{Binding Index}" />
+                        <DataGridTemplateColumn Header="编号">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Index}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="名称">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="显存">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TotalMemoryGbText}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="{Binding Data.MainCoinCode, Source={StaticResource proxy}}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MainCoinSpeedText}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="名称" Binding="{Binding Name}" />
+                        <DataGridTemplateColumn Header="找到">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding FoundShare}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="拒绝">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding RejectShare}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="无效">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding IncorrectShare}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="显存" Binding="{Binding TotalMemoryGbText}" />
-                        <DataGridTextColumn Header="{Binding Data.MainCoinCode, Source={StaticResource proxy}}" Binding="{Binding MainCoinSpeedText}" />
-                        <DataGridTextColumn Header="找到" Binding="{Binding FoundShare}" />
-                        <DataGridTextColumn Header="拒绝" Binding="{Binding RejectShare}" />
-                        <DataGridTextColumn Header="无效" Binding="{Binding IncorrectShare}" />
-
-                        <DataGridTextColumn 
-                            Visibility="{Binding Data.DualCoinCode, Source={StaticResource proxy}, Converter={StaticResource NotNullOrEmptyVisibilityConverter}}"
-                            Header="{Binding Data.DualCoinCode, Source={StaticResource proxy}}" 
-                            Binding="{Binding DualCoinSpeedText}" />
+                        <DataGridTemplateColumn Header="{Binding Data.DualCoinCode, Source={StaticResource proxy}}"
+                                                Visibility="{Binding Data.DualCoinCode, Source={StaticResource proxy}, Converter={StaticResource NotNullOrEmptyVisibilityConverter}}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding DualCoinSpeedText}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
                     </DataGrid.Columns>
                 </DataGrid>
@@ -310,23 +358,77 @@
                     </DataGrid.Resources>
                     <DataGrid.Columns>
 
-                        <DataGridTextColumn Header="功耗" Binding="{Binding Data.PowerUsageWText, Source={StaticResource proxy}}" />
+                        <DataGridTemplateColumn Header="功耗">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Data.PowerUsageWText, Source={StaticResource proxy}}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="温度" Binding="{Binding TemperatureText}" />
+                        <DataGridTemplateColumn Header="温度">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TemperatureText}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
-                        <DataGridTextColumn Header="风扇" Binding="{Binding FanSpeedText}" />
-
-                        <DataGridTextColumn Header="核心电压" Binding="{Binding CoreVoltage}" />
-
-                        <DataGridTextColumn Header="显存电压" Binding="{Binding MemoryVoltage}" />
-
-                        <DataGridTextColumn Header="功耗" Binding="{Binding PowerCapacityText}" />
-
-                        <DataGridTextColumn Header="温度阈值" Binding="{Binding TempLimitText}" />
-
-                        <DataGridTextColumn Header="核心" Binding="{Binding CoreClockDeltaMText}" />
-
-                        <DataGridTextColumn Header="显存" Binding="{Binding MemoryClockDeltaMText}" />
+                        <DataGridTemplateColumn Header="风扇">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding FanSpeedText}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="核心电压">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CoreVoltage}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="显存电压">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MemoryVoltage}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="功耗">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding PowerCapacityText}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="温度阈值">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding TempLimitText}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="核心">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding CoreClockDeltaMText}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        
+                        <DataGridTemplateColumn Header="显存">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding MemoryClockDeltaMText}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
 
                     </DataGrid.Columns>
                 </DataGrid>
@@ -340,35 +442,20 @@
         <WrapPanel>
             
             <TextBlock Style="{StaticResource LblTb}">主币矿池</TextBlock>
-            <TextBox 
-				ToolTip="{Binding MainCoinPool}"
-				BorderThickness="0"
-				Background="Transparent"
-				IsReadOnly="True"
-				Text="{Binding MainCoinPool, Mode=OneWay}"></TextBox>
+            <TextBlock Text="{Binding MainCoinPool}"></TextBlock>
             <TextBlock Style="{StaticResource LblTb}">矿池延时</TextBlock>
             <TextBlock Text="{Binding MainCoinPoolDelay}"/>
 
             <WrapPanel Visibility="{Binding DualCoinPool,Converter={StaticResource NotNullOrEmptyVisibilityConverter}}">
                 <TextBlock Style="{StaticResource LblTb}">双挖矿池</TextBlock>
-                <TextBox 
-					Padding="0"
-					ToolTip="{Binding DualCoinPool}"
-					BorderThickness="0"
-					Background="Transparent"
-					IsReadOnly="True"
-					Text="{Binding DualCoinPool, Mode=OneWay}"></TextBox>
+                <TextBlock Text="{Binding DualCoinPool}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">矿池延时</TextBlock>
                 <TextBlock Text="{Binding DualCoinPoolDelay}"></TextBlock>
             </WrapPanel>
             
             <WrapPanel>
                 <TextBlock Style="{StaticResource LblTb}">挖矿内核</TextBlock>
-                <TextBox 
-					BorderThickness="0"
-					Background="Transparent"
-					IsReadOnly="True"
-					Text="{Binding Kernel, Mode=OneWay}"></TextBox>
+                <TextBlock Text="{Binding Kernel}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">内核重启次数</TextBlock>
                 <TextBlock Text="{Binding KernelSelfRestartCount}"></TextBlock>
             </WrapPanel>
@@ -378,43 +465,22 @@
         <WrapPanel Margin="0 3">
             <WrapPanel>
                 <TextBlock Style="{StaticResource LblTb}">操作系统</TextBlock>
-                <TextBox 
-                    IsReadOnly="True" 
-                    Background="Transparent" 
-                    Width="160"
-                    BorderThickness="0" 
-                    Text="{Binding OSName, Mode=OneWay}"></TextBox>
+                <TextBlock Width="160" Text="{Binding OSName}"></TextBlock>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Style="{StaticResource LblTb}" Width="Auto">物理内存</TextBlock>
-                <TextBox 
-                    Padding="0" 
-                    IsReadOnly="True" 
-                    Width="100"
-                    Background="Transparent" 
-                    BorderThickness="0" 
-                    Text="{Binding TotalPhysicalMemoryGbText, Mode=OneWay}"></TextBox>
+                <TextBlock Text="{Binding TotalPhysicalMemoryGbText}"></TextBlock>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Style="{StaticResource LblTb}" Width="Auto">虚拟内存</TextBlock>
-                <TextBox 
-                    Padding="0" 
-                    IsReadOnly="True" 
-                    Width="100"
-                    Background="Transparent" 
-                    BorderThickness="0" 
-                    Text="{Binding OSVirtualMemoryGbText, Mode=OneWay}"></TextBox>
+                <TextBlock Text="{Binding OSVirtualMemoryGbText}"></TextBlock>
             </WrapPanel>
             <WrapPanel>
                 <TextBlock Style="{StaticResource LblTb}" Width="Auto">剩余磁盘</TextBlock>
-                <TextBox 
-                    Padding="0" 
-                    IsReadOnly="True" 
-                    Background="Transparent" 
-                    BorderThickness="0" 
-                    Text="{Binding DiskSpace, Mode=OneWay}"></TextBox>
+                <TextBlock Text="{Binding DiskSpace}"></TextBlock>
             </WrapPanel>
         </WrapPanel>
+        
         <WrapPanel Margin="0 3">
             <TextBlock Style="{StaticResource LblTb}">CPU使用率</TextBlock>
             <WrapPanel Width="50" VerticalAlignment="Center">
@@ -446,28 +512,26 @@
 				    Stretch="Fill" />
                 <TextBlock VerticalAlignment="Center" Text=" x "></TextBlock>
                 <TextBlock VerticalAlignment="Center" Text="{Binding GpuCount}"></TextBlock>
-                <TextBox 
-				    Margin="4 0 0 0"
-				    Padding="0"
-				    BorderThickness="0"
-				    Background="Transparent"
-				    IsReadOnly="True"
-				    ToolTip="{Binding GpuInfo}"
-				    Text="{Binding GpuInfo, Mode=OneWay}"></TextBox>
+                <TextBlock Margin="4 0 0 0" Text="{Binding GpuInfo}"></TextBlock>
                 <TextBlock Margin="10 0 0 0" Style="{StaticResource LblTb}" Width="Auto">显卡驱动</TextBlock>
-                <TextBox 
-				    Margin="4 0 0 0"
-				    Padding="0"
-                    Width="100"
-				    BorderThickness="0"
-				    Background="Transparent"
-				    IsReadOnly="True"
-				    Text="{Binding GpuDriver, Mode=OneWay}"></TextBox>
+                <TextBlock Margin="4 0 0 0" Text="{Binding GpuDriver}"></TextBlock>
             </WrapPanel>
         </WrapPanel>
-        <WrapPanel Margin="0 3">
-            <TextBlock Style="{StaticResource LblTb}"></TextBlock>
-            <WrapPanel Width="260">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition Width="auto" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <WrapPanel Grid.Row="0" Grid.Column="0">
                 <Path
 					Width="16"
 					Height="16"
@@ -476,7 +540,7 @@
 					Stretch="Fill" />
                 <TextBlock Margin="2 0 0 0" Style="{StaticResource LblTb}">启动时自动关闭 Windows 防火墙</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260">
+            <WrapPanel Grid.Row="0" Grid.Column="1">
                 <Path
 					Width="16"
 					Height="16"
@@ -485,7 +549,7 @@
 					Stretch="Fill" />
                 <TextBlock Margin="2 0 0 0" Style="{StaticResource LblTb}">启动时自动关闭 Windows UAC</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260">
+            <WrapPanel Grid.Row="0" Grid.Column="2">
                 <Path
 					Width="16"
 					Height="16"
@@ -494,10 +558,8 @@
 					Stretch="Fill" />
                 <TextBlock Margin="2 0 0 0" Style="{StaticResource LblTb}">启动时自动关闭 Windows 自动更新</TextBlock>
             </WrapPanel>
-        </WrapPanel>
-        <WrapPanel Margin="0 3">
-            <TextBlock Style="{StaticResource LblTb}"></TextBlock>
-            <WrapPanel Width="260">
+
+            <WrapPanel Grid.Row="1" Grid.Column="0">
                 <Path
 					Width="16"
 					Height="16"
@@ -506,7 +568,7 @@
 					Stretch="Fill" />
                 <TextBlock Margin="2 0 0 0" Style="{StaticResource LblTb}">启动时自动关闭 Windows Defender</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260">
+            <WrapPanel Grid.Row="1" Grid.Column="1">
                 <Path
 					Width="16"
 					Height="16"
@@ -515,7 +577,7 @@
 					Stretch="Fill" />
                 <TextBlock Margin="2 0 0 0" Style="{StaticResource LblTb}">启动时自动关闭 Windows 系统休眠</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260">
+            <WrapPanel Grid.Row="1" Grid.Column="2">
                 <Path
 					Width="16"
 					Height="16"
@@ -524,10 +586,8 @@
 					Stretch="Fill" />
                 <TextBlock Margin="2 0 0 0" Style="{StaticResource LblTb}">有1080/1080ti显卡时启动小药丸加速算力</TextBlock>
             </WrapPanel>
-        </WrapPanel>
-        <WrapPanel Margin="0 3">
-            <TextBlock Style="{StaticResource LblTb}"></TextBlock>
-            <WrapPanel Width="260">
+
+            <WrapPanel Grid.Row="2" Grid.Column="0">
                 <Path
 					Width="16"
 					Height="16"
@@ -536,7 +596,7 @@
 					Stretch="Fill" />
                 <TextBlock Margin="2 0 0 0" Style="{StaticResource LblTb}">开着行运矿工时阻止显示器休眠</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260">
+            <WrapPanel Grid.Row="2" Grid.Column="1">
                 <Path
 					Width="16"
 					Height="16"
@@ -545,10 +605,8 @@
 					Stretch="Fill" />
                 <TextBlock Margin="2 0 0 0" Style="{StaticResource LblTb}">Windows蓝屏自动重启</TextBlock>
             </WrapPanel>
-        </WrapPanel>
-        <WrapPanel Margin="0 3">
-            <TextBlock Style="{StaticResource LblTb}"></TextBlock>
-            <WrapPanel Width="260">
+
+            <WrapPanel Grid.Row="3" Grid.Column="0">
                 <Path
 					Width="16"
 					Height="16"
@@ -561,7 +619,7 @@
                 <TextBlock Padding="4 0" Text="{Binding HighCpuPercent}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">%时告警</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260">
+            <WrapPanel Grid.Row="3" Grid.Column="1">
                 <Path
 					Width="16"
 					Height="16"
@@ -574,7 +632,7 @@
                 <TextBlock Padding="4 0" Text="{Binding CpuStopTemperature}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">℃时停止挖矿</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260">
+            <WrapPanel Grid.Row="3" Grid.Column="2">
                 <Path
 					Width="16"
 					Height="16"
@@ -587,21 +645,19 @@
                 <TextBlock Padding="4 0" Text="{Binding CpuStartTemperature}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">℃时开始挖矿</TextBlock>
             </WrapPanel>
-        </WrapPanel>
-        <WrapPanel Margin="0 3">
-            <TextBlock Style="{StaticResource LblTb}"></TextBlock>
-            <WrapPanel Width="260" VerticalAlignment="Center">
+
+            <WrapPanel Grid.Row="4" Grid.Column="0">
                 <Path
 					Width="16"
 					Height="16"
 					Data="{Binding IsAutoRestartKernel,Converter={StaticResource BoolToStreamGeometryConverter}}"
 					Fill="{StaticResource LableColor}"
 					Stretch="Fill" />
-                <TextBlock Style="{StaticResource LblTb}" Padding="2 0 0 0">自动重启内核，上限</TextBlock>
+                <TextBlock Style="{StaticResource LblTb}">自动重启内核，上限</TextBlock>
                 <TextBlock Margin="4 0" Text="{Binding AutoRestartKernelTimes}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">次</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260" VerticalAlignment="Center">
+            <WrapPanel Grid.Row="4" Grid.Column="1">
                 <Path
 					Width="16"
 					Height="16"
@@ -611,7 +667,7 @@
                 <TextBlock Margin="2 0" Text="{Binding NoShareRestartKernelMinutes}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">分钟无份额重启内核</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260" VerticalAlignment="Center">
+            <WrapPanel Grid.Row="4" Grid.Column="2">
                 <Path
 					Width="16"
 					Height="16"
@@ -621,10 +677,8 @@
                 <TextBlock Margin="2 0" Text="{Binding NoShareRestartComputerMinutes}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">分钟无份额重启电脑</TextBlock>
             </WrapPanel>
-        </WrapPanel>
-        <WrapPanel Margin="0 3">
-            <TextBlock Style="{StaticResource LblTb}"></TextBlock>
-            <WrapPanel Width="260" VerticalAlignment="Center">
+
+            <WrapPanel Grid.Row="5" Grid.Column="0">
                 <Path
 					Width="16"
 					Height="16"
@@ -637,7 +691,7 @@
                 <TextBlock Margin="2 0" Text="{Binding PeriodicRestartKernelMinutes}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">分钟周期重启内核</TextBlock>
             </WrapPanel>
-            <WrapPanel Width="260" VerticalAlignment="Center">
+            <WrapPanel Grid.Row="5" Grid.Column="1">
                 <Path
 					Width="16"
 					Height="16"
@@ -650,21 +704,22 @@
                 <TextBlock Margin="2 0" Text="{Binding PeriodicRestartComputerMinutes}"></TextBlock>
                 <TextBlock Style="{StaticResource LblTb}">分钟周期重启电脑</TextBlock>
             </WrapPanel>
-        </WrapPanel>
+        </Grid>
+        
         <Grid Margin="0 3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Style="{StaticResource LblTb}" VerticalAlignment="Top">内核命令行</TextBlock>
-            <controls:KbMuiltilineTextBox 
-				Grid.Column="1"
-				Padding="0"
+            <TextBox
+                Grid.Column="1"
 				BorderThickness="0"
-				Background="Transparent"
-				IsReadOnly="True"
-				ToolTip="{Binding KernelCommandLine}"
-				Text="{Binding KernelCommandLine, Mode=OneWay}"></controls:KbMuiltilineTextBox>
+                IsReadOnly="True"
+                    TextWrapping="Wrap"
+                    SpellCheck.IsEnabled="True"
+                    SelectionBrush="Green"
+                    Text="{Binding KernelCommandLine, Mode=OneWay}" />
         </Grid>
     </StackPanel>
 </UserControl>

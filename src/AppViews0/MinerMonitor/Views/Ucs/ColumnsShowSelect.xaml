@@ -5,99 +5,53 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:sys="clr-namespace:System;assembly=mscorlib"
-	xmlns:blankWindow="http://luckycm.monsterorb.com"
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
 	xmlns:local="clr-namespace:Lucky.Views.Ucs"
 	xmlns:vm="clr-namespace:Lucky.MinerMonitor.Vms;assembly=AppModels"
-	BorderBrush="{StaticResource WindowBorderBrush}"
-	BorderThickness="1"
-	Background="White"
 	mc:Ignorable="d" 
 	d:DesignHeight="300"
     d:DesignWidth="260"
     d:DataContext="{d:DesignData Source=../Design/ColumnsShowSelectViewModel.xaml}">
-    <Grid Background="{StaticResource ToolbarBackground}">
+    <Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto"></RowDefinition>
 			<RowDefinition Height="*"></RowDefinition>
 		</Grid.RowDefinitions>
-		<Border Grid.Row="0">
+        <Border Grid.Row="0">
             <Button
                 Click="HideView"
                 Content="新建视图"
 				Command="{Binding ColumnsShowVms.Add}"/>
 
         </Border>
-		<controls:KbButton 
-			Background="Transparent" 
-			BorderThickness="0" 
-			Padding="0 0 4 0"
-			Command="{Binding HideView}"
-			HorizontalAlignment="Right">
-			<Path
-				Width="14"
-				Height="14"
-				Data="{StaticResource Icon_Close}"
-				Fill="Black"
-				Stretch="Fill" />
-		</controls:KbButton>
-        <ListBox 
+        <ListBox
             Grid.Row="1"
 			ItemsSource="{Binding ColumnsShowVms.List}"
 			SelectedItem="{Binding SelectedResult}"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Auto"
-            SelectionChanged="Lb_SelectionChanged"
-			BorderThickness="0 1 0 0"
-            BorderBrush="{StaticResource LightLineColor}">
-            <ListBox.Resources>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem">
-                                <Border BorderThickness="0 1 0 0" BorderBrush="{StaticResource LightLineColor}" Background="{TemplateBinding Background}">
-                                    <ContentPresenter 
-								        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-								        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="{StaticResource MouseOverRowBackground}"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Background" Value="{StaticResource SelectedRowBackground}"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ListBox.Resources>
+            SelectionChanged="Lb_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel>
                         <TextBlock Width="200" Padding="4 6" VerticalAlignment="Center" Text="{Binding ColumnsShowName}"></TextBlock>
-                        <controls:KbButton 
+                        <Button 
                             Margin="4 0 0 0"
                             Padding="4"
                             Click="HideView"
                             Visibility="{Binding IsPleaseSelect,Converter={StaticResource BoolToHiddenInvertConverter}}"
-                            Background="{StaticResource TransparentColor}"
                             Command="{Binding Remove}">
-                            <controls:KbButton.Content>
                                 <Path
 							        Width="16"
 							        Height="16"
 							        Data="{StaticResource Icon_Delete}"
-							        Fill="{StaticResource BtnBackground}"
+							        Fill="{DynamicResource SystemControlForegroundBaseHighBrush}"
 							        Stretch="Fill" />
-                            </controls:KbButton.Content>
-                        </controls:KbButton>
+                        </Button>
                     </WrapPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <TextBlock Grid.Row="1" Visibility="{Binding ColumnsShowVms.List, Converter={StaticResource NoRecordVisibilityConverter}}" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center">没有记录</TextBlock>
+        <TextBlock Grid.Row="1" Visibility="{Binding ColumnsShowVms.List, Converter={StaticResource NoRecordVisibilityConverter}}" Foreground="{DynamicResource SystemControlErrorTextForegroundBrush}" VerticalAlignment="Center" HorizontalAlignment="Center">没有记录</TextBlock>
 	</Grid>
 </UserControl>

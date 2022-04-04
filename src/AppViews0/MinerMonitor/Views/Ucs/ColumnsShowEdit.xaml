@@ -9,7 +9,6 @@
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
 	xmlns:local="clr-namespace:Lucky.Views.Ucs"
 	xmlns:vm="clr-namespace:Lucky.MinerMonitor.Vms;assembly=AppModels"
-	Background="White"
 	mc:Ignorable="d" 
 	d:DesignHeight="300"
     d:DesignWidth="560"
@@ -48,9 +47,8 @@
             <CheckBox 
                 Width="200"
                 IsChecked="{Binding IsAllChecked}" 
-                Foreground="{StaticResource LableColor}"
                 Content="全选"></CheckBox>
-            <TextBlock Style="{StaticResource LblTbBase}">视图名称</TextBlock>
+            <TextBlock Style="{DynamicResource CaptionTextBlockStyle}">视图名称</TextBlock>
             <TextBox Width="200" Text="{Binding ColumnsShowName,UpdateSourceTrigger=LostFocus}"></TextBox>
         </WrapPanel>
     </Grid>

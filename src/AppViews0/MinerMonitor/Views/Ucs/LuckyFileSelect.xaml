@@ -9,69 +9,21 @@
 	xmlns:controls="clr-namespace:Lucky.Controls;assembly=LuckyWpf"
 	xmlns:local="clr-namespace:Lucky.Views.Ucs"
 	xmlns:vm="clr-namespace:Lucky.MinerMonitor.Vms;assembly=AppModels"
-	BorderBrush="{StaticResource WindowBorderBrush}"
-	BorderThickness="1"
-	Background="White"
 	mc:Ignorable="d" 
 	d:DesignHeight="300"
     d:DataContext="{d:DesignData Source=../Design/LuckyFileSelectViewModel.xaml}">
-    <Grid Background="{StaticResource ToolbarBackground}">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="26"></RowDefinition>
-			<RowDefinition Height="*"></RowDefinition>
-		</Grid.RowDefinitions>
-        <TextBlock 
-            HorizontalAlignment="Left" 
-            VerticalAlignment="Center" 
-            Padding="4"
-            Text="鼠标悬停在行上可以查看版本详情"
-            Foreground="{StaticResource LableColor}"></TextBlock>
-		<controls:KbButton 
-			Background="Transparent" 
-			BorderThickness="0" 
-			Padding="0 0 4 0"
-			Command="{Binding HideView}"
-			HorizontalAlignment="Right">
-			<Path
-				Width="14"
-				Height="14"
-				Data="{StaticResource Icon_Close}"
-				Fill="Black"
-				Stretch="Fill" />
-		</controls:KbButton>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
         <ListBox 
             Grid.Row="1"
 			ItemsSource="{Binding LuckyFileVms}"
             SelectedItem="{Binding SelectedResult}"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled"
 			ScrollViewer.VerticalScrollBarVisibility="Auto"
-            SelectionChanged="Lb_SelectionChanged"
-			BorderThickness="0 1 0 0"
-            BorderBrush="{StaticResource LightLineColor}">
-            <ListBox.Resources>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}"></Setter>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem">
-                                <Border Padding="2" BorderThickness="0 1 0 0" BorderBrush="{StaticResource LightLineColor}" Background="{TemplateBinding Background}">
-                                    <ContentPresenter 
-								        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-								        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="{StaticResource MouseOverRowBackground}"/>
-                        </Trigger>
-                        <Trigger Property="IsSelected" Value="true">
-                            <Setter Property="Background" Value="{StaticResource SelectedRowBackground}"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </ListBox.Resources>
+            SelectionChanged="Lb_SelectionChanged">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <WrapPanel ToolTip="{Binding Description}">
