@@ -33,7 +33,7 @@
             <Setter Property="EnableRowVirtualization" Value="False"></Setter>
             <Setter Property="HorizontalGridLinesBrush" Value="{DynamicResource GridLinesBrush}" />
             <Setter Property="VerticalGridLinesBrush" Value="{DynamicResource GridLinesBrush}" />
-            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="BorderThickness" Value="0" />
             <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundListLowBrush}" />
         </Style>
     </UserControl.Resources>

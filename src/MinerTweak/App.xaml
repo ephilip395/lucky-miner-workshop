@@ -8,15 +8,18 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/KbSkin.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/KbIcons.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/KbButton.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/KbTextBox.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/KbComboBox.xaml" />
-
-                <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/DataGrid1.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/LeftBarScrollViewer.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Notifications/Themes/Generic.xaml" />
+
+                <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/DataGrid1.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/LuckyWpf;component/Styles/TabControll.xaml" />
+                
 
                 <ui:ThemeResources CanBeAccessedAcrossThreads="{x:Static local:App.IsMultiThreaded}">
                     <ui:ThemeResources.ThemeDictionaries>

@@ -98,61 +98,40 @@
         </Grid>
 
         <TabControl Grid.Row="2" x:Name="MainTabControl" TabStripPlacement="Bottom">
-                
-            <TabItem x:Name="TabItemSpeedTable">
-                <TabItem.Header>
-                    <TextBlock Text="挖矿状态" Padding="2 0"></TextBlock>
-                </TabItem.Header>
+
+            <TabItem x:Name="TabItemSpeedTable" Header="挖矿状态">
                 <Border x:Name="SpeedTableContainer"
-                BorderThickness="1"
+                BorderThickness="0 1 0 0"
                 BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}" />
             </TabItem>
-            <TabItem x:Name="TabItemOverClockTable">
-                <TabItem.Header>
-                    <TextBlock Text="超频" Padding="2 0"></TextBlock>
-                </TabItem.Header>
+            <TabItem x:Name="TabItemOverClockTable" Header="超频">
                 <Border x:Name="OverClockTableContainer"
-                BorderThickness="1"
+                BorderThickness="0 1 0 0"
                 BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"/>
             </TabItem>
-            <TabItem x:Name="TabItemMinerProfileOption">
-                <TabItem.Header>
-                    <TextBlock Text="高级设置" Padding="2 0"></TextBlock>
-                </TabItem.Header>
+            <TabItem x:Name="TabItemMinerProfileOption" Header="高级设置">
                 <Border x:Name="MinerProfileOptionContainer"
-                BorderThickness="1"
+                BorderThickness="0 1 0 0"
                 BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
             </TabItem>
-            <TabItem x:Name="TabItemConnectionMethodOption">
-                <TabItem.Header>
-                    <TextBlock Text="网络连接" Padding="2 0"></TextBlock>
-                </TabItem.Header>
+            <TabItem x:Name="TabItemConnectionMethodOption" Header="网络连接">
                 <Border x:Name="ConnectionMethodOptionContainer"
-                BorderThickness="1"
+                BorderThickness="0 1 0 0"
                 BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
             </TabItem>
-            <TabItem x:Name="TabItemGroupMonitorOption">
-                <TabItem.Header>
-                    <TextBlock Text="外网群控" Padding="2 0"></TextBlock>
-                </TabItem.Header>
+            <TabItem x:Name="TabItemGroupMonitorOption" Header="外网群控">
                 <Border x:Name="GroupMonitorOptionContainer"
-                BorderThickness="1"
+                BorderThickness="0 1 0 0"
                 BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
             </TabItem>
-            <TabItem x:Name="TabItemOutput">
-                <TabItem.Header>
-                    <TextBlock Text="输出" Padding="2 0"></TextBlock>
-                </TabItem.Header>
+            <TabItem x:Name="TabItemOutput" Header="输出">
                 <Border x:Name="OutputContainer"
-                BorderThickness="1"
+                BorderThickness="0 1 0 0"
                 BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
             </TabItem>
-            <TabItem x:Name="TabItemDeveloperTools" Visibility="{x:Static app:AppStatic.IsDevModeVisible }">
-                <TabItem.Header>
-                    <TextBlock Text="开发者工具" Padding="2 0"></TextBlock>
-                </TabItem.Header>
+            <TabItem x:Name="TabItemDeveloperTools" Header="开发者工具" Visibility="{x:Static app:AppStatic.IsDevModeVisible }">
                 <Border x:Name="DeveloperToolsContainer"
-                BorderThickness="1"
+                BorderThickness="0 1 0 0"
                 BorderBrush="{DynamicResource SystemControlBackgroundListLowBrush}"></Border>
             </TabItem>
         </TabControl>

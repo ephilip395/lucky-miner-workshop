@@ -10,7 +10,7 @@
     x:Name="Uc"
 	d:DesignHeight="450" d:DesignWidth="1200"
     d:DataContext="{d:DesignData Source=../Design/SpeedTableViewModel.xaml}">
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
@@ -18,112 +18,166 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
-        
-		<DataGrid 
+
+        <DataGrid 
             x:Name="DataGrid"
 			ItemsSource="{Binding GpuSpeedVms.List}" 
 			HorizontalScrollBarVisibility="Auto"
             AutoGenerateColumns="False"
             HeadersVisibility="Column"
+            IsReadOnly="True"
             GridLinesVisibility="None">
-			<DataGrid.Resources>
+            <DataGrid.Resources>
                 <controls:BindingProxy x:Key="proxy" Data="{Binding}" />
-			</DataGrid.Resources>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                
-                <DataGridTextColumn
-                        Header="序号"
-                        IsReadOnly="True"
-                        Width="105"
-                        Binding="{Binding GpuVm.IndexText}" />
 
-                <DataGridTextColumn
+                <DataGridTemplateColumn 
+                        Header="序号"
+                        Width="105">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding GpuVm.IndexText}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn 
                         Visibility="{Binding Data.IsPCIEVisible, Source={StaticResource proxy}}"
                         Header="PCIE"
-                        IsReadOnly="True"
-                        Width="105"
-                        Binding="{Binding GpuVm.BusId}" />
+                        Width="105">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding GpuVm.BusId}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                <DataGridTextColumn
+
+                <DataGridTemplateColumn
                         Header="名称"
-                        IsReadOnly="True"
-                        Width="3*"
-                        Binding="{Binding GpuVm.Name}" />
+                        Width="3*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding GpuVm.Name}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                <DataGridTextColumn
+                <DataGridTemplateColumn 
                         Header="显存"
-                        IsReadOnly="True"
                         MinWidth="80"
-                        Width="80"
-                        Binding="{Binding GpuVm.TotalMemoryGbText}" />
+                        Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding GpuVm.TotalMemoryGbText}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                <DataGridTextColumn
-                    Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.CoinKernel.CoinKernelProfile.IsDualCoinEnabled, Source={StaticResource proxy}, Converter={StaticResource BoolToHiddenConverter}}"
-                    Header="{MultiBinding StringFormat=\{\}\{0\} {Binding Data.GpuSpeedVms.TotalSpeedVm.DualCoinSpeed.SpeedText} }"
-                    IsReadOnly="True"
-                    MinWidth="80"
-                    Width="80"
-                    Binding="{Binding GpuVm.SpeedText}" />
 
-                <DataGridTextColumn
-                    Header="温度"
-                    Binding="{Binding GpuVm.TemperatureHrText}"
-                    IsReadOnly="True"
-                    MinWidth="80"
-                    Width="80"/>
+                <DataGridTemplateColumn 
+                        Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.CoinKernel.CoinKernelProfile.IsDualCoinEnabled, Source={StaticResource proxy}, Converter={StaticResource BoolToHiddenConverter}}"
+                        Header="{MultiBinding StringFormat=\{\}\{0\} {Binding Data.GpuSpeedVms.TotalSpeedVm.DualCoinSpeed.SpeedText} }"
+                        MinWidth="80"
+                        Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding GpuVm.SpeedText}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                <DataGridTextColumn
+
+                <DataGridTemplateColumn 
+                        Header="温度"
+                        MinWidth="80"
+                        Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding GpuVm.TemperatureHrText}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn 
                         Header="风扇"
-                        IsReadOnly="True"
                         MinWidth="80"
-                        Width="80"
-                        Binding="{Binding GpuVm.FanSpeedText}" />
+                        Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding GpuVm.FanSpeedText}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
 
-                <DataGridTextColumn
+                <DataGridTemplateColumn 
                         Header="功耗"
-                        IsReadOnly="True"
                         MinWidth="80"
-                        Width="80"
-                        Binding="{Binding GpuVm.PowerUsageWText}" />
+                        Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding GpuVm.PowerUsageWText}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
 
-                <DataGridTextColumn
+                <DataGridTemplateColumn 
                         Header="算力"
-                        IsReadOnly="True"
                         MinWidth="80"
-                        Width="80"
-                        Binding="{Binding MainCoinSpeed.SpeedText}" />
+                        Width="120">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding MainCoinSpeed.SpeedText}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                <DataGridTextColumn
-                        Header="找到"
-                        IsReadOnly="True"
-                        MinWidth="80"
-                        Width="80"
+                <DataGridTemplateColumn 
                         Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.CoinKernel.Kernel.KernelOutputVm.IsFoundOneGpuShare,Source={StaticResource proxy},Converter={StaticResource BoolToVisibilityConverter}}"
-                        Binding="{Binding MainCoinSpeed.FoundShare}" />
-
-                <DataGridTextColumn
-                        Header="拒绝"
-                        IsReadOnly="True"
+                        Header="找到"
                         MinWidth="80"
-                        Width="80"
+                        Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding MainCoinSpeed.FoundShare}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+                <DataGridTemplateColumn 
                         Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.CoinKernel.Kernel.KernelOutputVm.IsRejectOneGpuShare,Source={StaticResource proxy},Converter={StaticResource BoolToVisibilityConverter}}"
-                        Binding="{Binding MainCoinSpeed.RejectShare}" />
-
-
-                <DataGridTextColumn
-                        Header="无效"
-                        IsReadOnly="True"
+                        Header="拒绝"
                         MinWidth="80"
-                        Width="80"
-                        Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.CoinKernel.Kernel.KernelOutputVm.IsGotOneIncorrectGpuShare,Source={StaticResource proxy},Converter={StaticResource BoolToVisibilityConverter}}"
-                        Binding="{Binding MainCoinSpeed.IncorrectShare}" />
+                        Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding MainCoinSpeed.RejectShare}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
 
-                
+
+
+                <DataGridTemplateColumn 
+                        Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.CoinKernel.Kernel.KernelOutputVm.IsGotOneIncorrectGpuShare,Source={StaticResource proxy},Converter={StaticResource BoolToVisibilityConverter}}"
+                        Header="无效"
+                        MinWidth="80"
+                        Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding MainCoinSpeed.IncorrectShare}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
             </DataGrid.Columns>
         </DataGrid>
-        
+
         <TextBlock Visibility="{Binding GpuSpeedVms.List, Converter={StaticResource NoRecordVisibilityConverter}}" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center">没有矿卡或矿卡未驱动</TextBlock>
 
         <TextBlock Grid.Row="3" Padding="4 2" Foreground="Red" Visibility="{x:Static app:AppStatic.IsMixedGpuVisible}">不建议N卡A卡混插，若挖矿内核支持混插，算力体现在总算力里。</TextBlock>
