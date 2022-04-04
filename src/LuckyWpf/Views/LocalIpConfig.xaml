@@ -29,7 +29,6 @@
             <ItemsControl 
 			    x:Name="ItemsControl"
 			    HorizontalContentAlignment="Center"
-                Background="{StaticResource MinerProfileBackground}"
 			    ItemsSource="{Binding LocalIpVms}"
 			    BorderThickness="0"
 			    ScrollViewer.HorizontalScrollBarVisibility="Disabled">
@@ -38,7 +37,7 @@
                 </ItemsControl.Resources>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <GroupBox BorderThickness="1" BorderBrush="{StaticResource LightLineColor}" Background="White" Padding="10 4 10 0" Margin="10 0 10 10">
+                        <GroupBox BorderThickness="1" BorderBrush="{StaticResource LightLineColor}" Padding="10 4 10 0" Margin="10 0 10 10">
                             <GroupBox.Header>
                                 <WrapPanel>
                                     <TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>

@@ -13,6 +13,7 @@
 	    WindowStartupLocation="CenterOwner"
         MouseDown="Window_MouseDown"
         Title="网络连接"
+        Background="{StaticResource AppBackgroundBrush}"
         mc:Ignorable="d"
         Height="450"
         Width="800">
