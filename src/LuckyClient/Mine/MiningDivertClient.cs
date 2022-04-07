@@ -39,11 +39,11 @@ namespace Lucky.Mine
 
         }
 
-        public static void UpdateUpstream(ConnMethod proxyType, string endpoint, string username="", string password="")
+        public static void UpdateUpstream(ConnMethod connMethod, string endpoint, string username="", string password="")
         {
 
             IMiningDivert divert = GetDivert();
-            divert.UpdateUpstream(proxyType, endpoint, username, password);
+            divert.UpdateUpstream(connMethod, endpoint, username, password);
             ((IDisposable)divert).Dispose();
 
         }

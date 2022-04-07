@@ -85,7 +85,5 @@ namespace Lucky
 
         void ExportWorkJson(MineWorkData mineWorkData, out string localJson, out string serverJson);
 
-        void StartProxyRouter();
-        void StopProxyRouter();
     }
 }

@@ -1127,16 +1127,5 @@ namespace Lucky
             }
         }
 
-        public void StartProxyRouter()
-        {
-            //DivertServer.UpStreamProxyAddress = MinerProfile.ProxyServerAddress;
-            //DivertServer.UpStreamProxyPort = (ushort) MinerProfile.ProxyServerPort;
-
-        }
-
-        public void StopProxyRouter()
-        {
-            //DivertServer.Stop();
-        }
     }
 }

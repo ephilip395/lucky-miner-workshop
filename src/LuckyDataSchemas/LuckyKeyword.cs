@@ -137,7 +137,7 @@ namespace Lucky
         public const string IsUseProxyRegistryKey = "IsUseProxy";
         public const string ConnectionMethodRegistryKey = "ConnectionMethod";
         public const string ProxyServerAddressRegistryKey = "ProxyServerAddress";
-        public const string ProxyServerPortRegistryKey = "ProxyServerAddress";
+        public const string ProxyServerPortRegistryKey = "ProxyServerPort";
         public const string ProxyUsernameRegistryKey = "ProxyUsername";
         public const string ProxyPasswordRegistryKey = "ProxyPassword";
         public const string IsProxyPoolRegistryKey = "IsProxyPool";
