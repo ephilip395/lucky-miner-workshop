@@ -241,6 +241,7 @@ namespace Lucky.Vms
                     OnPropertyChanged(nameof(Temperature));
                     OnPropertyChanged(nameof(TemperatureText));
                     OnPropertyChanged(nameof(TemperatureForeground));
+                    OnPropertyChanged(nameof(TemperatureHrText));
                 }
             }
         }
@@ -256,6 +257,7 @@ namespace Lucky.Vms
                     OnPropertyChanged(nameof(MemoryTemperature));
                     OnPropertyChanged(nameof(MemoryTemperatureText));
                     OnPropertyChanged(nameof(IsMemoryTemperatureVisible));
+                    OnPropertyChanged(nameof(TemperatureHrText));
                 }
             }
         }

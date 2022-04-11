@@ -102,7 +102,6 @@
                 <controls:BindingProxy x:Key="proxy" Data="{Binding}" />
             </DataGrid.Resources>
             
-            
             <DataGrid.Columns>
 
                 <DataGridTemplateColumn MinWidth="80" Width="80" Header="序号">
@@ -121,18 +120,16 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn MinWidth="80" Width="80">
+                <DataGridTemplateColumn MinWidth="80" Width="100">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="℃ 核心 / 显存" ToolTip="1. 核心温度不超过80℃通常就没问题；2. 提高风扇转速和降低功耗有利于降低温度；3. 5700、3080、3090等新卡才有显存温度传感器，旧卡没有；4. 显存温度可能会很高，甚至超过100度也没有问题。" FontSize="10"></TextBlock>
+                                <TextBlock Text="温度" ToolTip="1. 核心温度不超过80℃通常就没问题；2. 提高风扇转速和降低功耗有利于降低温度；3. 5700、3080、3090等新卡才有显存温度传感器，旧卡没有；4. 显存温度可能会很高，甚至超过100度也没有问题。" FontSize="10"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}" IsEnabled="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.IsOverClockEnabled,Source={StaticResource proxy}}">
                                     <CheckBox 
                                         Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.IsOverClockGpuAll,Source={StaticResource proxy},Converter={StaticResource BoolToVisibilityConverter}}"
 			                            FocusVisualStyle="{x:Null}"
-			                            Padding="0" 
                                         ToolTip="通过自动调整风扇转速努力将温度控制在60度"
-                                        FontWeight="Normal"
 			                            VerticalContentAlignment="Center"
 			                            Tag="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.GpuAllProfileVm,Source={StaticResource proxy}}"
 			                            IsChecked="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.GpuAllProfileVm.IsAutoFanSpeed,Source={StaticResource proxy}}" 
@@ -146,17 +143,13 @@
                         <DataTemplate>
                             <StackPanel VerticalAlignment="Center">
                                 <WrapPanel>
-                                    <TextBlock Text="{Binding GpuVm.TemperatureText}"></TextBlock>
-                                    <TextBlock Visibility="{Binding GpuVm.IsMemoryTemperatureVisible}" Text=" / "></TextBlock>
-                                    <TextBlock Visibility="{Binding GpuVm.IsMemoryTemperatureVisible}" Text="{Binding GpuVm.MemoryTemperatureText}"></TextBlock>
+                                    <TextBlock Text="{Binding GpuVm.TemperatureHrText}"></TextBlock>
                                 </WrapPanel>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}">
                                     <CheckBox 
 							            FocusVisualStyle="{x:Null}"
-							            Padding="0" 
 							            VerticalAlignment="Center"
 							            Tag="{Binding GpuProfileVm}"
-                                        FontSize="11"
                                         ToolTip="通过自动调整风扇转速努力将温度控制在60度"
                                         Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.IsOverClockGpuAll,Source={StaticResource proxy},Converter={StaticResource BoolToVisibilityInvertConverter}}"
                                         IsEnabled="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.IsOverClockEnabled,Source={StaticResource proxy}}"
@@ -167,6 +160,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
                 <DataGridTemplateColumn MinWidth="80" Width="80" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
@@ -336,6 +330,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                
                 <DataGridTemplateColumn MinWidth="80" Width="80" Header="显存电压" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
@@ -370,21 +365,24 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn MinWidth="80" Width="80" Header="显存时序" CanUserResize="False" Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.GpuAllProfileVm.GpuVm.IsMemoryTimingVisible,Source={StaticResource proxy}}">
+                
+                <DataGridTemplateColumn
+                    Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.GpuAllProfileVm.GpuVm.IsMemoryTimingVisible,Source={StaticResource proxy}}"
+                    MinWidth="80"
+                    Width="80"
+                    Header="显存时序"
+                    CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
                             <StackPanel>
                                 <TextBlock Text="显存时序" FontSize="10"></TextBlock>
                                 <Border Visibility="{Binding ElementName=Uc,Path=IsOverClockVisible}" IsEnabled="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.IsOverClockEnabled,Source={StaticResource proxy}}">
-                                    <controls:KbComboBox 
-                                        Width="42"
-                                        Height="22"
-                                        Padding="4 2"
+                                    <ComboBox
                                         ToolTip="-1表示不设置"
                                         Visibility="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.IsOverClockGpuAll,Source={StaticResource proxy},Converter={StaticResource BoolToVisibilityConverter}}"
                                         ItemsSource="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.GpuAllProfileVm.GpuVm.MemoryTimingLevelSelects,Source={StaticResource proxy}}" 
                                         SelectedItem="{Binding Data.GpuSpeedVms.MinerProfile.CoinVm.GpuAllProfileVm.CurrentMemoryTimingLevel,Source={StaticResource proxy},ValidatesOnExceptions=True}" >
-                                    </controls:KbComboBox>
+                                    </ComboBox>
                                 </Border>
                             </StackPanel>
                         </DataTemplate>
@@ -410,6 +408,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                
                 <DataGridTemplateColumn MinWidth="80" Width="80" CanUserResize="False">
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>

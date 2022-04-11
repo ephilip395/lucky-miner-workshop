@@ -12,10 +12,15 @@
         <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
             <Setter Property="Padding" Value="7"/>
             <Setter Property="Margin" Value="2 0"/>
+            <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundAltMediumBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightAltListAccentHighBrush}" />
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
             <Setter Property="Padding" Value="7"/>
             <Setter Property="Margin" Value="2 0"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SystemControlHighlightAltListAccentHighBrush}" />
+            <Setter Property="BorderThickness" Value="1"/>
         </Style>
         <Style TargetType="TextBlock" x:Key="label" BasedOn="{StaticResource {x:Type TextBlock}}">
             <Setter Property="Foreground" Value="{DynamicResource ResourceKey=SystemControlBackgroundBaseMediumHighBrush}"/>
