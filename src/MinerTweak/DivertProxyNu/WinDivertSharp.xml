@@ -1717,6 +1717,16 @@
             The static WinDivert class contains all free functions defined in the WinDivert library.
             </summary>
         </member>
+        <member name="F:WinDivertSharp.WinDivert.PriorityHighest">
+            <summary>
+            WINDIVERT_PRIORITY_HIGHEST
+            </summary>
+        </member>
+        <member name="F:WinDivertSharp.WinDivert.PriorityLowest">
+            <summary>
+            WINDIVERT_PRIORITY_LOWEST
+            </summary>
+        </member>
         <member name="M:WinDivertSharp.WinDivert.WinDivertOpen(System.String,WinDivertSharp.WinDivertLayer,System.Int16,System.UInt64)">
             <summary>
             Opens a WinDivert handle for the given filter. Unless otherwise specified by flags, any

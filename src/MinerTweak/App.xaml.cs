@@ -231,7 +231,7 @@ namespace Lucky
 
                               // 运行流量转发守护进程
                               DivertProxyNu.DivertProxyNuUtil.RunLuckyDivertProxyNu();
-                              
+
                           }
                           catch (Exception ex)
                           {
@@ -326,12 +326,15 @@ namespace Lucky
               });
             #endregion
             #region 周期确保守护进程在运行
-            VirtualRoot.BuildEventPath<Per1MinuteEvent>("周期确保守护进程在运行", LogEnum.DevConsole, location: this.GetType(), PathPriority.Normal,
-                path: message =>
-                {
-                    Daemon.DaemonUtil.RunLuckyDaemon();
-                    DivertProxyNu.DivertProxyNuUtil.RunLuckyDivertProxyNu();
-                });
+            if (!DevMode.IsDevMode)
+            {
+                VirtualRoot.BuildEventPath<Per1MinuteEvent>("周期确保守护进程在运行", LogEnum.DevConsole, location: this.GetType(), PathPriority.Normal,
+                    path: message =>
+                    {
+                        Daemon.DaemonUtil.RunLuckyDaemon();
+                        DivertProxyNu.DivertProxyNuUtil.RunLuckyDivertProxyNu();
+                    });
+            }
             #endregion
             #region 开始和停止挖矿后
             VirtualRoot.BuildEventPath<StartingMineEvent>("开始挖矿时更新挖矿按钮状态", LogEnum.DevConsole, location: this.GetType(), PathPriority.Normal,
